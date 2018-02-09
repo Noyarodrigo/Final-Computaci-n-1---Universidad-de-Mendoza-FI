@@ -22,7 +22,7 @@ void UsuarioController::abm()
 
 void UsuarioController::listar()
 {
-    (new UsuarioViewer())->listar((new UsuarioDAO())->collection());
+    //(new UsuarioViewer())->listar((new UsuarioDAO())->collection(opc));
 }
 
 void UsuarioController::inicio(){
