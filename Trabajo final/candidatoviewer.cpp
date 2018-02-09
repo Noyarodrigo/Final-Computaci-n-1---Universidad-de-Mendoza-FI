@@ -76,10 +76,7 @@ void CandidatoViewer::listar(Queue* queue){
   cout<<"<html><head>"<<endl;
   cout<<"<font color='blue'><h1 align='center'>Listado de candidatos</h1></font>"<<endl;
   cout<<"<font color='grey'><h4 align='center'>Ingrese el codigo del candidato a continuacion</h4></font>"<<endl;
-  cout<<"<font color='green'><h1 align='center'>eleccion "<<opc<<endl;
   cout<<"</h1></font>"<<endl;
-  cout<<"<p>"<<z<<endl;
-  cout<<"</p>"<<endl;
   queue->show();
   cout<<"</body></html>"<<endl;
 

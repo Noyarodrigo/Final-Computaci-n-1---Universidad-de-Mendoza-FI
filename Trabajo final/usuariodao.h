@@ -17,7 +17,7 @@ class UsuarioDAO
         Usuario* find(int);
         int checkusuario(string);
         Queue* collection(int);
-        int checkcandidato(string);
+        Queue* checkcandidato(string);
         int checkLogin();
         void setLogin(string);
         void removeLogin();
