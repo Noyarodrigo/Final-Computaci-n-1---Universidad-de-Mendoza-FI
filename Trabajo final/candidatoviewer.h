@@ -13,7 +13,7 @@ class CandidatoViewer
     public:
         CandidatoViewer();
         virtual ~CandidatoViewer();
-        void listar(string);
+        void listar(Queue*);
         void mostrar();
 
     protected:

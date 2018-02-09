@@ -125,8 +125,17 @@ int UsuarioDAO::checkusuario(string d){
           }
 }*/
 }
-int UsuarioDAO::checkcandidato(string d){
+int UsuarioDAO::checkcandidato(string opc){
+  
+  Queue* queue = new Queue();
+    sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM persona WHERE idtc="opc);
 
+    while (res->next())
+        queue->qstore(new Usuario(res));
+
+    delete res;
+
+    return queue;
 
 }
 

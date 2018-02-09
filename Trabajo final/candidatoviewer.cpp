@@ -7,6 +7,7 @@
 #include "usuariodao.h"
 #include "string.h"
 #include <sstream>
+#include "candidatocontroller.h"
 
 using namespace std;
 
@@ -23,7 +24,9 @@ void CandidatoViewer::mostrar(){
   map<string,string> Get;
   initializeGet(Get);
   if (Get.find("categoria")!=Get.end()) {
-    listar(Get["categoria"]);
+
+    (new CandidatoViewer())->listar((new UsuarioDAO())->checkcandidato(Get["categoria"]));
+
     }else{
       cout<<"Content-type: text/html"<<endl<<endl;
       cout<<"<html><head>"<<endl;
@@ -67,12 +70,17 @@ void CandidatoViewer::mostrar(){
   }
 }
 
-void CandidatoViewer::listar(string opc){
+void CandidatoViewer::listar(Queue* queue){
+
   cout<<"Content-type: text/html"<<endl<<endl;
   cout<<"<html><head>"<<endl;
-  cout<<"<font color='green'><h1 align='center'>ACA VA LA LISTA</h1></font>"<<endl;
-  cout<<"<font color='green'><h1 align='center'>eleccion"<<opc<<endl;
+  cout<<"<font color='blue'><h1 align='center'>Listado de candidatos</h1></font>"<<endl;
+  cout<<"<font color='grey'><h4 align='center'>Ingrese el codigo del candidato a continuacion</h4></font>"<<endl;
+  cout<<"<font color='green'><h1 align='center'>eleccion "<<opc<<endl;
   cout<<"</h1></font>"<<endl;
+  cout<<"<p>"<<z<<endl;
+  cout<<"</p>"<<endl;
+  queue->show();
   cout<<"</body></html>"<<endl;
-  //((new UsuarioDAO())->checkcandidato(Post["documento"]));
+
 }
