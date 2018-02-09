@@ -7,9 +7,10 @@ using namespace std;
 
 Usuario::Usuario()
 {
-	id = 0;
+		id = 0;
     usuario = "";
     clave = "";
+		partido="";
 }
 
 Usuario::Usuario(sql::ResultSet* res)
@@ -20,9 +21,11 @@ Usuario::Usuario(sql::ResultSet* res)
 
 void Usuario::fillObject(sql::ResultSet* rs)
 {
+
     this->setId(rs->getInt("id"));
     this->setUsuario(rs->getString("nombre"));
     this->setClave(rs->getString("apellido"));
+		this->setPartido(rs->getString("partido"));
 }
 
 
@@ -55,11 +58,18 @@ void Usuario::setClave(string clave)
 {
     this->clave = clave;
 }
+string Usuario::getPartido(){
 
+	return this->partido;
+}
+
+void Usuario::setPartido(string partido){
+	this->partido = partido;
+}
 
 string Usuario::toString()
 {
     stringstream ss;
     ss << this->getId();
-    return ss.str() + "\t" + this->getUsuario() + " " + this->getClave();
+    return "<div>&nbsp;"+ ss.str() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\t" + this->getUsuario() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\t" + this->getClave() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\t"+this->getPartido()+"</div>";
 }

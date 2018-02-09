@@ -31,7 +31,6 @@ void CandidatoViewer::mostrar(){
       cout<<"Content-type: text/html"<<endl<<endl;
       cout<<"<html><head>"<<endl;
       cout<<"<font color='blue'><h1 align='center'>Elije el tipo de eleccion a continuacion</h1></font>"<<endl;
-      cout<<"</body></html>"<<endl;
       cout<<"	<br>	"<<endl;
       cout<<"	<br>"<<endl;
       cout<<"	<br>"<<endl;
@@ -77,6 +76,10 @@ void CandidatoViewer::listar(Queue* queue){
   cout<<"<font color='blue'><h1 align='center'>Listado de candidatos</h1></font>"<<endl;
   cout<<"<font color='grey'><h4 align='center'>Ingrese el codigo del candidato a continuacion</h4></font>"<<endl;
   cout<<"</h1></font>"<<endl;
+  cout<<"<div>"<<endl;
+  cout<<"<font color='red'>Codigo  \tNombre  \tApellido  \tPartido</font>"<<endl;
+  cout<<"</div>"<<endl;
+  cout<<"<br>"<<endl;
   queue->show();
   cout<<"</body></html>"<<endl;
 

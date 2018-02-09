@@ -16,9 +16,10 @@ class Usuario
         Usuario(sql::ResultSet*);
 
         void ingresar();
-
+        string getPartido();
+        void setPartido(string);
         int getId();
-		void setId(int);
+		    void setId(int);
         void setUsuario(string);
         string getUsuario();
         void setClave(string);
@@ -33,5 +34,6 @@ class Usuario
         int id;
         string usuario;
         string clave;
+        string partido;
 };
 #endif

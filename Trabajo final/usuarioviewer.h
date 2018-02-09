@@ -18,7 +18,7 @@ class UsuarioViewer
         void mostrar(Usuario*);
         void inicio();
         void fracaso();
-        void exito();
+        void votar();
         void categoria();
         //void cargar(Usuario*, string);
         //void mensaje(string);

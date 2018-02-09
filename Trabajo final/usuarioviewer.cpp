@@ -75,10 +75,11 @@ void UsuarioViewer::inicio(){
 	}else{
 
 		(new CandidatoViewer())->mostrar();
+		votar();
 	}
 
 }
-void UsuarioViewer::exito(){
+void UsuarioViewer::votar(){
 
 
 }
