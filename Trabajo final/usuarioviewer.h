@@ -21,6 +21,7 @@ class UsuarioViewer
         void votar(string);
         void categoria();
         void fail();
+        void info(string, int);
         //void cargar(Usuario*, string);
         //void mensaje(string);
     protected:

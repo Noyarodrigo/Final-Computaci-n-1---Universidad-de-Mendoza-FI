@@ -1,8 +1,10 @@
 #ifndef USUARIODAO_H
 #define USUARIODAO_H
-
+#include <string>
+#include <sstream>
 #include "usuario.h"
 #include "queue.h"
+using namespace std;
 
 class UsuarioDAO
 {

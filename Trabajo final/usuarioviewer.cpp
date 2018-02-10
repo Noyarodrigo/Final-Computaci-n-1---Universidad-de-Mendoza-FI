@@ -110,6 +110,18 @@ void UsuarioViewer::fail(){
 	cout<<"<font color='red'><h1 align='center'>Ya has votado en esa categoria!</h1></font>"<<endl;
 
 }
+void UsuarioViewer::info(string id, int x) {
+	cout<<"Content-type: text/html"<<endl<<endl;
+  cout<<"<html><head>"<<endl;
+  cout<<"	<br>	"<<endl;
+  cout<<"	<br>	"<<endl;
+  cout<<"</h1>\n";
+  cout<<"<h1>categoria:"<<x<<endl;
+  cout<<"</h1>\n";
+  cout<<"	<br>	"<<endl;
+  cout<<"</body></html>"<<endl;
+	cout<<"<h1>Su id de votante es:"+id<<endl;
+}
 /*int UsuarioViewer::buscar()
 {
     int cliID;

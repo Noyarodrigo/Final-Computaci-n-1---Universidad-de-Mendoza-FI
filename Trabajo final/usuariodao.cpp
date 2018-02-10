@@ -2,7 +2,8 @@
 #include "myconnection.h"
 #include "string.h"
 #include <sstream>
-
+#include "getpost.h"
+#include "usuarioviewer.h"
 UsuarioDAO::UsuarioDAO()
 {
     //ctor
@@ -171,13 +172,34 @@ int UsuarioDAO::checkLogin()
 
 string UsuarioDAO::getId()
 {
-    sql::ResultSet* res = MyConnection::instance()->query("SELECT id FROM votantes WHERE login =  1;");
+    sql::ResultSet* res = MyConnection::instance()->query("SELECT idvotantes FROM votantes WHERE login =  1;");
     res->next();
-    return res->getString("id");
+    return res->getString("idvotantes");
 }
+
 void UsuarioDAO::votar(int b){
-/*
+
+  map<string,string> Get;
+  initializeGet(Get);
+  string id= (new UsuarioDAO())->getId();
   stringstream stringSQL;
-  stringSQL <<"UPDATE `elecciones`.`votantes` SET `login` = '0' WHERE `votantes`.`id` ='"<<getId()<<"';";
-  MyConnection::instance()->execute(stringSQL.str());*/
+  string categoria=Get["categoria"];
+  int x = atoi(categoria.c_str());
+
+  (new UsuarioViewer())->info(id, x);
+
+
+  if (Get.find("categoria")!=Get.end()) {
+    switch (x) {
+        case 1:
+          stringSQL <<"UPDATE `elecciones`.`votantes` SET `consejal` = '0' WHERE `votantes`.`idvotantes` ='"+id+"';";
+          MyConnection::instance()->execute(stringSQL.str());
+         break;
+
+        case 2: // (new UsuarioViewer())->fracaso();
+          break;
+
+        }
+
+    }
 }
