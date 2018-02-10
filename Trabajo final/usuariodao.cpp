@@ -196,7 +196,10 @@ void UsuarioDAO::votar(int b){
           MyConnection::instance()->execute(stringSQL.str());
          break;
 
-        case 2: // (new UsuarioViewer())->fracaso();
+        case 2:
+            stringSQL <<"UPDATE `elecciones`.`votantes` SET `legislador` = '0' WHERE `votantes`.`idvotantes` ='"+id+"';";
+            MyConnection::instance()->execute(stringSQL.str());
+           break;
           break;
 
         }
