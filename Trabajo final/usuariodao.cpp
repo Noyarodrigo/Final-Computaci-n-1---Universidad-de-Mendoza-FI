@@ -175,3 +175,9 @@ string UsuarioDAO::getId()
     res->next();
     return res->getString("id");
 }
+void UsuarioDAO::votar(int b){
+/*
+  stringstream stringSQL;
+  stringSQL <<"UPDATE `elecciones`.`votantes` SET `login` = '0' WHERE `votantes`.`id` ='"<<getId()<<"';";
+  MyConnection::instance()->execute(stringSQL.str());*/
+}

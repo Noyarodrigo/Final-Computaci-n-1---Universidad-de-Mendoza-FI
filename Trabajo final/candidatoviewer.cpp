@@ -26,7 +26,7 @@ void CandidatoViewer::mostrar(){
   if (Get.find("categoria")!=Get.end()) {
 
     (new CandidatoViewer())->listar((new UsuarioDAO())->checkcandidato(Get["categoria"]));
-
+    (new UsuarioViewer())->votar(Get["categoria"]);
     }else{
       cout<<"Content-type: text/html"<<endl<<endl;
       cout<<"<html><head>"<<endl;

@@ -22,6 +22,7 @@ class UsuarioDAO
         void setLogin(string);
         void removeLogin();
         string getId();
+        void votar(int);
     protected:
     private:
 };

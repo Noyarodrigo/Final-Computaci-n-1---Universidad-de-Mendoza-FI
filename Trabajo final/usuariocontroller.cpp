@@ -29,6 +29,19 @@ void UsuarioController::inicio(){
 		(new UsuarioViewer())->inicio();
 }
 
+void UsuarioController::control(string cod){
+	int b = atoi(cod.c_str());
+	switch (b) {
+			case 1: (new UsuarioViewer())->fail();
+			 break;
+			case 2: (new UsuarioViewer())->fracaso();
+				break;
+		}
+
+	//(new UsuarioDAO())->votar(b);
+	}
+
+
 void UsuarioController::eliminar()
 {
 	Usuario* usuario = new Usuario();

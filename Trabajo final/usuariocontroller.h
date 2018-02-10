@@ -1,5 +1,7 @@
 #ifndef USUARIOCONTROLLER_H
 #define USUARIOCONTROLLER_H
+#include <string>
+using namespace std;
 
 class UsuarioController
 {
@@ -7,11 +9,14 @@ class UsuarioController
         UsuarioController();
         virtual ~UsuarioController();
         void abm();
+        void control(string);
+        void votar(string);
     protected:
     private:
         void listar();
         void inicio();
         void eliminar();
+
 };
 
 #endif // UsuarioCONTROLLER_H

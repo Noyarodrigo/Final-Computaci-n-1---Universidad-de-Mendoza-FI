@@ -6,6 +6,7 @@
 #include "getpost.h"
 #include "usuariodao.h"
 #include "candidatoviewer.h"
+#include "usuariocontroller.h"
 using namespace std;
 
 UsuarioViewer::UsuarioViewer()
@@ -52,7 +53,7 @@ void UsuarioViewer::inicio(){
 		cout<<"<h1>LOG IN<h1>\n";
 		cout<<"<div class='container'>"<<endl;
 	  cout<<"<form class='form-signin' method='post'>"<<endl;
-	  cout<<"<h2 class='form-signin-heading'>Ingrese sus documento</h2>"<<endl;
+	  cout<<"<h2 class='form-signin-heading'>Ingrese su documento</h2>"<<endl;
 	  cout<<"<label for='documento' class='sr-only'>Usuario</label>"<<endl;
 	  cout<<"<input type='text' name='documento' class='form-control' placeholder='Documento' required autofocus>"<<endl;
 	  cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingresar</button>"<<endl;
@@ -75,22 +76,40 @@ void UsuarioViewer::inicio(){
 	}else{
 
 		(new CandidatoViewer())->mostrar();
-		votar();
+
 	}
 
 }
-void UsuarioViewer::votar(){
+void UsuarioViewer::votar(string opc){
+	map<string,string> Post;
+	initializePost(Post);
+	cout<<"<html><head>"<<endl;
+	cout<< "</head>" <<endl;
+	cout<< "<body>   <div class='container'>"<<endl;
+	cout<<"<div class='centrar'></div>"<<endl;
+	cout<<"<h3 color='grey'>Ingrese el codigo del candidato que desea votar<h1>\n";
+	cout<<"<div class='container'>"<<endl;
+	cout<<"<form class='form-signin' method='post'>"<<endl;
+	cout<<"<label for='codigo' class='sr-only'>Codigo</label>"<<endl;
+	cout<<"<input type='text' name='codigo' class='form-control' placeholder='Ingreselo AQUI' required autofocus>"<<endl;
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>VOTAR</button>"<<endl;
+	cout<<"</form>"<<endl;
+	cout<<"</div>"<<endl;
+	 if (Post.find("codigo")!=Post.end()) {
+		 (new UsuarioController())->control(Post["codigo"]);
+	 }//else fail();
 
 
 }
 void UsuarioViewer::fracaso()
 {
-
 	cout<<"<font color='red'><h1 align='center'>Ingreso Incorrecto!</h1></font>"<<endl;
-	cout<<"<form align='center'>"<<endl;
-	cout<<"</form>"<<endl;
 }
 
+void UsuarioViewer::fail(){
+	cout<<"<font color='red'><h1 align='center'>Ya has votado en esa categoria!</h1></font>"<<endl;
+
+}
 /*int UsuarioViewer::buscar()
 {
     int cliID;
