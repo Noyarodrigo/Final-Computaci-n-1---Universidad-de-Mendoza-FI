@@ -8,7 +8,8 @@ class CandidatoController
     public:
         CandidatoController();
         virtual ~CandidatoController();
-        void listar(string);
+        void listar();
+        void ver();
     protected:
     private:
 };

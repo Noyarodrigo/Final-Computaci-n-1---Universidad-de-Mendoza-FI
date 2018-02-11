@@ -75,7 +75,7 @@ void UsuarioViewer::inicio(){
 		cout<<"</div></body></html>"<<endl;
 	}else{
 
-		(new CandidatoViewer())->mostrar();
+		(new CandidatoController())->ver();
 
 	}
 
@@ -110,17 +110,18 @@ void UsuarioViewer::fail(){
 	cout<<"<font color='red'><h1 align='center'>Ya has votado en esa categoria!</h1></font>"<<endl;
 
 }
-void UsuarioViewer::info(string id, int x) {
-	cout<<"Content-type: text/html"<<endl<<endl;
-  cout<<"<html><head>"<<endl;
+void UsuarioViewer::info(string id, string categoria) {
+	cout<<"<html><head>"<<endl;
   cout<<"	<br>	"<<endl;
-  cout<<"	<br>	"<<endl;
+	cout<<"<font color='grey'>"<<endl;
   cout<<"</h1>\n";
-  cout<<"<h1>categoria:"<<x<<endl;
-  cout<<"</h1>\n";
+  cout<<"<h3>categoria: "<<categoria<<endl;
+  cout<<"</h3>\n";
   cout<<"	<br>	"<<endl;
   cout<<"</body></html>"<<endl;
-	cout<<"<h1>Su id de votante es:"+id<<endl;
+	cout<<"<h3>Su id de votante es:"+id<<endl;
+	cout<<"</h3>\n";
+	cout<<"</font>"<<endl;
 }
 /*int UsuarioViewer::buscar()
 {

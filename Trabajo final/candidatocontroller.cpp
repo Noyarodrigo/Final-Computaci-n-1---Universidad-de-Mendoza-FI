@@ -1,7 +1,7 @@
 #include "candidatocontroller.h"
 #include "usuarioviewer.h"
 #include "usuariodao.h"
-
+#include "candidatoviewer.h"
 CandidatoController::CandidatoController()
 {
     //ctor
@@ -13,8 +13,12 @@ CandidatoController::~CandidatoController()
 }
 
 
-void CandidatoController::listar(string opc)
+void CandidatoController::listar()
 {
-    (new UsuarioDAO())->checkcandidato(opc);
+  //  (new UsuarioDAO())->checkcandidato(Get["categoria"]);
+
+}
+void CandidatoController::ver(){
+  (new CandidatoViewer())->mostrar();
 
 }

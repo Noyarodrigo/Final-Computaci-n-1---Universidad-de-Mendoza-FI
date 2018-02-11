@@ -127,12 +127,21 @@ int UsuarioDAO::checkusuario(string d){
 }*/
 }
 Queue* UsuarioDAO::checkcandidato(string opc){
+  string a=opc;
+  if (a=="consejal"){a="1";}
+  if (a=="legislador"){a="2";}
+  if (a=="senador"){a="3";}
+  if (a=="diputado"){a="4";}
+  if (a=="intendente"){a="5";}
+  if (a=="gobernador"){a="6";}
+  if (a=="presidente"){a="7";}
 
-  string stringSQL;
+/*  string stringSQL;
   stringstream ss;
-  ss << opc;
+  ss << a;*/
   Queue* queue = new Queue();
-    sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM persona WHERE idtc="+ss.str());
+  //  sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM persona WHERE idtc="+ss.str());
+    sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM persona WHERE idtc="+a);
 
     while (res->next())
         queue->qstore(new Usuario(res));
@@ -177,20 +186,25 @@ string UsuarioDAO::getId()
     return res->getString("idvotantes");
 }
 
-void UsuarioDAO::votar(int b){
+void UsuarioDAO::votar(string categoria){
 
   map<string,string> Get;
   initializeGet(Get);
   string id= (new UsuarioDAO())->getId();
   stringstream stringSQL;
-  string categoria=Get["categoria"];
-  int x = atoi(categoria.c_str());
+  //string categoria=Get["categoria"];
+  //int x = atoi(categoria.c_str());
 
-  (new UsuarioViewer())->info(id, x);
-
+  (new UsuarioViewer())->info(id, categoria);
 
   if (Get.find("categoria")!=Get.end()) {
-    switch (x) {
+    string a="UPDATE `elecciones`.`votantes` SET " +categoria+"= '0' WHERE `votantes`.`idvotantes` ='"+id+"' AND `votantes`.`"+categoria+"` ='1' ";
+
+    stringSQL <<"UPDATE `elecciones`.`votantes` SET " +categoria+"= '0' WHERE `votantes`.`idvotantes` ='"+id+"' AND `votantes`.`"+categoria+"` ='1' ";
+    cout<<"<h3>categoria: "<<a<<endl;
+    cout<<"</h3>\n";
+    MyConnection::instance()->execute(stringSQL.str());
+  /*  switch (x) {
         case 1:
           stringSQL <<"UPDATE `elecciones`.`votantes` SET `consejal` = '0' WHERE `votantes`.`idvotantes` ='"+id+"';";
           MyConnection::instance()->execute(stringSQL.str());
@@ -202,7 +216,7 @@ void UsuarioDAO::votar(int b){
            break;
           break;
 
-        }
+        }*/
 
     }
 }

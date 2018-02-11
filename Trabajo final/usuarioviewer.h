@@ -4,7 +4,7 @@
 #include "queue.h"
 #include <iostream>
 #include <string>
-
+#include "candidatocontroller.h"
 using namespace std;
 
 class UsuarioViewer
@@ -21,7 +21,7 @@ class UsuarioViewer
         void votar(string);
         void categoria();
         void fail();
-        void info(string, int);
+        void info(string, string);
         //void cargar(Usuario*, string);
         //void mensaje(string);
     protected:

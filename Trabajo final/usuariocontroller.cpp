@@ -3,6 +3,7 @@
 #include "usuariodao.h"
 #include <string>
 #include <sstream>
+#include "getpost.h"
 
 UsuarioController::UsuarioController()
 {
@@ -31,10 +32,14 @@ void UsuarioController::inicio(){
 		(new UsuarioViewer())->inicio();
 }
 
+
+
+
 void UsuarioController::control(string cod){
-	
+	map<string,string> Get;
+  initializeGet(Get);
 	int b = atoi(cod.c_str());
-	(new UsuarioDAO())->votar(b);
+	(new UsuarioDAO())->votar(Get["categoria"]);
 	}
 
 
