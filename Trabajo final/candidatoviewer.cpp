@@ -26,8 +26,9 @@ void CandidatoViewer::mostrar(){
   if (Get.find("categoria")!=Get.end()) {
 
     (new CandidatoViewer())->listar((new UsuarioDAO())->checkcandidato(Get["categoria"]));
-    (new UsuarioViewer())->votar(Get["categoria"]);
-    }else{
+    (new UsuarioViewer())->votar();
+    }
+    else{
       cout<<"Content-type: text/html"<<endl<<endl;
       cout<<"<html><head>"<<endl;
       cout<<"<font color='blue'><h1 align='center'>Elije el tipo de eleccion a continuacion</h1></font>"<<endl;

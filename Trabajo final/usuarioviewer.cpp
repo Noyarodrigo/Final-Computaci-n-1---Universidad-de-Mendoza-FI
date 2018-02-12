@@ -80,7 +80,7 @@ void UsuarioViewer::inicio(){
 	}
 
 }
-void UsuarioViewer::votar(string opc){
+void UsuarioViewer::votar(){
 	map<string,string> Post;
 	initializePost(Post);
 	cout<<"<html><head>"<<endl;

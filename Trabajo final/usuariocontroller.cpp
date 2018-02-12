@@ -38,8 +38,7 @@ void UsuarioController::inicio(){
 void UsuarioController::control(string cod){
 	map<string,string> Get;
   initializeGet(Get);
-	int b = atoi(cod.c_str());
-	(new UsuarioDAO())->votar(Get["categoria"]);
+	(new UsuarioDAO())->votar(Get["categoria"], cod);
 	}
 
 
