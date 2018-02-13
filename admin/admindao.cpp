@@ -58,7 +58,7 @@ void AdminDAO::update(Usuario* Usuario)
 }
 
 void AdminDAO::add(Usuario* Usuario)
-{
+{ string stringSQL;
   stringSQL = "SELECT documento FROM votantes WHERE documento = " + Usuario->getDocumento();
   sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
   if (res->next())
