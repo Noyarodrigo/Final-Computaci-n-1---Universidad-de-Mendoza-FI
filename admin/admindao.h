@@ -6,11 +6,11 @@
 #include "queue.h"
 using namespace std;
 
-class UsuarioDAO
+class AdminDAO
 {
     public:
-        UsuarioDAO();
-        virtual ~UsuarioDAO();
+        AdminDAO();
+        virtual ~AdminDAO();
         void add(Usuario*);
         void update(Usuario*);
         bool exist(Usuario*);

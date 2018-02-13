@@ -1,21 +1,21 @@
-#include "usuariodao.h"
+#include "adminodao.h"
 #include "myconnection.h"
 #include "string.h"
 #include <sstream>
 #include "getpost.h"
-#include "usuarioviewer.h"
-#include "usuariocontroller.h"
-UsuarioDAO::UsuarioDAO()
+#include "adminviewer.h"
+#include "admincontroller.h"
+AdminDAO::AdminDAO()
 {
     //ctor
 }
 
-UsuarioDAO::~UsuarioDAO()
+AdminDAO::~AdminDAO()
 {
     //dtor
 }
 
-Queue* UsuarioDAO::collection(int opc)
+Queue* AdminDAO::collection(int opc)
 {
     Queue* queue = new Queue();
     sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM persona WHERE idtc= "+opc);
@@ -28,7 +28,7 @@ Queue* UsuarioDAO::collection(int opc)
     return queue;
 }
 
-void UsuarioDAO::del(Usuario* usuario)
+void AdminDAO::del(Usuario* usuario)
 {
     string stringSQL;
     stringstream ss;
@@ -38,7 +38,7 @@ void UsuarioDAO::del(Usuario* usuario)
     MyConnection::instance()->execute(stringSQL);
 }
 
-void UsuarioDAO::save(Usuario* Usuario)
+void AdminDAO::save(Usuario* Usuario)
 {
     if (exist(Usuario))
         update(Usuario);
@@ -46,7 +46,7 @@ void UsuarioDAO::save(Usuario* Usuario)
         add(Usuario);
 }
 
-bool UsuarioDAO::exist(Usuario* Usuario)
+bool AdminDAO::exist(Usuario* Usuario)
 {
     string stringSQL;
 
@@ -59,7 +59,7 @@ bool UsuarioDAO::exist(Usuario* Usuario)
     return res->next();
 }
 
-void UsuarioDAO::update(Usuario* Usuario)
+void AdminDAO::update(Usuario* Usuario)
 {
     string stringSQL;
 
@@ -70,7 +70,7 @@ void UsuarioDAO::update(Usuario* Usuario)
     MyConnection::instance()->execute(stringSQL);
 }
 
-void UsuarioDAO::add(Usuario* Usuario)
+void AdminDAO::add(Usuario* Usuario)
 {
     stringstream ss;
 
@@ -82,7 +82,7 @@ void UsuarioDAO::add(Usuario* Usuario)
     MyConnection::instance()->execute(stringSQL);
 }
 
-Usuario* UsuarioDAO::find(int id)
+Usuario* AdminDAO::find(int id)
 {
     string stringSQL;
 
@@ -104,12 +104,9 @@ Usuario* UsuarioDAO::find(int id)
     return new Usuario();
 }
 
-int UsuarioDAO::checkusuario(string d){
-  int a=0;
-  string stringSQL;
-  stringstream ss;
-  ss << d;
-   stringSQL = "SELECT * FROM votantes WHERE documento = " + ss.str();
+int AdminDAO::checkadmin(string id){
+
+   stringSQL = "SELECT * FROM admin WHERE id = " + id;
    sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
    if (res->next()){
      a=1;
@@ -117,7 +114,7 @@ int UsuarioDAO::checkusuario(string d){
  }
 
 }
-Queue* UsuarioDAO::checkcandidato(string opc){
+Queue* AdminDAO::checkcandidato(string opc){
 
   string a=opc;
   if (a=="consejal"){a="1";}
@@ -137,23 +134,23 @@ Queue* UsuarioDAO::checkcandidato(string opc){
 
 }
 
-void UsuarioDAO::setLogin(string l)
+void AdminDAO::setLogin(string l)
 {
     stringstream stringSQL;
-    stringSQL <<"UPDATE `elecciones`.`votantes` SET `login` = '1' WHERE `votantes`.`documento` ='"<<l<<"';";
+    stringSQL <<"UPDATE `elecciones`.`admmin` SET `login` = '1' WHERE `admin`.`id` ='"<<l<<"';";
     MyConnection::instance()->execute(stringSQL.str());
 }
 
-void UsuarioDAO::removeLogin()
+void AdminDAO::removeLogin()
 {
     stringstream stringSQL;
     stringSQL <<"UPDATE `elecciones`.`votantes` SET `login` = '0' WHERE `votantes`.`id` ='"<<getId()<<"';";
     MyConnection::instance()->execute(stringSQL.str());
 }
 
-int UsuarioDAO::checkLogin()
+int AdminDAO::checkLogin()
 {
-    sql::ResultSet* res = MyConnection::instance()->query("Select * from votantes");
+    sql::ResultSet* res = MyConnection::instance()->query("Select * from admin");
 
     int a=0;
     while (res->next()) {
@@ -164,14 +161,14 @@ int UsuarioDAO::checkLogin()
     return a;
 }
 
-string UsuarioDAO::getId()
+string AdminDAO::getId()
 {
     sql::ResultSet* res = MyConnection::instance()->query("SELECT idvotantes FROM votantes WHERE login =  1;");
     res->next();
     return res->getString("idvotantes");
 }
 
-void UsuarioDAO::votar(string categoria, string cod){
+void AdminDAO::votar(string categoria, string cod){
 
   map<string,string> Get;
   initializeGet(Get);
@@ -180,7 +177,7 @@ void UsuarioDAO::votar(string categoria, string cod){
   if (Get.find("categoria")!=Get.end()) {
 
     int x=(new UsuarioDAO())->checkvoto(categoria);
-    (new UsuarioController())->voto(x);
+    (new AminController())->voto(x);
       if (x==1){
       stringSQL <<"UPDATE `elecciones`.`votantes` SET " +categoria+"= '0' WHERE `votantes`.`idvotantes` ='"+getId()+"' AND `votantes`.`"+categoria+"` ='1' ";
       MyConnection::instance()->execute(stringSQL.str());
@@ -189,13 +186,13 @@ void UsuarioDAO::votar(string categoria, string cod){
   }
 }
 
-void UsuarioDAO::sumarvoto(string cod)
+void AdminDAO::sumarvoto(string cod)
 {
   stringstream stringSQL;
   stringSQL <<"UPDATE `elecciones`.`persona` SET votos= votos+1 WHERE `persona`.`id` ='"+cod+"' ";
   MyConnection::instance()->execute(stringSQL.str());
 }
-int UsuarioDAO::checkvoto(string categoria)
+int AdminDAO::checkvoto(string categoria)
 {
     sql::ResultSet* res = MyConnection::instance()->query("Select "+categoria+" from votantes WHERE `votantes`.`idvotantes`  ="+getId()+";");
     res->next();

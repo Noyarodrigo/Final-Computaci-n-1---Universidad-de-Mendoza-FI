@@ -1,38 +1,36 @@
-#include "usuariocontroller.h"
+#include "admincontroller.h"
 #include "usuarioviewer.h"
 #include "usuariodao.h"
 #include <string>
 #include <sstream>
 #include "getpost.h"
 
-UsuarioController::UsuarioController()
+AdminController::AdminController()
 {
     //ctor
 }
 
-UsuarioController::~UsuarioController()
+AdminController::~AdminController()
 {
     //dtor
 }
 
-void UsuarioController::abm()
+void AdminController::abm()
 {
-//	eliminar();
-	// listar();
 	inicio();
 
 }
 
-void UsuarioController::listar()
+void AdminController::listar()
 {
-    //(new UsuarioViewer())->listar((new UsuarioDAO())->collection(opc));
+    (new AdminViewer())->listar((new UsuarioDAO())->collection(opc));
 }
 
-void UsuarioController::inicio(){
-		(new UsuarioViewer())->inicio();
+void AdminController::inicio(){
+		(new AdminViewer())->inicio();
 }
 
-void UsuarioController::voto(int x){
+void AdminController::voto(int x){
 	if (x==1)(new UsuarioViewer())->yav();
 	if (x==0)(new UsuarioViewer())->fail();
 

@@ -1,8 +1,8 @@
-#include "usuariocontroller.h"
+#include "admincontroller.h"
 
 
 int main (int argc, char* const argv[]) {
-	(new UsuarioController())->abm();
+	(new AdminController())->abm();
 
 	return 0;
 }

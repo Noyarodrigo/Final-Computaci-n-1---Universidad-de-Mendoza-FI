@@ -1,13 +1,13 @@
-#ifndef USUARIOCONTROLLER_H
-#define USUARIOCONTROLLER_H
+#ifndef ADMINCONTROLLER_H
+#define ADMINCONTROLLER_H
 #include <string>
 using namespace std;
 
-class UsuarioController
+class AdminController
 {
     public:
-        UsuarioController();
-        virtual ~UsuarioController();
+        AdminController();
+        virtual ~AdminController();
         void abm();
         void control(string);
         void votar(string);

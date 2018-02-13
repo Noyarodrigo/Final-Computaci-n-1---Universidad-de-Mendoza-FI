@@ -4,9 +4,9 @@
 #include <typeinfo>
 #include <stdlib.h>
 #include "getpost.h"
-#include "usuariodao.h"
-#include "candidatoviewer.h"
-#include "usuariocontroller.h"
+#include "admindao.h"
+#include "adminviewer.h"
+#include "admincontroller.h"
 using namespace std;
 
 UsuarioViewer::UsuarioViewer()
@@ -40,7 +40,7 @@ void UsuarioViewer::listar(Queue* queue)
 void UsuarioViewer::inicio(){
 	int z=0,x=0;
 
-	x=(new UsuarioDAO())->checkLogin();
+	x=(new AdminDAO())->checkLogin();
 
 	if (x==0) {
 		map<string,string> Post;
@@ -56,21 +56,21 @@ void UsuarioViewer::inicio(){
 		cout<<"<h1>LOG IN<h1>\n";
 		cout<<"<div class='input'>"<<endl;
 	  cout<<"<form class='form-signin' method='post'>"<<endl;
-	  cout<<"<h2 class='form-signin-heading'>Ingrese su documento</h2>"<<endl;
-	  cout<<"<label for='documento' class='sr-only'>Usuario</label>"<<endl;
-	  cout<<"<input type='text' name='documento' class='form-control' placeholder='Documento' required autofocus>"<<endl;
+	  cout<<"<h2 class='form-signin-heading'>Ingrese su id de administrador</h2>"<<endl;
+	  cout<<"<label for='id' class='sr-only'>Usuario</label>"<<endl;
+	  cout<<"<input type='text' name='id' class='form-control' placeholder='ID' required autofocus>"<<endl;
 	  cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingresar</button>"<<endl;
 	  cout<<"</form>"<<endl;
 	  cout<<"</div>"<<endl;
 		cout<<"</div></body></html>"<<endl;
 
-	      if (Post.find("documento")!=Post.end()) {
-					z=(new UsuarioDAO())->checkusuario(Post["documento"]);
+	      if (Post.find("id")!=Post.end()) {
+					z=(new AdminDAO())->checkadmin(Post["id"]);
 	          if(z == 1){
-								((new UsuarioDAO()) ->setLogin(Post["documento"]));
+								((new AdminDAO()) ->setLogin(Post["id"]));
 								cout<<"<font color='green'><h1 align='center'>Ingreso con Exito!</h1></font>"<<endl;
 								cout<<"<form align='center'>"<<endl;
-								cout<<"<input value='Ir a las categorias' onClick='document.location.reload()' type='button' class='btn btn-outline-success my-2 my-sm-0'>"<<endl;
+								cout<<"<input value='Ir al menu de administracion' onClick='document.location.reload()' type='button' class='btn btn-outline-success my-2 my-sm-0'>"<<endl;
 								cout<<"</form>"<<endl;
 							}else{fracaso();}
 						}
@@ -78,7 +78,7 @@ void UsuarioViewer::inicio(){
 		cout<<"</div></body></html>"<<endl;
 	}else{
 
-		(new CandidatoController())->ver();
+		(new AdminViewer())->ver();
 
 	}
 
@@ -128,4 +128,61 @@ void UsuarioViewer::info(string id, string categoria) {
 
 void UsuarioViewer::yav(){
 	cout<<"<font color='Green'><h1 align='center'>Voto ingresado !</h1></font>"<<endl;
+}
+void AdminViewer()::ver(){
+
+map<string,string> Get;
+initializeGet(Get);
+if (Get.find("opcion")!=Get.end()) {
+
+	(new AdminViewer())->info((new AdminDAO())->getId(), Get["opcion"]);
+	//(new CandidatoViewer())->listar((new UsuarioDAO())->checkcandidato(Get["categoria"]));
+	//(new UsuarioViewer())->votar();
+	}
+	else{
+		cout<<"Content-type: text/html"<<endl<<endl;
+		cout<<"<html><head>"<<endl;
+		cout<<"<font color='blue'><h1 align='center'>Panel de administracion</h1></font>"<<endl;
+		cout<<"	<br>	"<<endl;
+		cout<<"	<br>"<<endl;
+		cout<<"	<br>"<<endl;
+		cout<<"<form class='form-signin' method='get'>"<<endl;
+		cout<<"  <fieldset>"<<endl;
+		cout<<"    <legend>Elige una opcion luego, haz click en siguiente</legend>>"<<endl;
+		cout<<"      <p>"<<endl;
+		cout<<"          <input type=\"radio\" name=\"opc\" value=\"addu\"> Añadir votante"<<endl;
+		cout<<"      </p>"<<endl;
+		cout<<"      <p>"<<endl;
+		cout<<"           <input type=\"radio\" name=\"opc\" value=\"delu\"> Quitar votante "<<endl;
+		cout<<"      </p>"<<endl;
+		cout<<"      <p>"<<endl;
+		cout<<"          <input type=\"radio\" name=\"opc\" value=\"modu\"> Modificar votante"<<endl;
+		cout<<"      </p>"<<endl;
+		cout<<"      <p>"<<endl;
+		cout<<"          <input type=\"radio\" name=\"opc\" value=\"infu\"> Info de votante"<<endl;
+		cout<<"      </p>"<<endl;
+		cout<<"      <p>"<<endl;
+		cout<<"          <input type=\"radio\" name=\"opc\" value=\"adda\"> Agregar admin"<<endl;
+		cout<<"      </p>"<<endl;
+		cout<<"      <p>"<<endl;
+		cout<<"           <input type=\"radio\" name=\"opc\" value=\"dela\"> Quitar admin"<<endl;
+		cout<<"      </p>"<<endl;
+		cout<<"      <p>"<<endl;
+		cout<<"           <input type=\"radio\" name=\"opc\" value=\"moda\"> Modificar admin"<<endl;
+		cout<<"      </p>"<<endl;
+		cout<<"      <p>"<<endl;
+		cout<<"          <input type=\"radio\" name=\"opc\" value=\"infa\"> Info de admin"<<endl;
+		cout<<"      </p>"<<endl;
+		cout<<"      <p>"<<endl;
+		cout<<"          <input type=\"radio\" name=\"opc\" value=\"infa\"> Info de admin"<<endl;
+		cout<<"      </p>"<<endl;
+		cout<<"  </fieldset>"<<endl;
+		cout<<"	<br>	"<<endl;
+		cout<<"<div align='center'>"<<endl;
+		cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Siguiente</button>"<<endl;
+		cout<<"</div>"<<endl;
+		cout<<"</form>"<<endl;
+		cout<<"</body></html>"<<endl;
+
+}
 }
