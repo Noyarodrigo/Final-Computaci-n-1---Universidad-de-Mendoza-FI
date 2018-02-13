@@ -17,16 +17,13 @@ class AdminDAO
         void save(Usuario*);
         void del(Usuario*);
         Usuario* find(int);
-        int checkusuario(string);
-        Queue* collection(int);
+        int checkadmin(string);
         Queue* checkcandidato(string);
         int checkLogin();
         void setLogin(string);
         void removeLogin();
         string getId();
-        void votar(string, string);
-        void sumarvoto(string);
-        int checkvoto(string);
+        //
     protected:
     private:
 };

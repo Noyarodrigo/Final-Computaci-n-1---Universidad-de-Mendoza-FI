@@ -1,4 +1,3 @@
-#include "usuarioviewer.h"
 #include <iostream>
 #include <map>
 #include <typeinfo>
@@ -9,18 +8,18 @@
 #include "admincontroller.h"
 using namespace std;
 
-UsuarioViewer::UsuarioViewer()
+AdminViewer::AdminViewer()
 {
     //ctor
 }
 
-UsuarioViewer::~UsuarioViewer()
+AdminViewer::~AdminViewer()
 {
     //dtor
 }
 
 
-void UsuarioViewer::listar(Queue* queue)
+void AdminViewer::listar(Queue* queue)
 {
 	cout<<"Content-type: text/html"<<endl<<endl;
 	cout<<"<html><head>"<<endl;
@@ -37,7 +36,7 @@ void UsuarioViewer::listar(Queue* queue)
 
 
 }
-void UsuarioViewer::inicio(){
+void AdminViewer::inicio(){
 	int z=0,x=0;
 
 	x=(new AdminDAO())->checkLogin();
@@ -83,7 +82,7 @@ void UsuarioViewer::inicio(){
 	}
 
 }
-void UsuarioViewer::votar(){
+void AdminViewer::votar(){
 	map<string,string> Post;
 	initializePost(Post);
 	cout<<"<html><head>"<<endl;
@@ -99,20 +98,21 @@ void UsuarioViewer::votar(){
 	cout<<"</form>"<<endl;
 	cout<<"</div>"<<endl;
 	 if (Post.find("codigo")!=Post.end()) {
-		 (new UsuarioController())->control(Post["codigo"]);
+		 (new AdminController())->control(Post["codigo"]);
 	 }//else fail();
 
 
 }
-void UsuarioViewer::fracaso()
+void AdminViewer::fracaso()
 {
 	cout<<"<font color='red'><h1 align='center'>Ingreso Incorrecto!</h1></font>"<<endl;
 }
 
-void UsuarioViewer::fail(){
+void AdminViewer::fail(){
 	cout<<"<font color='red'><h1 align='center'>Ya has votado en esa categoria!</h1></font>"<<endl;
 }
-void UsuarioViewer::info(string id, string categoria) {
+
+void AdminViewer::info(string id, string categoria) {
 	cout<<"Content-type: text/html"<<endl<<endl;
 	cout<<"<html><head>"<<endl;
   cout<<"	<br>	"<<endl;
@@ -120,22 +120,22 @@ void UsuarioViewer::info(string id, string categoria) {
   cout<<"</h1>\n";
   cout<<"<h3>categoria: "<<categoria<<endl;
   cout<<"</h3>\n";
-	cout<<"<h3>Su id de votante es:"+id<<endl;
+	cout<<"<h3>Su id de administrador es:"+id<<endl;
 	cout<<"</h3>\n";
 	cout<<"</font>"<<endl;
 	cout<<"</body></html>"<<endl;
 }
 
-void UsuarioViewer::yav(){
+void AdminViewer::yav(){
 	cout<<"<font color='Green'><h1 align='center'>Voto ingresado !</h1></font>"<<endl;
 }
-void AdminViewer()::ver(){
+void AdminViewer::ver(){
 
 map<string,string> Get;
 initializeGet(Get);
-if (Get.find("opcion")!=Get.end()) {
+if (Get.find("opc")!=Get.end()) {
 
-	(new AdminViewer())->info((new AdminDAO())->getId(), Get["opcion"]);
+	(new AdminViewer())->info((new AdminDAO())->getId(), Get["opc"]);
 	//(new CandidatoViewer())->listar((new UsuarioDAO())->checkcandidato(Get["categoria"]));
 	//(new UsuarioViewer())->votar();
 	}
@@ -150,7 +150,7 @@ if (Get.find("opcion")!=Get.end()) {
 		cout<<"  <fieldset>"<<endl;
 		cout<<"    <legend>Elige una opcion luego, haz click en siguiente</legend>>"<<endl;
 		cout<<"      <p>"<<endl;
-		cout<<"          <input type=\"radio\" name=\"opc\" value=\"addu\"> Añadir votante"<<endl;
+		cout<<"          <input type=\"radio\" name=\"opc\" value=\"addu\"> Agregar votante"<<endl;
 		cout<<"      </p>"<<endl;
 		cout<<"      <p>"<<endl;
 		cout<<"           <input type=\"radio\" name=\"opc\" value=\"delu\"> Quitar votante "<<endl;
@@ -174,7 +174,7 @@ if (Get.find("opcion")!=Get.end()) {
 		cout<<"          <input type=\"radio\" name=\"opc\" value=\"infa\"> Info de admin"<<endl;
 		cout<<"      </p>"<<endl;
 		cout<<"      <p>"<<endl;
-		cout<<"          <input type=\"radio\" name=\"opc\" value=\"infa\"> Info de admin"<<endl;
+		cout<<"          <input text-color='grey' type=\"radio\" name=\"opc\" value=\"infa\"> LOG OUT"<<endl;
 		cout<<"      </p>"<<endl;
 		cout<<"  </fieldset>"<<endl;
 		cout<<"	<br>	"<<endl;

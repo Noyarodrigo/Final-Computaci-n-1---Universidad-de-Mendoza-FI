@@ -1,17 +1,17 @@
-#ifndef USUARIOVIEWER_H
-#define USUARIOVIEWER_H
+#ifndef ADMINVIEWER_H
+#define ADMINVIEWER_H
 
 #include "queue.h"
 #include <iostream>
 #include <string>
-#include "candidatocontroller.h"
+#include "admincontroller.h"
 using namespace std;
 
-class UsuarioViewer
+class AdminViewer
 {
     public:
-        UsuarioViewer();
-        virtual ~UsuarioViewer();
+        AdminViewer();
+        virtual ~AdminViewer();
         int menu();
         void listar(Queue*);
        // int buscar();
@@ -22,6 +22,7 @@ class UsuarioViewer
         void categoria();
         void fail();
         void info(string, string);
+        void ver();
         //void cargar(Usuario*, string);
         //void mensaje(string);
         void yav();

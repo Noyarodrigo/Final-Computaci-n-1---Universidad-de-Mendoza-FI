@@ -1,4 +1,4 @@
-#include "adminodao.h"
+#include "admindao.h"
 #include "myconnection.h"
 #include "string.h"
 #include <sstream>
@@ -15,7 +15,7 @@ AdminDAO::~AdminDAO()
     //dtor
 }
 
-Queue* AdminDAO::collection(int opc)
+/*Queue* AdminDAO::collection(int opc)
 {
     Queue* queue = new Queue();
     sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM persona WHERE idtc= "+opc);
@@ -26,7 +26,7 @@ Queue* AdminDAO::collection(int opc)
     delete res;
 
     return queue;
-}
+}*/
 
 void AdminDAO::del(Usuario* usuario)
 {
@@ -105,7 +105,8 @@ Usuario* AdminDAO::find(int id)
 }
 
 int AdminDAO::checkadmin(string id){
-
+  string stringSQL;
+  int a =0;
    stringSQL = "SELECT * FROM admin WHERE id = " + id;
    sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
    if (res->next()){
@@ -137,7 +138,7 @@ Queue* AdminDAO::checkcandidato(string opc){
 void AdminDAO::setLogin(string l)
 {
     stringstream stringSQL;
-    stringSQL <<"UPDATE `elecciones`.`admmin` SET `login` = '1' WHERE `admin`.`id` ='"<<l<<"';";
+    stringSQL <<"UPDATE `elecciones`.`admin` SET `login` = '1' WHERE `admin`.`id` ='"<<l<<"';";
     MyConnection::instance()->execute(stringSQL.str());
 }
 
@@ -167,37 +168,3 @@ string AdminDAO::getId()
     res->next();
     return res->getString("idvotantes");
 }
-
-void AdminDAO::votar(string categoria, string cod){
-
-  map<string,string> Get;
-  initializeGet(Get);
-  stringstream stringSQL;
-
-  if (Get.find("categoria")!=Get.end()) {
-
-    int x=(new UsuarioDAO())->checkvoto(categoria);
-    (new AminController())->voto(x);
-      if (x==1){
-      stringSQL <<"UPDATE `elecciones`.`votantes` SET " +categoria+"= '0' WHERE `votantes`.`idvotantes` ='"+getId()+"' AND `votantes`.`"+categoria+"` ='1' ";
-      MyConnection::instance()->execute(stringSQL.str());
-      sumarvoto(cod);
-    }
-  }
-}
-
-void AdminDAO::sumarvoto(string cod)
-{
-  stringstream stringSQL;
-  stringSQL <<"UPDATE `elecciones`.`persona` SET votos= votos+1 WHERE `persona`.`id` ='"+cod+"' ";
-  MyConnection::instance()->execute(stringSQL.str());
-}
-int AdminDAO::checkvoto(string categoria)
-{
-    sql::ResultSet* res = MyConnection::instance()->query("Select "+categoria+" from votantes WHERE `votantes`.`idvotantes`  ="+getId()+";");
-    res->next();
-    int a =res->getInt(""+categoria+"");
-    return a;
-}
-
-  //""+categoria+""

@@ -1,6 +1,6 @@
 #include "admincontroller.h"
-#include "usuarioviewer.h"
-#include "usuariodao.h"
+#include "adminviewer.h"
+#include "admindao.h"
 #include <string>
 #include <sstream>
 #include "getpost.h"
@@ -23,7 +23,7 @@ void AdminController::abm()
 
 void AdminController::listar()
 {
-    (new AdminViewer())->listar((new UsuarioDAO())->collection(opc));
+  //  (new AdminViewer())->listar((new AdminDAO())->collection(opc));
 }
 
 void AdminController::inicio(){
@@ -31,23 +31,23 @@ void AdminController::inicio(){
 }
 
 void AdminController::voto(int x){
-	if (x==1)(new UsuarioViewer())->yav();
-	if (x==0)(new UsuarioViewer())->fail();
+	if (x==1)(new AdminViewer())->yav();
+	if (x==0)(new AdminViewer())->fail();
 
 
 }
 
 
-void UsuarioController::control(string cod){
+void AdminController::control(string cod){
 	map<string,string> Get;
   initializeGet(Get);
-	(new UsuarioDAO())->votar(Get["categoria"], cod);
+	//(new AdminDAO())->votar(Get["categoria"], cod);
 	}
 
 
-void UsuarioController::eliminar()
+void AdminController::eliminar()
 {
 	Usuario* usuario = new Usuario();
 	usuario->setId(11);
-	(new UsuarioDAO())->del(usuario);
+	(new AdminDAO())->del(usuario);
 }
