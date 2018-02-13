@@ -47,11 +47,14 @@ void UsuarioViewer::inicio(){
 		initializePost(Post);
 		cout<<"Content-type: text/html"<<endl<<endl;
 		cout<<"<html><head>"<<endl;
+		cout<<"<title>Elecciones 2018</title>"<<endl;
+    cout<<"<link rel=\"stylesheet\" href=\"http://localhost/css.css\">"<<endl;
+		href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 		cout<< "</head>" <<endl;
 		cout<< "<body>   <div class='container'>"<<endl;
-		cout<<"<div class='centrar'></div>"<<endl;
+		cout<<"<div class='header'></div>"<<endl;
 		cout<<"<h1>LOG IN<h1>\n";
-		cout<<"<div class='container'>"<<endl;
+		cout<<"<div class='input'>"<<endl;
 	  cout<<"<form class='form-signin' method='post'>"<<endl;
 	  cout<<"<h2 class='form-signin-heading'>Ingrese su documento</h2>"<<endl;
 	  cout<<"<label for='documento' class='sr-only'>Usuario</label>"<<endl;
@@ -108,38 +111,21 @@ void UsuarioViewer::fracaso()
 
 void UsuarioViewer::fail(){
 	cout<<"<font color='red'><h1 align='center'>Ya has votado en esa categoria!</h1></font>"<<endl;
-
 }
 void UsuarioViewer::info(string id, string categoria) {
+	cout<<"Content-type: text/html"<<endl<<endl;
 	cout<<"<html><head>"<<endl;
   cout<<"	<br>	"<<endl;
 	cout<<"<font color='grey'>"<<endl;
   cout<<"</h1>\n";
   cout<<"<h3>categoria: "<<categoria<<endl;
   cout<<"</h3>\n";
-  cout<<"	<br>	"<<endl;
-  cout<<"</body></html>"<<endl;
 	cout<<"<h3>Su id de votante es:"+id<<endl;
 	cout<<"</h3>\n";
 	cout<<"</font>"<<endl;
-}
-/*int UsuarioViewer::buscar()
-{
-    int cliID;
-
-    cout << endl << endl << "Buscar Usuario" << endl;
-    cout << "Ingrese ID Usuario: ";
-    cin >> cliID;
-
-    return cliID;
-}
-*/
-/*
-void UsuarioViewer::mostrar(Usuario* id)
-{
-
+	cout<<"</body></html>"<<endl;
 }
 
-void UsuarioViewer::cargar(Usuario* cl, string msg)
-{
-}*/
+void UsuarioViewer::yav(){
+	cout<<"<font color='Green'><h1 align='center'>Voto ingresado !</h1></font>"<<endl;
+}

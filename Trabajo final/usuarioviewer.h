@@ -24,6 +24,7 @@ class UsuarioViewer
         void info(string, string);
         //void cargar(Usuario*, string);
         //void mensaje(string);
+        void yav();
     protected:
     private:
 };

@@ -25,6 +25,7 @@ void CandidatoViewer::mostrar(){
   initializeGet(Get);
   if (Get.find("categoria")!=Get.end()) {
 
+    (new UsuarioViewer())->info((new UsuarioDAO())->getId(), Get["categoria"]);
     (new CandidatoViewer())->listar((new UsuarioDAO())->checkcandidato(Get["categoria"]));
     (new UsuarioViewer())->votar();
     }
@@ -72,7 +73,6 @@ void CandidatoViewer::mostrar(){
 
 void CandidatoViewer::listar(Queue* queue){
 
-  cout<<"Content-type: text/html"<<endl<<endl;
   cout<<"<html><head>"<<endl;
   cout<<"<font color='blue'><h1 align='center'>Listado de candidatos</h1></font>"<<endl;
   cout<<"<font color='grey'><h4 align='center'>Ingrese el codigo del candidato a continuacion</h4></font>"<<endl;

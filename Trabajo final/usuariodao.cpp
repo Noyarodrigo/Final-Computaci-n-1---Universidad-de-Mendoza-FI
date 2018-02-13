@@ -4,6 +4,7 @@
 #include <sstream>
 #include "getpost.h"
 #include "usuarioviewer.h"
+#include "usuariocontroller.h"
 UsuarioDAO::UsuarioDAO()
 {
     //ctor
@@ -176,35 +177,30 @@ void UsuarioDAO::votar(string categoria, string cod){
   initializeGet(Get);
   stringstream stringSQL;
 
-  (new UsuarioViewer())->info(getId(), categoria);
-
   if (Get.find("categoria")!=Get.end()) {
+
     int x=(new UsuarioDAO())->checkvoto(categoria);
-    if (x==1){
-      cout<<"<h3>ACEPTADO:"<<endl;
-      cout<<"</h3>\n";
+    (new UsuarioController())->voto(x);
+      if (x==1){
       stringSQL <<"UPDATE `elecciones`.`votantes` SET " +categoria+"= '0' WHERE `votantes`.`idvotantes` ='"+getId()+"' AND `votantes`.`"+categoria+"` ='1' ";
       MyConnection::instance()->execute(stringSQL.str());
-
+      sumarvoto(cod);
     }
   }
 }
 
 void UsuarioDAO::sumarvoto(string cod)
 {
-
   stringstream stringSQL;
   stringSQL <<"UPDATE `elecciones`.`persona` SET votos= votos+1 WHERE `persona`.`id` ='"+cod+"' ";
   MyConnection::instance()->execute(stringSQL.str());
 }
-
 int UsuarioDAO::checkvoto(string categoria)
 {
-  int a=0;
-      sql::ResultSet* res = MyConnection::instance()->query("Select * from votantes WHERE `votantes`.`idvotantes`  ='"+getId()+"'AND 'votantes'.'"+categoria+"'='1'");
-      if (res->getInt(""+categoria+""))
-          {
-              a=1;
-              return a;
-          }
-  }
+    sql::ResultSet* res = MyConnection::instance()->query("Select "+categoria+" from votantes WHERE `votantes`.`idvotantes`  ="+getId()+";");
+    res->next();
+    int a =res->getInt(""+categoria+"");
+    return a;
+}
+
+  //""+categoria+""
