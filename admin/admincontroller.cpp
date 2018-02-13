@@ -28,8 +28,8 @@ void AdminController::inicio(){
 
 
 
-void AdminController::categoria(string opc){
-	if (opc =="addu") {addu();}
+void AdminController::categoria(){
+	if ((new AdminDAO())->getAux() =="addu") {addu();}
 	/*if (opc =="delu")delu();
 	if (opc =="modu")modu();
 	if (opc =="infu")infu();
@@ -45,14 +45,19 @@ void AdminController::addu()
 {
 	map<string,string> Get;
 	initializeGet(Get);
-	//Usuario* usuario = new Usuario();
-	cout<<"Content-type: text/html"<<endl<<endl;
-	cout<<"<html><head>"<<endl;
-	cout<<"<h3 color='grey'>Nombre<h3>\n"<<Get["nombre"]<<endl;
-	cout<<"<h3 color='grey'>Apellido<h3>\n"<<Get["apellido"]<<endl;
-	cout<<"<h3 color='grey'>Documento<h3>\n"<<Get["documento"]<<endl;
-	/*usuario->setDocumento(Get["documento"]);
+
+	Usuario* usuario = new Usuario();
+	usuario->setDocumento(Get["documento"]);
 	usuario->setUsuario(Get["nombre"]);
 	usuario->setClave(Get["apellido"]);
-	(new AdminDAO())->add(usuario);*/
+	(new AdminDAO())->add(usuario);
+	
+}
+
+void AdminController::setAux()
+{
+	map<string,string> Get;
+	initializeGet(Get);
+	string op=Get["opc"];
+	(new AdminDAO())->setAux(op);
 }

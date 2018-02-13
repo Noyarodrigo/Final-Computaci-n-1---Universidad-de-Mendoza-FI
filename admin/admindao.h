@@ -23,7 +23,8 @@ class AdminDAO
         void setLogin(string);
         void removeLogin();
         string getId();
-        //
+        void setAux(string);
+        string getAux();
     protected:
     private:
 };

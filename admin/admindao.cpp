@@ -59,11 +59,15 @@ void AdminDAO::update(Usuario* Usuario)
 
 void AdminDAO::add(Usuario* Usuario)
 {
-    string stringSQL;
-    stringSQL = "INSERT INTO persona (nombre, apellido, documento) VALUES (" + Usuario->getUsuario() + ", '" + Usuario->getClave() + "','"+Usuario->getDocumento()+"')";
-    cout<<"Content-type: text/html"<<endl<<endl;
-    cout<<"<h3 color='grey'>QUERY<h3>\n"<<stringSQL<<endl;
-  //  MyConnection::instance()->execute(stringSQL);
+  stringSQL = "SELECT documento FROM votantes WHERE documento = " + Usuario->getDocumento();
+  sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
+  if (res->next())
+  {
+    //error al agregar hacerlo en el viewer
+  }else{
+    stringSQL = "INSERT INTO votantes (nombre, apellido, documento) VALUES ('" + Usuario->getUsuario() + "', '" + Usuario->getClave() + "','"+Usuario->getDocumento()+"')";
+    MyConnection::instance()->execute(stringSQL);
+  }
 }
 
 Usuario* AdminDAO::find(int id)
@@ -148,7 +152,20 @@ int AdminDAO::checkLogin()
 
 string AdminDAO::getId()
 {
-    sql::ResultSet* res = MyConnection::instance()->query("SELECT idvotantes FROM votantes WHERE login =  1;");
+    sql::ResultSet* res = MyConnection::instance()->query("SELECT id FROM admin WHERE login =  1;");
     res->next();
-    return res->getString("idvotantes");
+    return res->getString("id");
+}
+
+void AdminDAO::setAux(string l)
+{
+    stringstream stringSQL;
+    stringSQL <<"UPDATE `elecciones`.`admin` SET `ultac` = '"+l+"' WHERE `admin`.`id` ='"<<getId()<<"';";
+    MyConnection::instance()->execute(stringSQL.str());
+}
+string AdminDAO::getAux(){
+  sql::ResultSet* res = MyConnection::instance()->query("Select ultac from admin WHERE `admin`.`id`  ="+getId()+";");
+    res->next();
+    string a =res->getString("ultac");
+    return a;
 }

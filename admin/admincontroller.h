@@ -10,7 +10,9 @@ class AdminController
         virtual ~AdminController();
         void abm();
         void control(string);
-        void categoria(string);
+        void categoria();
+        void setAux();
+
     protected:
     private:
         void adda();
