@@ -13,7 +13,6 @@ class AdminViewer
         AdminViewer();
         virtual ~AdminViewer();
         int menu();
-        void listar(Queue*);
        // int buscar();
         void mostrar(Usuario*);
         void inicio();
@@ -23,10 +22,13 @@ class AdminViewer
         void fail();
         void info(string, string);
         void ver();
-        void datos();
+        void dusu();
+        void dcan();
+        void did();
         //void cargar(Usuario*, string);
         //void mensaje(string);
         void yav();
+        void listarv(Queue*);
     protected:
     private:
 };

@@ -15,7 +15,7 @@ class AdminDAO
         void update(Usuario*);
         bool exist(Usuario*);
         void save(Usuario*);
-        void del(Usuario*);
+        void del();
         Usuario* find(int);
         int checkadmin(string);
         Queue* checkcandidato(string);
@@ -25,6 +25,9 @@ class AdminDAO
         string getId();
         void setAux(string);
         string getAux();
+        void setIdaux(string);
+        string getIdaux();
+        Queue* listarv();
     protected:
     private:
 };

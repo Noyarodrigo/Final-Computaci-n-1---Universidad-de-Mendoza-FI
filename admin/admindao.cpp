@@ -15,13 +15,18 @@ AdminDAO::~AdminDAO()
     //dtor
 }
 
-void AdminDAO::del(Usuario* usuario)
+void AdminDAO::del()
 {
-    string stringSQL;
-    stringstream ss;
-    ss << usuario->getId();
+    cout<<"<h3 color='grey'>QUERY<h3>\n";
+    string stringSQL = "SELECT idaux FROM admin WHERE id = " + getId();
+    sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
+    res->next();
+    string x =res->getString("idaux");
+    cout<<"<h3 color='grey'>IDAUX: <h3>\n"+x;
 
-    stringSQL = "DELETE FROM persona WHERE id = " + ss.str();
+     stringSQL = "DELETE FROM votantes WHERE idvotantes = " + x;
+     cout<<"<h3 color='grey'>QUERY<h3>\n"+stringSQL;
+
     MyConnection::instance()->execute(stringSQL);
 }
 
@@ -103,6 +108,7 @@ int AdminDAO::checkadmin(string id){
  }
 
 }
+
 Queue* AdminDAO::checkcandidato(string opc){
 
   string a=opc;
@@ -163,9 +169,37 @@ void AdminDAO::setAux(string l)
     stringSQL <<"UPDATE `elecciones`.`admin` SET `ultac` = '"+l+"' WHERE `admin`.`id` ='"<<getId()<<"';";
     MyConnection::instance()->execute(stringSQL.str());
 }
+
 string AdminDAO::getAux(){
   sql::ResultSet* res = MyConnection::instance()->query("Select ultac from admin WHERE `admin`.`id`  ="+getId()+";");
     res->next();
     string a =res->getString("ultac");
     return a;
+}
+
+void AdminDAO::setIdaux(string l)
+{
+    stringstream stringSQL;
+    stringSQL <<"UPDATE `elecciones`.`admin` SET `idaux` = '"+l+"' WHERE `admin`.`id` ='"<<getId()<<"';";
+    MyConnection::instance()->execute(stringSQL.str());
+}
+
+string AdminDAO::getIdaux(){
+  sql::ResultSet* res = MyConnection::instance()->query("Select idaux from admin WHERE `admin`.`id`  ="+getId()+";");
+    res->next();
+    string a =res->getString("idaux");
+    return a;
+}
+
+Queue* AdminDAO::listarv()
+{
+    Queue* queue = new Queue();
+    sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM votantes");
+
+    while (res->next())
+        queue->qstore(new Usuario(res));
+
+    delete res;
+
+    return queue;
 }

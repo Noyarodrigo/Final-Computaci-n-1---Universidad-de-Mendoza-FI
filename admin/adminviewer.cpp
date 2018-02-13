@@ -19,24 +19,6 @@ AdminViewer::~AdminViewer()
     //dtor
 }
 
-
-void AdminViewer::listar(Queue* queue)
-{
-	cout<<"Content-type: text/html"<<endl<<endl;
-	cout<<"<html><head>"<<endl;
-	/*cout<<"<link href='http://localhost/css/bootstrap.min.css' rel='stylesheet'>"<<endl;
-	cout<<"<link href='http://localhost/css/signin.css' rel='stylesheet'>"<<endl;
-	cout<<"<link href='http://localhost/css/ejemplo.css' rel='stylesheet'>"<<endl;*/
-	cout << "</head>" <<endl;
-	cout << "<body>   <div class='container'>"<<endl;
-	cout<<"<div class='centrar'></div>"<<endl;
-	cout<<"<div>"<<endl;
-	cout<<"</div>"<<endl;
-	queue->show();
-	cout<<"</div></body></html>"<<endl;
-
-
-}
 void AdminViewer::inicio(){
 	int z=0,x=0;
 
@@ -83,6 +65,7 @@ void AdminViewer::inicio(){
 	}
 
 }
+
 void AdminViewer::votar(){
 	map<string,string> Post;
 	initializePost(Post);
@@ -104,6 +87,7 @@ void AdminViewer::votar(){
 
 
 }
+
 void AdminViewer::fracaso()
 {
 	cout<<"<font color='red'><h1 align='center'>Ingreso Incorrecto!</h1></font>"<<endl;
@@ -135,16 +119,30 @@ void AdminViewer::ver()
 map<string,string> Get;
 initializeGet(Get);
 if (Get.find("opc")!=Get.end()) {
-	cout<<"Content-type: text/html"<<endl<<endl;
-	(new AdminViewer())->info((new AdminDAO())->getId(), Get["opc"]);
-	(new AdminController())->setAux();
-	(new AdminViewer())->datos();
+		cout<<"Content-type: text/html"<<endl<<endl;
+		(new AdminViewer())->info((new AdminDAO())->getId(), Get["opc"]);
+		(new AdminController())->setAux();
 
+		if (Get["opc"]== "addu" ) {
+			(new AdminViewer())->dusu();	}
+
+		if (Get["opc"]== "addc") {
+			(new AdminViewer())->dcan();	}
+
+		if (Get["opc"]== "delu" || Get["opc"]== "delc" || Get["opc"]== "infu" || Get["opc"]== "infc" || Get["opc"]== "modu" || Get["opc"]== "modc") {
+			//	(new AdminController())->listarv();
+				(new AdminViewer())->did();
+				}
+
+		if (Get["opc"]== "out" ) {
+			//log out directamente aca}
+				}
 	}else{
 
-		if (Get.find("nombre")!=Get.end() || Get.find("apellido")!=Get.end() || Get.find("documento")!=Get.end()) {
+		if (Get.find("nombre")!=Get.end() || Get.find("apellido")!=Get.end() || Get.find("documento")!=Get.end() || Get.find("id")!=Get.end()) {
 				cout<<"Content-type: text/html"<<endl<<endl;
 				cout<<"<h3 color='grey'>OPCION<h3>\n"<<(new AdminDAO())->getAux();
+				(new AdminController())->idAux();
 				(new AdminController())->categoria();
 
 			}else{
@@ -156,7 +154,7 @@ if (Get.find("opc")!=Get.end()) {
 				cout<<"	<br>"<<endl;
 				cout<<"<form class='form-signin' method='get'>"<<endl;
 				cout<<"  <fieldset>"<<endl;
-				cout<<"    <legend>Elige una opcion luego, haz click en siguiente</legend>"<<endl;
+				cout<<"    <legend>Opciones de votantes</legend>"<<endl;
 				cout<<"      <p>"<<endl;
 				cout<<"          <input type=\"radio\" name=\"opc\" value=\"addu\"> Agregar votante"<<endl;
 				cout<<"      </p>"<<endl;
@@ -169,18 +167,26 @@ if (Get.find("opc")!=Get.end()) {
 				cout<<"      <p>"<<endl;
 				cout<<"          <input type=\"radio\" name=\"opc\" value=\"infu\"> Info de votante"<<endl;
 				cout<<"      </p>"<<endl;
+				cout<<"  </fieldset>"<<endl;
+				cout<<"	<br>	"<<endl;
+				cout<<"  <fieldset>"<<endl;
+				cout<<"    <legend>Opciones de candidatos</legend>"<<endl;
 				cout<<"      <p>"<<endl;
-				cout<<"          <input type=\"radio\" name=\"opc\" value=\"adda\"> Agregar admin"<<endl;
+				cout<<"          <input type=\"radio\" name=\"opc\" value=\"addc\"> Agregar candidato"<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"      <p>"<<endl;
-				cout<<"           <input type=\"radio\" name=\"opc\" value=\"dela\"> Quitar admin"<<endl;
+				cout<<"           <input type=\"radio\" name=\"opc\" value=\"delc\"> Quitar candidato"<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"      <p>"<<endl;
-				cout<<"           <input type=\"radio\" name=\"opc\" value=\"moda\"> Modificar admin"<<endl;
+				cout<<"           <input type=\"radio\" name=\"opc\" value=\"modc\"> Modificar candidato"<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"      <p>"<<endl;
-				cout<<"          <input type=\"radio\" name=\"opc\" value=\"infa\"> Info de admin"<<endl;
+				cout<<"           <input type=\"radio\" name=\"opc\" value=\"infc\"> info candidato"<<endl;
 				cout<<"      </p>"<<endl;
+				cout<<"  </fieldset>"<<endl;
+				cout<<"	<br>	"<<endl;
+				cout<<"  <fieldset>"<<endl;
+				cout<<"    <legend>SALIR DE LA ADMINISTRACION</legend>"<<endl;
 				cout<<"      <p>"<<endl;
 				cout<<"          <input text-color='grey' type=\"radio\" name=\"opc\" value=\"out\"> LOG OUT"<<endl;
 				cout<<"      </p>"<<endl;
@@ -194,13 +200,11 @@ if (Get.find("opc")!=Get.end()) {
 
 
 		}
+	}
 
-}
-
-void AdminViewer::datos()
+void AdminViewer::dusu()
 {
-	map<string,string> Get;
-	initializePost(Get);
+
 	cout<<"<html><head>"<<endl;
 	cout<< "</head>" <<endl;
 	cout<< "<body>   <div class='container'>"<<endl;
@@ -228,5 +232,78 @@ void AdminViewer::datos()
 	cout<<"<br>"<<endl;
 	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingrsar datos</button>"<<endl;
 	cout<<"</div>"<<endl;
-//	(new AdminController())->categoria(Get["opc"]);
+
+}
+
+void AdminViewer::dcan()
+{
+
+	cout<<"<html><head>"<<endl;
+	cout<< "</head>" <<endl;
+	cout<< "<body>   <div class='container'>"<<endl;
+	cout<<"<div class='centrar'></div>"<<endl;
+	cout<<"<h3 color='grey'>Ingrese los datos<h3>\n";
+	cout<<"<div class='container'>"<<endl;
+
+	cout<<"<form class='form-signin' method='get'>"<<endl;
+	//NOMBRE
+	cout<<"<br>"<<endl;
+	cout<<"<label for='nombre' class='sr-only'>Nombre</label>"<<endl;
+	cout<<"<input type='text' name='nombre' class='form-control' placeholder='Nombre' required autofocus>"<<endl;
+	//apellido
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<label for='nombre' class='sr-only'>Apellido</label>"<<endl;
+	cout<<"<input type='text' name='apellido' class='form-control' placeholder='Apellido' >"<<endl;
+	//telefono
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<label for='telefono' class='sr-only'>Telefono</label>"<<endl;
+	cout<<"<input type='text' name='telefono' class='form-control' placeholder='Telefono' >"<<endl;
+	//idtc
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<label for='idtc' class='sr-only'>Tipo de candidato:</label>"<<endl;
+	cout<<"<input type='text' name='idtc' class='form-control' placeholder='IDTC' >"<<endl;
+	//partido
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<label for='partido' class='sr-only'>Partido</label>"<<endl;
+	cout<<"<input type='text' name='partido' class='form-control' placeholder='Partido' >"<<endl;
+
+	//boton
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingrsar datos</button>"<<endl;
+	cout<<"</div>"<<endl;
+
+}
+
+void AdminViewer::did()	{
+	cout<<"<h3 color='grey'>Ingrese el id<h3>\n";
+	cout<<"<form class='form-signin' method='get'>"<<endl;
+	cout<<"<label for='id' class='sr-only'>ID</label>"<<endl;
+	cout<<"<input type='text' name='id' class='form-control' placeholder='Ingrese el id AQUI' >"<<endl;
+	//boton
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Aceptar</button>"<<endl;
+	cout<<"</div>"<<endl;
+	cout<<"</form>"<<endl;
+
+}
+
+void AdminViewer::listarv(Queue* queue){
+
+  cout<<"<html><head>"<<endl;
+  cout<<"<font color='blue'><h3 align='center'>Listado de Votantes</h3></font>"<<endl;
+  cout<<"<font color='grey'><h4 align='center'>Ingrese el id del votante abajo</h4></font>"<<endl;
+  cout<<"</h1></font>"<<endl;
+  cout<<"<div>"<<endl;
+  cout<<"<font color='red'>Codigo  \tNombre  \tApellido  \tPartido</font>"<<endl;
+  cout<<"</div>"<<endl;
+  cout<<"<br>"<<endl;
+  queue->show();
+  cout<<"</body></html>"<<endl;
+
 }

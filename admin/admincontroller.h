@@ -12,6 +12,8 @@ class AdminController
         void control(string);
         void categoria();
         void setAux();
+        void idAux();
+        void listarv();
 
     protected:
     private:

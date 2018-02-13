@@ -106,7 +106,7 @@ void UsuarioViewer::votar(){
 }
 void UsuarioViewer::fracaso()
 {
-	cout<<"<font color='red'><h1 align='center'>Ingreso Incorrecto!</h1></font>"<<endl;
+	cout<<"<font color='red'><h3 align='center'>Ingreso Incorrecto!</h3></font>"<<endl;
 }
 
 void UsuarioViewer::fail(){
