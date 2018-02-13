@@ -26,12 +26,14 @@ class Usuario
         string getClave();
         void fillObject(sql::ResultSet*);
         string toString();
-
+        void setDocumento(string);
+        string getDocumento();
 
     protected:
 
     private:
         int id;
+        string documento;
         string usuario;
         string clave;
         string partido;

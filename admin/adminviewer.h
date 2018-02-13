@@ -23,6 +23,7 @@ class AdminViewer
         void fail();
         void info(string, string);
         void ver();
+        void datos();
         //void cargar(Usuario*, string);
         //void mensaje(string);
         void yav();

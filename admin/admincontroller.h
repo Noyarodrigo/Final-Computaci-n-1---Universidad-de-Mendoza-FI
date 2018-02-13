@@ -10,14 +10,19 @@ class AdminController
         virtual ~AdminController();
         void abm();
         void control(string);
-        void votar(string);
-        void voto(int);
+        void categoria(string);
     protected:
     private:
-        void listar();
+        void adda();
+        void dela();
+        void infa();
+        void moda();
+        void addu();
+        void delu();
+        void infu();
+        void modu();
+        void out();
         void inicio();
-        void eliminar();
-
 };
 
 #endif // UsuarioCONTROLLER_H

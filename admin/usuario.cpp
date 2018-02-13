@@ -26,6 +26,7 @@ void Usuario::fillObject(sql::ResultSet* rs)
     this->setUsuario(rs->getString("nombre"));
     this->setClave(rs->getString("apellido"));
 		this->setPartido(rs->getString("partido"));
+		this->setDocumento(rs->getString("documento"));
 }
 
 
@@ -65,6 +66,15 @@ string Usuario::getPartido(){
 
 void Usuario::setPartido(string partido){
 	this->partido = partido;
+}
+
+string Usuario::getDocumento(){
+
+	return this->documento;
+}
+
+void Usuario::setDocumento(string documento){
+	this->documento = documento;
 }
 
 string Usuario::toString()

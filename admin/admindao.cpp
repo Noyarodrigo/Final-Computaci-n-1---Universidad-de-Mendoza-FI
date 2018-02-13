@@ -15,19 +15,6 @@ AdminDAO::~AdminDAO()
     //dtor
 }
 
-/*Queue* AdminDAO::collection(int opc)
-{
-    Queue* queue = new Queue();
-    sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM persona WHERE idtc= "+opc);
-
-    while (res->next())
-        queue->qstore(new Usuario(res));
-
-    delete res;
-
-    return queue;
-}*/
-
 void AdminDAO::del(Usuario* usuario)
 {
     string stringSQL;
@@ -72,14 +59,11 @@ void AdminDAO::update(Usuario* Usuario)
 
 void AdminDAO::add(Usuario* Usuario)
 {
-    stringstream ss;
-
     string stringSQL;
-
-    ss << Usuario->getId();
-
-    stringSQL = "INSERT INTO persona (id, usuario) VALUES (" + ss.str() + ", '" + Usuario->getUsuario() + "')";
-    MyConnection::instance()->execute(stringSQL);
+    stringSQL = "INSERT INTO persona (nombre, apellido, documento) VALUES (" + Usuario->getUsuario() + ", '" + Usuario->getClave() + "','"+Usuario->getDocumento()+"')";
+    cout<<"Content-type: text/html"<<endl<<endl;
+    cout<<"<h3 color='grey'>QUERY<h3>\n"<<stringSQL<<endl;
+  //  MyConnection::instance()->execute(stringSQL);
 }
 
 Usuario* AdminDAO::find(int id)

@@ -21,33 +21,38 @@ void AdminController::abm()
 
 }
 
-void AdminController::listar()
-{
-  //  (new AdminViewer())->listar((new AdminDAO())->collection(opc));
-}
 
 void AdminController::inicio(){
 		(new AdminViewer())->inicio();
 }
 
-void AdminController::voto(int x){
-	if (x==1)(new AdminViewer())->yav();
-	if (x==0)(new AdminViewer())->fail();
 
+
+void AdminController::categoria(string opc){
+	if (opc =="addu") {addu();}
+	/*if (opc =="delu")delu();
+	if (opc =="modu")modu();
+	if (opc =="infu")infu();
+	if (opc =="adda")adda();
+	if (opc =="dela")dela();
+	if (opc =="moda")moda();
+	if (opc =="infa")infa();
+	if (opc =="out")out();*/
 
 }
 
-
-void AdminController::control(string cod){
-	map<string,string> Get;
-  initializeGet(Get);
-	//(new AdminDAO())->votar(Get["categoria"], cod);
-	}
-
-
-void AdminController::eliminar()
+void AdminController::addu()
 {
-	Usuario* usuario = new Usuario();
-	usuario->setId(11);
-	(new AdminDAO())->del(usuario);
+	map<string,string> Get;
+	initializeGet(Get);
+	//Usuario* usuario = new Usuario();
+	cout<<"Content-type: text/html"<<endl<<endl;
+	cout<<"<html><head>"<<endl;
+	cout<<"<h3 color='grey'>Nombre<h3>\n"<<Get["nombre"]<<endl;
+	cout<<"<h3 color='grey'>Apellido<h3>\n"<<Get["apellido"]<<endl;
+	cout<<"<h3 color='grey'>Documento<h3>\n"<<Get["documento"]<<endl;
+	/*usuario->setDocumento(Get["documento"]);
+	usuario->setUsuario(Get["nombre"]);
+	usuario->setClave(Get["apellido"]);
+	(new AdminDAO())->add(usuario);*/
 }
