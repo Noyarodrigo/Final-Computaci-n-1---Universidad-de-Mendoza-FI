@@ -49,7 +49,7 @@ void UsuarioViewer::inicio(){
 		cout<<"<html><head>"<<endl;
 		cout<<"<title>Elecciones 2018</title>"<<endl;
     cout<<"<link rel=\"stylesheet\" href=\"http://localhost/css.css\">"<<endl;
-		href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+
 		cout<< "</head>" <<endl;
 		cout<< "<body>   <div class='container'>"<<endl;
 		cout<<"<div class='header'></div>"<<endl;
@@ -62,7 +62,7 @@ void UsuarioViewer::inicio(){
 	  cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingresar</button>"<<endl;
 	  cout<<"</form>"<<endl;
 	  cout<<"</div>"<<endl;
-
+		cout<<"</div></body></html>"<<endl;
 
 	      if (Post.find("documento")!=Post.end()) {
 					z=(new UsuarioDAO())->checkusuario(Post["documento"]);
