@@ -25,6 +25,10 @@ class AdminViewer
         void dusu();
         void dcan();
         void did();
+        void out();
+        void nope();
+        void agregado();
+        void eliminado();
         //void cargar(Usuario*, string);
         //void mensaje(string);
         void yav();

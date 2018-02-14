@@ -135,17 +135,21 @@ if (Get.find("opc")!=Get.end()) {
 				}
 
 		if (Get["opc"]== "out" ) {
-			//log out directamente aca}
+			(new AdminController())->out();
 				}
 	}else{
 
 		if (Get.find("nombre")!=Get.end() || Get.find("apellido")!=Get.end() || Get.find("documento")!=Get.end() || Get.find("id")!=Get.end()) {
+
+			if (Get.find("id")!=Get.end()) {
+			(new AdminController())->idAux();
+			}
+
 				cout<<"Content-type: text/html"<<endl<<endl;
-				cout<<"<h3 color='grey'>OPCION<h3>\n"<<(new AdminDAO())->getAux();
-				(new AdminController())->idAux();
+				cout<<"<h3 color='grey'>Opcion: "+(new AdminDAO())->getAux()+"<h3>\n";
 				(new AdminController())->categoria();
 
-			}else{
+		}else{
 				cout<<"Content-type: text/html"<<endl<<endl;
 				cout<<"<html><head>"<<endl;
 				cout<<"<font color='blue'><h1 align='center'>Panel de administracion</h1></font>"<<endl;
@@ -202,6 +206,7 @@ if (Get.find("opc")!=Get.end()) {
 		}
 	}
 
+
 void AdminViewer::dusu()
 {
 
@@ -230,7 +235,7 @@ void AdminViewer::dusu()
 	//boton
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
-	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingrsar datos</button>"<<endl;
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingresar datos</button>"<<endl;
 	cout<<"</div>"<<endl;
 
 }
@@ -274,7 +279,7 @@ void AdminViewer::dcan()
 	//boton
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
-	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingrsar datos</button>"<<endl;
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingresar datos</button>"<<endl;
 	cout<<"</div>"<<endl;
 
 }
@@ -305,5 +310,41 @@ void AdminViewer::listarv(Queue* queue){
   cout<<"<br>"<<endl;
   queue->show();
   cout<<"</body></html>"<<endl;
+
+}
+
+void AdminViewer::out()
+{
+	cout<<"<font color='red'><h3 >Has salido de la app<h3></font>\n";
+	cout<<"<form class='form-signin' method='get'>"<<endl;
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>SALIR</button>"<<endl;
+	cout<<"</form>"<<endl;
+
+}
+
+void AdminViewer::nope()
+{
+	cout<<"<form class='form-signin' method='get'>"<<endl;
+	cout<<"<font color='red'><h3 >Algo salio mal<h3></font>\n";
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Volver</button>"<<endl;
+	cout<<"</form>"<<endl;
+
+}
+
+void AdminViewer::agregado()
+{
+	cout<<"<form class='form-signin' method='get'>"<<endl;
+	cout<<"<font color='green'><h3>Usuario Agregado<h3>\n";
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Volver</button>"<<endl;
+	cout<<"</form>"<<endl;
+
+}
+
+void AdminViewer::eliminado()
+{
+	cout<<"<form class='form-signin' method='get'>"<<endl;
+	cout<<"<font color='green'><h3>Eliminado correctamente<h3>\n";
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Volver</button>"<<endl;
+	cout<<"</form>"<<endl;
 
 }

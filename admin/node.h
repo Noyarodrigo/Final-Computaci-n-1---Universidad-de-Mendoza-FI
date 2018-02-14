@@ -2,6 +2,7 @@
 #define NODE_H
 
 #include "usuario.h"
+#include "candidato.h"
 
 class Node
 {

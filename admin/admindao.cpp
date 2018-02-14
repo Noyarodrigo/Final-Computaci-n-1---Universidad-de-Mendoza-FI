@@ -15,19 +15,27 @@ AdminDAO::~AdminDAO()
     //dtor
 }
 
-void AdminDAO::del()
+void AdminDAO::delu()
 {
-    cout<<"<h3 color='grey'>QUERY<h3>\n";
     string stringSQL = "SELECT idaux FROM admin WHERE id = " + getId();
     sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
     res->next();
     string x =res->getString("idaux");
-    cout<<"<h3 color='grey'>IDAUX: <h3>\n"+x;
-
-     stringSQL = "DELETE FROM votantes WHERE idvotantes = " + x;
-     cout<<"<h3 color='grey'>QUERY<h3>\n"+stringSQL;
-
+    stringSQL = "DELETE FROM votantes WHERE idvotantes = " + x;
     MyConnection::instance()->execute(stringSQL);
+    (new AdminViewer())->eliminado();
+
+}
+void AdminDAO::delc()
+{
+    string stringSQL = "SELECT idaux FROM admin WHERE id = " + getId();
+    sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
+    res->next();
+    string x =res->getString("idaux");
+    stringSQL = "DELETE FROM persona WHERE id = " + x;
+    MyConnection::instance()->execute(stringSQL);
+    (new AdminViewer())->eliminado();
+
 }
 
 void AdminDAO::save(Usuario* Usuario)
@@ -35,7 +43,7 @@ void AdminDAO::save(Usuario* Usuario)
     if (exist(Usuario))
         update(Usuario);
     else
-        add(Usuario);
+        addu(Usuario);
 }
 
 bool AdminDAO::exist(Usuario* Usuario)
@@ -62,16 +70,32 @@ void AdminDAO::update(Usuario* Usuario)
     MyConnection::instance()->execute(stringSQL);
 }
 
-void AdminDAO::add(Usuario* Usuario)
+void AdminDAO::addu(Usuario* Usuario)
 { string stringSQL;
   stringSQL = "SELECT documento FROM votantes WHERE documento = " + Usuario->getDocumento();
   sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
   if (res->next())
   {
-    //error al agregar hacerlo en el viewer
+    (new AdminViewer())->nope();
   }else{
     stringSQL = "INSERT INTO votantes (nombre, apellido, documento) VALUES ('" + Usuario->getUsuario() + "', '" + Usuario->getClave() + "','"+Usuario->getDocumento()+"')";
     MyConnection::instance()->execute(stringSQL);
+    (new AdminViewer())->agregado();
+  }
+}
+
+void AdminDAO::addc(Candidato* Candidato)
+{
+   string stringSQL;
+  stringSQL = "SELECT telefono FROM persona WHERE telefono = " + Candidato->getTel();
+  sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
+  if (res->next())
+  {
+    (new AdminViewer())->nope();
+  }else{
+    stringSQL = "INSERT INTO persona (nombre, apellido, telefono, idtc, partido) VALUES ('" + Candidato->getNombre() + "', '" + Candidato->getApellido() + "','"+Candidato->getTel()+"', '"+Candidato->getIdtc()+"','"+Candidato->getPartido()+"')";
+    MyConnection::instance()->execute(stringSQL);
+    (new AdminViewer())->agregado();
   }
 }
 
@@ -139,7 +163,7 @@ void AdminDAO::setLogin(string l)
 void AdminDAO::removeLogin()
 {
     stringstream stringSQL;
-    stringSQL <<"UPDATE `elecciones`.`votantes` SET `login` = '0' WHERE `votantes`.`id` ='"<<getId()<<"';";
+    stringSQL <<"UPDATE `elecciones`.`admin` SET `login` = '0' WHERE `admin`.`id` ='"<<getId()<<"';";
     MyConnection::instance()->execute(stringSQL.str());
 }
 

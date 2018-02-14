@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include "usuario.h"
+#include "candidato.h"
 #include "queue.h"
 using namespace std;
 
@@ -11,11 +12,13 @@ class AdminDAO
     public:
         AdminDAO();
         virtual ~AdminDAO();
-        void add(Usuario*);
+        void addu(Usuario*);
+        void addc(Candidato*);
         void update(Usuario*);
         bool exist(Usuario*);
         void save(Usuario*);
-        void del();
+        void delu();
+        void delc();
         Usuario* find(int);
         int checkadmin(string);
         Queue* checkcandidato(string);

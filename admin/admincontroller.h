@@ -13,19 +13,18 @@ class AdminController
         void categoria();
         void setAux();
         void idAux();
-        void listarv();
+        void out();
 
     protected:
     private:
-        void adda();
-        void dela();
-        void infa();
-        void moda();
+        void addc();
+        void delc();
+        void infc();
+        void modc();
         void addu();
         void delu();
         void infu();
         void modu();
-        void out();
         void inicio();
 };
 
