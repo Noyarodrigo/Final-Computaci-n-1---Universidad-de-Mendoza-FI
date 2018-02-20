@@ -7,10 +7,9 @@ using namespace std;
 
 Usuario::Usuario()
 {
-		id = 0;
-    usuario = "";
-    clave = "";
-		partido="";
+    nombre = "";
+    apellido = "";
+		documento="";
 }
 
 Usuario::Usuario(sql::ResultSet* res)
@@ -21,51 +20,38 @@ Usuario::Usuario(sql::ResultSet* res)
 
 void Usuario::fillObject(sql::ResultSet* rs)
 {
-
-    this->setId(rs->getInt("id"));
-    this->setUsuario(rs->getString("nombre"));
-    this->setClave(rs->getString("apellido"));
-		this->setPartido(rs->getString("partido"));
+		this->setId(rs->getInt("id"));
+    this->setNombre(rs->getString("nombre"));
+    this->setApellido(rs->getString("apellido"));
 		this->setDocumento(rs->getString("documento"));
+		this->setConsejal(rs->getString("consejal"));
+    this->setApellido(rs->getString("legislador"));
+		this->setDocumento(rs->getString("senador"));
+		this->setNombre(rs->getString("diputado"));
+    this->setApellido(rs->getString("intendente"));
+		this->setDocumento(rs->getString("gobernador"));
+		this->setDocumento(rs->getString("presidente"));
+
 }
 
-
-void Usuario::setId(int id)
+void Usuario::setNombre(string nombre)
 {
-    this->id = id;
+    this->nombre = nombre;
 }
 
-int Usuario::getId()
+string Usuario::getNombre()
 {
-    return this->id;
+    return this->nombre;
 }
 
-void Usuario::setUsuario(string usuario)
+string Usuario::getApellido()
 {
-    this->usuario = usuario;
+    return this->apellido;
 }
 
-string Usuario::getUsuario()
+void Usuario::setApellido(string apellido)
 {
-    return this->usuario;
-}
-
-string Usuario::getClave()
-{
-    return this->clave;
-}
-
-void Usuario::setClave(string clave)
-{
-    this->clave = clave;
-}
-string Usuario::getPartido(){
-
-	return this->partido;
-}
-
-void Usuario::setPartido(string partido){
-	this->partido = partido;
+    this->apellido = apellido;
 }
 
 string Usuario::getDocumento(){
@@ -77,9 +63,19 @@ void Usuario::setDocumento(string documento){
 	this->documento = documento;
 }
 
+void Usuario::setId(int id)
+{
+    this->id = id;
+}
+
+int Usuario::getId()
+{
+    return this->id;
+}
+
 string Usuario::toString()
 {
     stringstream ss;
     ss << this->getId();
-    return "<div>&nbsp;"+ ss.str() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\t" + this->getUsuario() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\t" + this->getClave() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\t"+this->getPartido()+"</div>";
+    return "<th>"+ ss.str() + "</th><th>" + this->getNombre() + "</th><th>" + this->getApellido() + "</th>"	;
 }

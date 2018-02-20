@@ -4,7 +4,9 @@
 #include <sstream>
 #include "usuario.h"
 #include "candidato.h"
-#include "queue.h"
+#include "queueusuario.h"
+#include "queuecandidato.h"
+
 using namespace std;
 
 class AdminDAO
@@ -14,14 +16,12 @@ class AdminDAO
         virtual ~AdminDAO();
         void addu(Usuario*);
         void addc(Candidato*);
-        void update(Usuario*);
-        bool exist(Usuario*);
-        void save(Usuario*);
         void delu();
         void delc();
+        Queueusuario* infu();
+        Queuecandidato* infc();
         Usuario* find(int);
         int checkadmin(string);
-        Queue* checkcandidato(string);
         int checkLogin();
         void setLogin(string);
         void removeLogin();
@@ -30,7 +30,8 @@ class AdminDAO
         string getAux();
         void setIdaux(string);
         string getIdaux();
-        Queue* listarv();
+
+
     protected:
     private:
 };

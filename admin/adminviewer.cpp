@@ -66,28 +66,6 @@ void AdminViewer::inicio(){
 
 }
 
-void AdminViewer::votar(){
-	map<string,string> Post;
-	initializePost(Post);
-	cout<<"<html><head>"<<endl;
-	cout<< "</head>" <<endl;
-	cout<< "<body>   <div class='container'>"<<endl;
-	cout<<"<div class='centrar'></div>"<<endl;
-	cout<<"<h3 color='grey'>Ingrese el codigo del candidato que desea votar<h1>\n";
-	cout<<"<div class='container'>"<<endl;
-	cout<<"<form class='form-signin' method='post'>"<<endl;
-	cout<<"<label for='codigo' class='sr-only'>Codigo</label>"<<endl;
-	cout<<"<input type='text' name='codigo' class='form-control' placeholder='Ingreselo AQUI' required autofocus>"<<endl;
-	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>VOTAR</button>"<<endl;
-	cout<<"</form>"<<endl;
-	cout<<"</div>"<<endl;
-	 if (Post.find("codigo")!=Post.end()) {
-		// (new AdminController())->control(Post["codigo"]);
-	 }//else fail();
-
-
-}
-
 void AdminViewer::fracaso()
 {
 	cout<<"<font color='red'><h1 align='center'>Ingreso Incorrecto!</h1></font>"<<endl;
@@ -129,14 +107,17 @@ if (Get.find("opc")!=Get.end()) {
 		if (Get["opc"]== "addc") {
 			(new AdminViewer())->dcan();	}
 
-		if (Get["opc"]== "delu" || Get["opc"]== "delc" || Get["opc"]== "infu" || Get["opc"]== "infc" || Get["opc"]== "modu" || Get["opc"]== "modc") {
-			//	(new AdminController())->listarv();
+		if (Get["opc"]== "delu" || Get["opc"]== "delc" || Get["opc"]== "modu" || Get["opc"]== "modc") {
+
 				(new AdminViewer())->did();
 				}
 
 		if (Get["opc"]== "out" ) {
 			(new AdminController())->out();
 				}
+			if (Get["opc"]== "infu" || Get["opc"]== "infc" ) {
+				(new AdminController())->categoria();
+			}
 	}else{
 
 		if (Get.find("nombre")!=Get.end() || Get.find("apellido")!=Get.end() || Get.find("documento")!=Get.end() || Get.find("id")!=Get.end()) {
@@ -146,7 +127,7 @@ if (Get.find("opc")!=Get.end()) {
 			}
 
 				cout<<"Content-type: text/html"<<endl<<endl;
-				cout<<"<h3 color='grey'>Opcion: "+(new AdminDAO())->getAux()+"<h3>\n";
+				cout<<"<h3 >Opcion: "+(new AdminDAO())->getAux()+"<h3>\n";
 				(new AdminController())->categoria();
 
 		}else{
@@ -298,17 +279,29 @@ void AdminViewer::did()	{
 
 }
 
-void AdminViewer::listarv(Queue* queue){
+void AdminViewer::infu(Queueusuario* queueusuario){
 
   cout<<"<html><head>"<<endl;
-  cout<<"<font color='blue'><h3 align='center'>Listado de Votantes</h3></font>"<<endl;
-  cout<<"<font color='grey'><h4 align='center'>Ingrese el id del votante abajo</h4></font>"<<endl;
+  cout<<"<font color='blue'><h3 align='center'>Informacion de ususario</h3></font>"<<endl;
   cout<<"</h1></font>"<<endl;
   cout<<"<div>"<<endl;
-  cout<<"<font color='red'>Codigo  \tNombre  \tApellido  \tPartido</font>"<<endl;
+  cout<<"<th>ID</th><th>Nombre</th><th>Apellido</th><th>Documento</th><th>Consejal</th><th>Legislador</th><th>senador</th><th>Diputado</th><th>Intendente</th><th>Gobernador</th><th>Presidente</th></font>"<<endl;
   cout<<"</div>"<<endl;
   cout<<"<br>"<<endl;
-  queue->show();
+  queueusuario->show();
+  cout<<"</body></html>"<<endl;
+
+}
+
+void AdminViewer::infc(Queuecandidato* queuecandidato){
+
+  cout<<"<html><head>"<<endl;
+  cout<<"<font color='blue'><h3 align='center'>Informacion de Candidato</h3></font>"<<endl;
+	cout<<"<tr>"<<endl;
+  cout<<"<th>ID</th><th>Nombre</th><th>Apellido</th><th>Telefono</th><th>IDTC</th><th>Partido</th><th>Votos</th></font>"<<endl;
+  cout<<"<br>"<<endl;
+  queuecandidato->show();
+	cout<<"</tr>"<<endl;
   cout<<"</body></html>"<<endl;
 
 }

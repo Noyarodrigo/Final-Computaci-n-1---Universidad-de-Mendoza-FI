@@ -14,16 +14,12 @@ class Usuario
     public:
         Usuario();
         Usuario(sql::ResultSet*);
-
-        void ingresar();
-        string getPartido();
-        void setPartido(string);
         int getId();
-		    void setId(int);
-        void setUsuario(string);
-        string getUsuario();
-        void setClave(string);
-        string getClave();
+        void setId(int);
+        void setNombre(string);
+        string getNombre();
+        void setApellido(string);
+        string getApellido();
         void fillObject(sql::ResultSet*);
         string toString();
         void setDocumento(string);
@@ -34,8 +30,7 @@ class Usuario
     private:
         int id;
         string documento;
-        string usuario;
-        string clave;
-        string partido;
+        string nombre;
+        string apellido;
 };
 #endif

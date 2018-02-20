@@ -21,7 +21,7 @@ void AdminDAO::delu()
     sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
     res->next();
     string x =res->getString("idaux");
-    stringSQL = "DELETE FROM votantes WHERE idvotantes = " + x;
+    stringSQL = "DELETE FROM votantes WHERE id = " + x;
     MyConnection::instance()->execute(stringSQL);
     (new AdminViewer())->eliminado();
 
@@ -38,38 +38,6 @@ void AdminDAO::delc()
 
 }
 
-void AdminDAO::save(Usuario* Usuario)
-{
-    if (exist(Usuario))
-        update(Usuario);
-    else
-        addu(Usuario);
-}
-
-bool AdminDAO::exist(Usuario* Usuario)
-{
-    string stringSQL;
-
-    stringstream ss;
-    ss << Usuario->getId();
-
-    stringSQL = "SELECT * FROM persona WHERE id = " + ss.str();
-    sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
-
-    return res->next();
-}
-
-void AdminDAO::update(Usuario* Usuario)
-{
-    string stringSQL;
-
-    stringstream ss;
-    ss << Usuario->getId();
-
-    stringSQL = "UPDATE persona SET usuario = '" + Usuario->getUsuario() + "' WHERE id = " + ss.str();
-    MyConnection::instance()->execute(stringSQL);
-}
-
 void AdminDAO::addu(Usuario* Usuario)
 { string stringSQL;
   stringSQL = "SELECT documento FROM votantes WHERE documento = " + Usuario->getDocumento();
@@ -78,7 +46,7 @@ void AdminDAO::addu(Usuario* Usuario)
   {
     (new AdminViewer())->nope();
   }else{
-    stringSQL = "INSERT INTO votantes (nombre, apellido, documento) VALUES ('" + Usuario->getUsuario() + "', '" + Usuario->getClave() + "','"+Usuario->getDocumento()+"')";
+    stringSQL = "INSERT INTO votantes (nombre, apellido, documento) VALUES ('" + Usuario->getNombre() + "', '" + Usuario->getApellido() + "','"+Usuario->getDocumento()+"')";
     MyConnection::instance()->execute(stringSQL);
     (new AdminViewer())->agregado();
   }
@@ -130,26 +98,6 @@ int AdminDAO::checkadmin(string id){
      a=1;
      return a;
  }
-
-}
-
-Queue* AdminDAO::checkcandidato(string opc){
-
-  string a=opc;
-  if (a=="consejal"){a="1";}
-  if (a=="legislador"){a="2";}
-  if (a=="senador"){a="3";}
-  if (a=="diputado"){a="4";}
-  if (a=="intendente"){a="5";}
-  if (a=="gobernador"){a="6";}
-  if (a=="presidente"){a="7";}
-
-  Queue* queue = new Queue();
-  sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM persona WHERE idtc="+a);
-  while (res->next())
-  queue->qstore(new Usuario(res));
-  delete res;
-  return queue;
 
 }
 
@@ -215,15 +163,24 @@ string AdminDAO::getIdaux(){
     return a;
 }
 
-Queue* AdminDAO::listarv()
-{
-    Queue* queue = new Queue();
-    sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM votantes");
+Queueusuario* AdminDAO::infu(){
+  
+  Queueusuario* queueusuario = new Queueusuario();
+      sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM votantes");
+      while (res->next())
+          queueusuario->qstore(new Usuario(res));
+      delete res;
+      return queueusuario;
 
-    while (res->next())
-        queue->qstore(new Usuario(res));
+}
 
-    delete res;
+Queuecandidato* AdminDAO::infc(){
 
-    return queue;
+  Queuecandidato* queuecandidato = new Queuecandidato();
+      sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM persona");
+      while (res->next())
+          queuecandidato->qstore(new Candidato(res));
+      delete res;
+      return queuecandidato;
+
 }

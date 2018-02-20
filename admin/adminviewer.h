@@ -1,7 +1,8 @@
 #ifndef ADMINVIEWER_H
 #define ADMINVIEWER_H
 
-#include "queue.h"
+#include "queueusuario.h"
+#include "queuecandidato.h"
 #include <iostream>
 #include <string>
 #include "admincontroller.h"
@@ -13,11 +14,11 @@ class AdminViewer
         AdminViewer();
         virtual ~AdminViewer();
         int menu();
-       // int buscar();
+        void infu(Queueusuario*);
+        void infc(Queuecandidato*);
         void mostrar(Usuario*);
         void inicio();
         void fracaso();
-        void votar();
         void categoria();
         void fail();
         void info(string, string);
@@ -32,7 +33,6 @@ class AdminViewer
         //void cargar(Usuario*, string);
         //void mensaje(string);
         void yav();
-        void listarv(Queue*);
     protected:
     private:
 };

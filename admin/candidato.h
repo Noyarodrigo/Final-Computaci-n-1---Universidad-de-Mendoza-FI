@@ -16,20 +16,27 @@ class Candidato
         Candidato(sql::ResultSet*);
         string getPartido();
         void setPartido(string);
+        int getId();
+        void setId(int);
         void setNombre(string);
         string getNombre();
         void setApellido(string);
         string getApellido();
         void fillObject(sql::ResultSet*);
-        //string toString();
+        string toString();
         void setTel(string);
         string getTel();
         void setIdtc(string);
         string getIdtc();
+        void setVotos(string);
+        string getVotos();
+
 
     protected:
 
     private:
+        int id;
+        string votos;
         string tel;
         string nombre;
         string apellido;

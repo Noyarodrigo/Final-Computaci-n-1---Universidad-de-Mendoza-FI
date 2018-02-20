@@ -1,57 +1,57 @@
-#include "queue.h"
+#include "queueusuario.h"
 #include <iostream>
 
 using namespace std;
 
-Queue::Queue()
+Queueusuario::Queueusuario()
 {
     qstart = qend = NULL;
 }
 
-void Queue::setQStart(Node* qstart)
+void Queueusuario::setQStart(Nodeusuario* qstart)
 {
     this->qstart = qstart;
 }
 
-Node* Queue::getQStart()
+Nodeusuario* Queueusuario::getQStart()
 {
     return this->qstart;
 }
 
-void Queue::setQEnd(Node* qend)
+void Queueusuario::setQEnd(Nodeusuario* qend)
 {
     this->qend = qend;
 }
 
-Node* Queue::getQEnd()
+Nodeusuario* Queueusuario::getQEnd()
 {
     return this->qend;
 }
 
-void Queue::qstore(Usuario* element)
+void Queueusuario::qstore(Usuario* element)
 {
-    Node* newNode = new Node();
+    Nodeusuario* newNodeusuario = new Nodeusuario();
 
-    newNode->setElement(element);
-    newNode->setNext(NULL);
+    newNodeusuario->setElement(element);
+    newNodeusuario->setNext(NULL);
 
     if (qstart == NULL)
     {
-        qstart = qend = newNode;
+        qstart = qend = newNodeusuario;
         return;
     }
 
-    qend->setNext(newNode); //Hace que el último apunte al nuevo último
+    qend->setNext(newNodeusuario); //Hace que el último apunte al nuevo último
 
-    qend = newNode; // Hace que el último sea el nuevo
+    qend = newNodeusuario; // Hace que el último sea el nuevo
 }
 
-Usuario* Queue::qretrieve()
+Usuario* Queueusuario::qretrieve()
 {
     if (this->qstart == NULL)
         return NULL;
     Usuario* aux = this->qstart->getElement(); //Recupero elemento a devolver
-    Node* nx = this->qstart; // Apunto nodo para no perder la referencia
+    Nodeusuario* nx = this->qstart; // Apunto nodo para no perder la referencia
 
     this->qstart = nx->getNext(); // Corro el start al siguiente nodo
 
@@ -64,17 +64,17 @@ Usuario* Queue::qretrieve()
 
 }
 
-void Queue::free()
+void Queueusuario::free()
 {
     while (this->qretrieve() != NULL);
 }
 
-void Queue::show()
+void Queueusuario::show()
 {
     if (this->qstart == NULL)
         return;
 
-    Node* aux = this->qstart;
+    Nodeusuario* aux = this->qstart;
 
     while (aux != NULL)
     {

@@ -12,6 +12,8 @@ Candidato::Candidato()
     apellido = "";
 		partido="";
 		tel="";
+		votos="";
+		id=0;
 }
 
 Candidato::Candidato(sql::ResultSet* res)
@@ -22,12 +24,23 @@ Candidato::Candidato(sql::ResultSet* res)
 
 void Candidato::fillObject(sql::ResultSet* rs)
 {
-
+		this->setId(rs->getInt("id"));
     this->setNombre(rs->getString("nombre"));
     this->setApellido(rs->getString("apellido"));
 		this->setPartido(rs->getString("partido"));
 		this->setIdtc(rs->getString("idtc"));
 		this->setTel(rs->getString("telefono"));
+		this->setVotos(rs->getString("votos"));
+}
+
+void Candidato::setId(int id)
+{
+    this->id = id;
+}
+
+int Candidato::getId()
+{
+    return this->id;
 }
 
 void Candidato::setNombre(string nombre)
@@ -76,9 +89,18 @@ void Candidato::setTel(string tel){
 	this->tel = tel;
 }
 
-/*string Candidato::toString()
+string Candidato::getVotos(){
+
+	return this->votos;
+}
+
+void Candidato::setVotos(string votos){
+	this->votos = votos;
+}
+
+string Candidato::toString()
 {
     stringstream ss;
     ss << this->getId();
-    return "<div>&nbsp;"+ ss.str() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\t" + this->getNombre() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\t" + this->getApellido() + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\t"+this->getPartido()+"</div>";
-}*/
+    return "<th>"+ ss.str() + "</th><th>" + this->getNombre() + "</th><th>" + this->getApellido() + "</th><th>"+this->getTel()+"</th><th>"+ this->getIdtc()+"</th><th>"+this->getPartido()+"</th><th>"+this->getVotos()+"</th>"	;
+}

@@ -14,16 +14,17 @@ class AdminController
         void setAux();
         void idAux();
         void out();
+        void infu();
+        void infc();
+
 
     protected:
     private:
         void addc();
         void delc();
-        void infc();
         void modc();
         void addu();
         void delu();
-        void infu();
         void modu();
         void inicio();
 };

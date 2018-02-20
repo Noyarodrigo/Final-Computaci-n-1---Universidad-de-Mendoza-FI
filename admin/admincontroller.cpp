@@ -5,6 +5,7 @@
 #include <sstream>
 #include "getpost.h"
 #include "candidato.h"
+#include "usuario.h"
 
 AdminController::AdminController()
 {
@@ -32,13 +33,11 @@ void AdminController::inicio(){
 void AdminController::categoria(){
 	if ((new AdminDAO())->getAux() =="addu") {addu();}
 	if ((new AdminDAO())->getAux() =="delu")delu();
-	/*if (opc =="modu")modu();
-	if (opc =="infu")infu();*/
+	if ((new AdminDAO())->getAux() =="infu")infu();
+	if ((new AdminDAO())->getAux() =="infc")infc();
 	if ((new AdminDAO())->getAux() =="addc"){addc();}
 	if ((new AdminDAO())->getAux() =="delc"){delc();}
-	/*if (opc =="moda")moda();
-	if (opc =="infa")infa();
-	if (opc =="out")out();*/
+
 
 }
 //USUARIO
@@ -46,10 +45,17 @@ void AdminController::addu()
 {
 	map<string,string> Get;
 	initializeGet(Get);
+	cout<<"<font color='blue'><h3 align='center'>DOCUMENTO: "+Get["documento"] +" </h3></font>"<<endl;
+
 	Usuario* usuario = new Usuario();
 	usuario->setDocumento(Get["documento"]);
-	usuario->setUsuario(Get["nombre"]);
-	usuario->setClave(Get["apellido"]);
+	//cout<<"<font color='blue'><h3 align='center'>DOCUMENTO: "+Usuario->getDocumento() +" </h3></font>"<<endl;
+
+	usuario->setNombre(Get["nombre"]);
+	usuario->setApellido	(Get["apellido"]);
+
+	//string stringSQL = "INSERT INTO votantes (nombre, apellido, documento) VALUES ('" + Usuario->getUsuario() + "', '" + Usuario->getClave() + "','"+Usuario->getDocumento()+"')";
+	//cout<<"<font color='red'><h3 >QUERY: "+stringSQL+"<h3></font>\n";
 	(new AdminDAO())->addu(usuario);
 
 }
@@ -57,7 +63,12 @@ void AdminController::delu()
 {
 	(new AdminDAO())->delu();
 }
+void AdminController::infu()
+{
 
+	(new AdminViewer())->infu((new AdminDAO())->infu());
+
+}
 //CANDIDATOS
 void AdminController::addc()
 {
@@ -75,6 +86,10 @@ void AdminController::addc()
 void AdminController::delc()
 {
 	(new AdminDAO())->delc();
+}
+void AdminController::infc()
+{
+	(new AdminViewer())->infc((new AdminDAO())->infc());
 }
 
 //CONTROL
