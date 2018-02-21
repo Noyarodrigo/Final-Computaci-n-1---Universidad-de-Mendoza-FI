@@ -49,8 +49,6 @@ void AdminController::addu()
 
 	Usuario* usuario = new Usuario();
 	usuario->setDocumento(Get["documento"]);
-	//cout<<"<font color='blue'><h3 align='center'>DOCUMENTO: "+Usuario->getDocumento() +" </h3></font>"<<endl;
-
 	usuario->setNombre(Get["nombre"]);
 	usuario->setApellido	(Get["apellido"]);
 

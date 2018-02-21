@@ -24,6 +24,21 @@ class Usuario
         string toString();
         void setDocumento(string);
         string getDocumento();
+        //INFORMACION DE VOTOS
+        void setConsejal(string);
+        string getConsejal();
+        void setLegislador(string);
+        string getLegislador();
+        void setSenador(string);
+        string getSenador();
+        void setDiputado(string);
+        string getDiputado();
+        void setIntendente(string);
+        string getIntendente();
+        void setGobernador(string);
+        string getGobernador();
+        void setPresidente(string);
+        string getPresidente();
 
     protected:
 
@@ -32,5 +47,12 @@ class Usuario
         string documento;
         string nombre;
         string apellido;
+        string consejal;
+        string diputado;
+        string legislador;
+        string senador;
+        string intendente;
+        string gobernador;
+        string presidente;
 };
 #endif

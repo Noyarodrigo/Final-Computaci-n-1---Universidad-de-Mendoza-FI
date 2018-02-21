@@ -41,12 +41,16 @@ void AdminDAO::delc()
 void AdminDAO::addu(Usuario* Usuario)
 { string stringSQL;
   stringSQL = "SELECT documento FROM votantes WHERE documento = " + Usuario->getDocumento();
+  cout<<"<font color='blue'><h1 align='center'>"+stringSQL+"</h1></font>"<<endl;
+
   sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
   if (res->next())
   {
     (new AdminViewer())->nope();
   }else{
+    cout<<"<font color='blue'><h3 align='center'>DOCUMENTO: "+Usuario->getDocumento() +" </h3></font>"<<endl;
     stringSQL = "INSERT INTO votantes (nombre, apellido, documento) VALUES ('" + Usuario->getNombre() + "', '" + Usuario->getApellido() + "','"+Usuario->getDocumento()+"')";
+    cout<<"<font color='blue'><h3 align='center'>QUERY: "+stringSQL +" </h3></font>"<<endl;
     MyConnection::instance()->execute(stringSQL);
     (new AdminViewer())->agregado();
   }
@@ -164,7 +168,7 @@ string AdminDAO::getIdaux(){
 }
 
 Queueusuario* AdminDAO::infu(){
-  
+
   Queueusuario* queueusuario = new Queueusuario();
       sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM votantes");
       while (res->next())
