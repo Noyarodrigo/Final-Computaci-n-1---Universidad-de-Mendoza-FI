@@ -53,3 +53,9 @@ void UsuarioController::eliminar()
 	usuario->setId(11);
 	(new UsuarioDAO())->del(usuario);
 }
+
+void UsuarioController::out()
+{
+	(new UsuarioViewer())->out();
+ 	(new UsuarioDAO())->removeLogin();
+}

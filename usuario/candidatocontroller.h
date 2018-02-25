@@ -10,6 +10,7 @@ class CandidatoController
         virtual ~CandidatoController();
         void listar();
         void ver();
+        void exe();
     protected:
     private:
 };

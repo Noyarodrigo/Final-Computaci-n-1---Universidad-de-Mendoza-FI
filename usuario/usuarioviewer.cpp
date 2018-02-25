@@ -19,24 +19,6 @@ UsuarioViewer::~UsuarioViewer()
     //dtor
 }
 
-
-void UsuarioViewer::listar(Queue* queue)
-{
-	cout<<"Content-type: text/html"<<endl<<endl;
-	cout<<"<html><head>"<<endl;
-	/*cout<<"<link href='http://localhost/css/bootstrap.min.css' rel='stylesheet'>"<<endl;
-	cout<<"<link href='http://localhost/css/signin.css' rel='stylesheet'>"<<endl;
-	cout<<"<link href='http://localhost/css/ejemplo.css' rel='stylesheet'>"<<endl;*/
-	cout << "</head>" <<endl;
-	cout << "<body>   <div class='container'>"<<endl;
-	cout<<"<div class='centrar'></div>"<<endl;
-	cout<<"<div>"<<endl;
-	cout<<"</div>"<<endl;
-	queue->show();
-	cout<<"</div></body></html>"<<endl;
-
-
-}
 void UsuarioViewer::inicio(){
 	int z=0,x=0;
 
@@ -83,6 +65,7 @@ void UsuarioViewer::inicio(){
 	}
 
 }
+
 void UsuarioViewer::votar(){
 	map<string,string> Post;
 	initializePost(Post);
@@ -104,15 +87,21 @@ void UsuarioViewer::votar(){
 
 
 }
+
 void UsuarioViewer::fracaso()
 {
 	cout<<"<font color='red'><h3 align='center'>Ingreso Incorrecto!</h3></font>"<<endl;
 }
 
 void UsuarioViewer::fail(){
-	cout<<"<font color='red'><h1 align='center'>Ya has votado en esa categoria!</h1></font>"<<endl;
+
+	cout<<"<font color='red'><h4 align='center'>Ya has votado en esa categoria!</h4></font>"<<endl;
+	cout<<"<form align='center' method='get'>"<<endl;
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>VOLVER</button>"<<endl;
+	cout<<"</form>"<<endl;
 }
 void UsuarioViewer::info(string id, string categoria) {
+
 	cout<<"Content-type: text/html"<<endl<<endl;
 	cout<<"<html><head>"<<endl;
   cout<<"	<br>	"<<endl;
@@ -127,5 +116,19 @@ void UsuarioViewer::info(string id, string categoria) {
 }
 
 void UsuarioViewer::yav(){
-	cout<<"<font color='Green'><h1 align='center'>Voto ingresado !</h1></font>"<<endl;
+
+	cout<<"<font color='green'><h4 align='center'>Voto ingresado !</h4></font>"<<endl;
+	cout<<"<form align='center' method='get'>"<<endl;
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>VOLVER</button>"<<endl;
+	cout<<"</form>"<<endl;
+}
+
+void UsuarioViewer::out()
+{
+	cout<<"Content-type: text/html"<<endl<<endl;
+	cout<<"<font color='red'><h3 >Has salido de la app<h3></font>\n";
+	cout<<"<form class='form-signin' method='get'>"<<endl;
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>SALIR</button>"<<endl;
+	cout<<"</form>"<<endl;
+
 }

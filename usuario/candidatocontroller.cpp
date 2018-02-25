@@ -2,6 +2,9 @@
 #include "usuarioviewer.h"
 #include "usuariodao.h"
 #include "candidatoviewer.h"
+#include "usuariodao.h"
+#include "getpost.h"
+
 CandidatoController::CandidatoController()
 {
     //ctor
@@ -21,4 +24,13 @@ void CandidatoController::listar()
 void CandidatoController::ver(){
   (new CandidatoViewer())->mostrar();
 
+}
+
+void CandidatoController::exe()
+{
+  map<string,string> Get;
+  initializeGet(Get);
+  (new UsuarioViewer())->info((new UsuarioDAO())->getId(), Get["categoria"]);
+  (new CandidatoViewer())->listar((new UsuarioDAO())->checkcandidato(Get["categoria"]));
+  (new UsuarioViewer())->votar();
 }
