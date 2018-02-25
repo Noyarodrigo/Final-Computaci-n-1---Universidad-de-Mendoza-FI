@@ -11,7 +11,6 @@ class UsuarioController
         void abm();
         void control(string);
         void votar(string);
-        void voto(int);
         void out();
     protected:
     private:

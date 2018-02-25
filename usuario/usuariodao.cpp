@@ -163,24 +163,29 @@ string UsuarioDAO::getId()
 }
 
 void UsuarioDAO::votar(string a, string cod, string idtc){
-
   map<string,string> Get;
   initializeGet(Get);
   stringstream stringSQL;
   if (Get.find("categoria")!=Get.end()) {
     int x=(new UsuarioDAO())->checkvoto(a);
-    (new UsuarioController())->voto(x);
       if (x==1){
-      stringSQL <<"UPDATE `elecciones`.`votantes` SET " +a+"= '0' WHERE `votantes`.`id` ='"+getId()+"' AND `votantes`.`"+a+"` ='1' ";
-      MyConnection::instance()->execute(stringSQL.str());
-      sumarvoto(cod, idtc);
-    }
+        sql::ResultSet* res = MyConnection::instance()->query("Select idtc from persona WHERE `persona`.`id`  ="+cod+";");
+        res->next();
+        string c =res->getString("idtc");
+        if (c ==idtc) {
+          stringSQL <<"UPDATE `elecciones`.`votantes` SET " +a+"= '0' WHERE `votantes`.`id` ='"+getId()+"' AND `votantes`.`"+a+"` ='1' ";
+          MyConnection::instance()->execute(stringSQL.str());
+          sumarvoto(cod, idtc);
+        }else{(new UsuarioViewer())->error();}
+      }
+      if (x==0) {
+        (new UsuarioViewer())->fail();
+      }
   }
 }
 
 int UsuarioDAO::checkvoto(string a)
 {
-  cout<<"<h3 color='grey'>checkvoto<h3>\n";
     sql::ResultSet* res = MyConnection::instance()->query("Select "+a+" from votantes WHERE `votantes`.`id`  ="+getId()+";");
     res->next();
     int b =res->getInt(""+a+"");
@@ -192,4 +197,5 @@ void UsuarioDAO::sumarvoto(string cod, string idtc)
   stringstream stringSQL;
   stringSQL <<"UPDATE `elecciones`.`persona` SET votos= votos+1 WHERE `persona`.`id` ='"+cod+"' AND `persona`.`idtc`="+idtc;
   MyConnection::instance()->execute(stringSQL.str());
+  (new UsuarioViewer())->yav();
 }

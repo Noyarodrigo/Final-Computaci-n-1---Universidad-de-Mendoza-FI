@@ -32,14 +32,6 @@ void UsuarioController::inicio(){
 		(new UsuarioViewer())->inicio();
 }
 
-void UsuarioController::voto(int x){
-	if (x==1)(new UsuarioViewer())->yav();
-	if (x==0)(new UsuarioViewer())->fail();
-
-
-}
-
-
 void UsuarioController::control(string cod){
 	map<string,string> Get;
   initializeGet(Get);

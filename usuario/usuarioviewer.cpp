@@ -118,3 +118,8 @@ void UsuarioViewer::out()
 	cout<<"</form>"<<endl;
 
 }
+
+void UsuarioViewer::error()
+{
+	cout<<"<font color='red'><h3 >Codigo no valido<h3></font>\n";
+}

@@ -20,6 +20,7 @@ class UsuarioViewer
         void fail();
         void out();
         void yav();
+        void error();
     protected:
     private:
 };
