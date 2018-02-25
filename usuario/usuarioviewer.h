@@ -18,7 +18,6 @@ class UsuarioViewer
         void votar();
         void categoria();
         void fail();
-        void info(string, string);
         void out();
         void yav();
     protected:

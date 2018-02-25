@@ -30,7 +30,6 @@ void CandidatoController::exe()
 {
   map<string,string> Get;
   initializeGet(Get);
-  (new UsuarioViewer())->info((new UsuarioDAO())->getId(), Get["categoria"]);
   (new CandidatoViewer())->listar((new UsuarioDAO())->checkcandidato(Get["categoria"]));
   (new UsuarioViewer())->votar();
 }

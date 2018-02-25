@@ -43,7 +43,15 @@ void UsuarioController::voto(int x){
 void UsuarioController::control(string cod){
 	map<string,string> Get;
   initializeGet(Get);
-	(new UsuarioDAO())->votar(Get["categoria"], cod);
+	string  a;
+	if(Get["categoria"]=="1"){a="consejal";}
+	if(Get["categoria"]=="2"){a="legislador";}
+	if(Get["categoria"]=="3"){a="senador";}
+	if(Get["categoria"]=="4"){a="diputado";}
+	if(Get["categoria"]=="5"){a="intendente";}
+	if(Get["categoria"]=="6"){a="gobernador";}
+	if(Get["categoria"]=="7"){a="presidente";}
+	(new UsuarioDAO())->votar(a, cod, Get["categoria"]);
 	}
 
 

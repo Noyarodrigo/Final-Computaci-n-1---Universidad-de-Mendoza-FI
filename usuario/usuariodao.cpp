@@ -119,17 +119,8 @@ int UsuarioDAO::checkusuario(string d){
 }
 Queue* UsuarioDAO::checkcandidato(string opc){
 
-  string a=opc;
-  if (a=="consejal"){a="1";}
-  if (a=="legislador"){a="2";}
-  if (a=="senador"){a="3";}
-  if (a=="diputado"){a="4";}
-  if (a=="intendente"){a="5";}
-  if (a=="gobernador"){a="6";}
-  if (a=="presidente"){a="7";}
-
   Queue* queue = new Queue();
-  sql::ResultSet* res = MyConnection::instance()->query("select p.id,p.nombre,p.apellido, d.partido from persona as p inner join partido_politico as d on p.partido=d.id where p.idtc="+a);
+  sql::ResultSet* res = MyConnection::instance()->query("select p.id,p.nombre,p.apellido, d.partido from persona as p inner join partido_politico as d on p.partido=d.id where p.idtc="+opc);
   while (res->next())
   queue->qstore(new Usuario(res));
   delete res;
@@ -171,36 +162,34 @@ string UsuarioDAO::getId()
     return res->getString("id");
 }
 
-void UsuarioDAO::votar(string categoria, string cod){
+void UsuarioDAO::votar(string a, string cod, string idtc){
 
   map<string,string> Get;
   initializeGet(Get);
   stringstream stringSQL;
-
   if (Get.find("categoria")!=Get.end()) {
-
-    int x=(new UsuarioDAO())->checkvoto(categoria);
+    int x=(new UsuarioDAO())->checkvoto(a);
     (new UsuarioController())->voto(x);
       if (x==1){
-      stringSQL <<"UPDATE `elecciones`.`votantes` SET " +categoria+"= '0' WHERE `votantes`.`id` ='"+getId()+"' AND `votantes`.`"+categoria+"` ='1' ";
+      stringSQL <<"UPDATE `elecciones`.`votantes` SET " +a+"= '0' WHERE `votantes`.`id` ='"+getId()+"' AND `votantes`.`"+a+"` ='1' ";
       MyConnection::instance()->execute(stringSQL.str());
-      sumarvoto(cod);
+      sumarvoto(cod, idtc);
     }
   }
 }
 
-void UsuarioDAO::sumarvoto(string cod)
+int UsuarioDAO::checkvoto(string a)
 {
-  stringstream stringSQL;
-  stringSQL <<"UPDATE `elecciones`.`persona` SET votos= votos+1 WHERE `persona`.`id` ='"+cod+"' ";
-  MyConnection::instance()->execute(stringSQL.str());
-}
-int UsuarioDAO::checkvoto(string categoria)
-{
-    sql::ResultSet* res = MyConnection::instance()->query("Select "+categoria+" from votantes WHERE `votantes`.`id`  ="+getId()+";");
+  cout<<"<h3 color='grey'>checkvoto<h3>\n";
+    sql::ResultSet* res = MyConnection::instance()->query("Select "+a+" from votantes WHERE `votantes`.`id`  ="+getId()+";");
     res->next();
-    int a =res->getInt(""+categoria+"");
-    return a;
+    int b =res->getInt(""+a+"");
+    return b;
 }
 
-  //""+categoria+""
+void UsuarioDAO::sumarvoto(string cod, string idtc)
+{
+  stringstream stringSQL;
+  stringSQL <<"UPDATE `elecciones`.`persona` SET votos= votos+1 WHERE `persona`.`id` ='"+cod+"' AND `persona`.`idtc`="+idtc;
+  MyConnection::instance()->execute(stringSQL.str());
+}

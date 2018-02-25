@@ -25,7 +25,7 @@ void CandidatoViewer::mostrar(){
   map<string,string> Get;
   initializeGet(Get);
   if (Get.find("categoria")!=Get.end()) {
-    if (Get["categoria"]== "out" ) {
+    if (Get["categoria"]== "8" ) {
 			(new UsuarioController())->out();
     }else{(new CandidatoController())->exe();}
 
@@ -42,32 +42,32 @@ void CandidatoViewer::mostrar(){
       cout<<"  <fieldset>"<<endl;
       cout<<"    <legend>Elige una categoria luego, haz click en siguiente</legend>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"consejal\"> Consejales"<<endl;
+      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"1\"> Consejales"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"           <input type=\"radio\" name=\"categoria\" value=\"legislador\"> Legisladores"<<endl;
+      cout<<"           <input type=\"radio\" name=\"categoria\" value=\"2\"> Legisladores"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"senador\"> Senadores"<<endl;
+      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"3\"> Senadores"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"diputado\"> Diputados"<<endl;
+      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"4\"> Diputados"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"           <input type=\"radio\" name=\"categoria\" value=\"intendente\"> Intendentes"<<endl;
+      cout<<"           <input type=\"radio\" name=\"categoria\" value=\"5\"> Intendentes"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"gobernador\"> Gobernadores"<<endl;
+      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"6\"> Gobernadores"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"presidente\"> Presidentes"<<endl;
+      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"7\"> Presidentes"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"  </fieldset>"<<endl;
       cout<<"	<br>"<<endl;
       cout<<"  <fieldset>"<<endl;
       cout<<"    <legend>SALIR</legend>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"out\"> LOG OUT"<<endl;
+      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"8\"> LOG OUT"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"  </fieldset>"<<endl;
       cout<<"	<br>	"<<endl;
@@ -81,6 +81,7 @@ void CandidatoViewer::mostrar(){
 }
 
 void CandidatoViewer::listar(Queue* queue){
+  cout<<"Content-type: text/html"<<endl<<endl;
   cout<<"<html><head>"<<endl;
   cout<<"<font color='blue'><h1 align='center'>Listado de candidatos</h1></font>"<<endl;
   cout<<"<font color='grey'><h4 align='center'>Ingrese el codigo del candidato a continuacion</h4></font>"<<endl;

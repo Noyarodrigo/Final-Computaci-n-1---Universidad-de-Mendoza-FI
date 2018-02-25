@@ -73,7 +73,7 @@ void UsuarioViewer::votar(){
 	cout<< "</head>" <<endl;
 	cout<< "<body>   <div class='container'>"<<endl;
 	cout<<"<div class='centrar'></div>"<<endl;
-	cout<<"<h3 color='grey'>Ingrese el codigo del candidato que desea votar<h1>\n";
+	cout<<"<h3 color='grey'>Ingrese el codigo del candidato que desea votar<h3>\n";
 	cout<<"<div class='container'>"<<endl;
 	cout<<"<form class='form-signin' method='post'>"<<endl;
 	cout<<"<label for='codigo' class='sr-only'>Codigo</label>"<<endl;
@@ -99,20 +99,6 @@ void UsuarioViewer::fail(){
 	cout<<"<form align='center' method='get'>"<<endl;
 	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>VOLVER</button>"<<endl;
 	cout<<"</form>"<<endl;
-}
-void UsuarioViewer::info(string id, string categoria) {
-
-	cout<<"Content-type: text/html"<<endl<<endl;
-	cout<<"<html><head>"<<endl;
-  cout<<"	<br>	"<<endl;
-	cout<<"<font color='grey'>"<<endl;
-  cout<<"</h1>\n";
-  cout<<"<h3>categoria: "<<categoria<<endl;
-  cout<<"</h3>\n";
-	cout<<"<h3>Su id de votante es:"+id<<endl;
-	cout<<"</h3>\n";
-	cout<<"</font>"<<endl;
-	cout<<"</body></html>"<<endl;
 }
 
 void UsuarioViewer::yav(){

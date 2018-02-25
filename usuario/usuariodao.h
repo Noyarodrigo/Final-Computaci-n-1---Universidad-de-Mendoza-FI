@@ -24,8 +24,8 @@ class UsuarioDAO
         void setLogin(string);
         void removeLogin();
         string getId();
-        void votar(string, string);
-        void sumarvoto(string);
+        void votar(string, string, string);
+        void sumarvoto(string,string);
         int checkvoto(string);
     protected:
     private:
