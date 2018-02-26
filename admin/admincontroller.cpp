@@ -38,7 +38,8 @@ void AdminController::categoria(){
 	if ((new AdminDAO())->getAux() =="addc"){addc();}
 	if ((new AdminDAO())->getAux() =="delc"){delc();}
 	if ((new AdminDAO())->getAux() =="addp"){addp();}
-
+	if ((new AdminDAO())->getAux() =="delp"){delp();}
+	if ((new AdminDAO())->getAux() =="infp")infp();
 
 }
 //USUARIO
@@ -95,6 +96,15 @@ void AdminController::addp()
 	partido->setNombre(Get["nombre"]);
 	(new AdminDAO())->addp(partido);
 }
+void AdminController::delp()
+{
+	(new AdminDAO())->delp();
+}
+void AdminController::infp()
+{
+	(new AdminViewer())->infp((new AdminDAO())->infp());
+}
+
 
 //CONTROL
 void AdminController::setAux()

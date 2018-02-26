@@ -86,10 +86,8 @@ void AdminDAO::addc(Candidato* Candidato)
 void AdminDAO::addp(Partido* Partido)
 {
   string stringSQL;
-  stringSQL = "SELECT nombre FROM partido_politico WHERE nombre = " + Partido->getNombre();
-  string query="SELECT nombre FROM partido_politico WHERE nombre = " + Partido->getNombre();
-  cout<<query;
-/*  sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
+  stringSQL = "SELECT nombre FROM partido_politico WHERE nombre = '"+ Partido->getNombre()+"'";
+  sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
   if (res->next())
   {
     (new AdminViewer())->nope();
@@ -97,7 +95,7 @@ void AdminDAO::addp(Partido* Partido)
     stringSQL = "INSERT INTO partido_politico (nombre) VALUES ('" + Partido->getNombre() + "')";
     MyConnection::instance()->execute(stringSQL);
     (new AdminViewer())->agregado();
-  }*/
+  }
 }
 
 Usuario* AdminDAO::find(int id)

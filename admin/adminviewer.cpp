@@ -109,7 +109,7 @@ void AdminViewer::ver()
 		if (Get["opc"]== "addp") {
 			(new AdminViewer())->dpar();	}
 
-		if (Get["opc"]== "delu" || Get["opc"]== "delc" || Get["opc"]== "modu" || Get["opc"]== "modc") {
+		if (Get["opc"]== "delu" || Get["opc"]== "delc" || Get["opc"]== "delp" || Get["opc"]== "modu" || Get["opc"]== "modc") {
 
 				(new AdminViewer())->did();
 				}
@@ -362,6 +362,7 @@ void AdminViewer::out()
 
 void AdminViewer::nope()
 {
+	cout<<"Content-type: text/html"<<endl<<endl;
 	cout<<"<form class='form-signin' method='get'>"<<endl;
 	cout<<"<font color='red'><h3 >Algo salio mal<h3></font>\n";
 	cout<<"<font color='grey'><h4 >Resiva los datos ingresados<h4></font>\n";
@@ -372,6 +373,7 @@ void AdminViewer::nope()
 
 void AdminViewer::agregado()
 {
+	cout<<"Content-type: text/html"<<endl<<endl;
 	cout<<"<form class='form-signin' method='get'>"<<endl;
 	cout<<"<font color='green'><h3>Agregado correctamente<h3>\n";
 	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Volver</button>"<<endl;
@@ -381,6 +383,7 @@ void AdminViewer::agregado()
 
 void AdminViewer::eliminado()
 {
+	cout<<"Content-type: text/html"<<endl<<endl;
 	cout<<"<form class='form-signin' method='get'>"<<endl;
 	cout<<"<font color='green'><h3>Eliminado correctamente<h3>\n";
 	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Volver</button>"<<endl;

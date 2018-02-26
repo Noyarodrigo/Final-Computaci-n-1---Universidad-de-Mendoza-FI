@@ -21,6 +21,7 @@ void Partido::fillObject(sql::ResultSet* rs)
 {
 		this->setId(rs->getInt("id"));
     this->setNombre(rs->getString("nombre"));
+    this->setSocios(rs->getString("socios"));
 }
 
 void Partido::setNombre(string nombre)
