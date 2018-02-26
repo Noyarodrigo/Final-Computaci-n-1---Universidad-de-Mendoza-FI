@@ -6,7 +6,7 @@
 #include "getpost.h"
 #include "candidato.h"
 #include "usuario.h"
-
+#include "partido.h"
 AdminController::AdminController()
 {
     //ctor
@@ -37,6 +37,7 @@ void AdminController::categoria(){
 	if ((new AdminDAO())->getAux() =="infc")infc();
 	if ((new AdminDAO())->getAux() =="addc"){addc();}
 	if ((new AdminDAO())->getAux() =="delc"){delc();}
+	if ((new AdminDAO())->getAux() =="addp"){addp();}
 
 
 }
@@ -45,17 +46,11 @@ void AdminController::addu()
 {
 	map<string,string> Get;
 	initializeGet(Get);
-	cout<<"<font color='blue'><h3 align='center'>DOCUMENTO: "+Get["documento"] +" </h3></font>"<<endl;
-
 	Usuario* usuario = new Usuario();
 	usuario->setDocumento(Get["documento"]);
 	usuario->setNombre(Get["nombre"]);
 	usuario->setApellido	(Get["apellido"]);
-
-	//string stringSQL = "INSERT INTO votantes (nombre, apellido, documento) VALUES ('" + Usuario->getUsuario() + "', '" + Usuario->getClave() + "','"+Usuario->getDocumento()+"')";
-	//cout<<"<font color='red'><h3 >QUERY: "+stringSQL+"<h3></font>\n";
 	(new AdminDAO())->addu(usuario);
-
 }
 void AdminController::delu()
 {
@@ -67,6 +62,7 @@ void AdminController::infu()
 	(new AdminViewer())->infu((new AdminDAO())->infu());
 
 }
+
 //CANDIDATOS
 void AdminController::addc()
 {
@@ -90,6 +86,16 @@ void AdminController::infc()
 	(new AdminViewer())->infc((new AdminDAO())->infc());
 }
 
+//PARTIDO
+void AdminController::addp()
+{
+	map<string,string> Get;
+	initializeGet(Get);
+	Partido* partido = new Partido();
+	partido->setNombre(Get["nombre"]);
+	(new AdminDAO())->addp(partido);
+}
+
 //CONTROL
 void AdminController::setAux()
 {
@@ -109,5 +115,5 @@ void AdminController::idAux()
 void AdminController::out()
 {
 	(new AdminViewer())->out();
- (new AdminDAO())->removeLogin();
+	(new AdminDAO())->removeLogin();
 }

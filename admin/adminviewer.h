@@ -3,6 +3,7 @@
 
 #include "queueusuario.h"
 #include "queuecandidato.h"
+#include "queuepartido.h"
 #include <iostream>
 #include <string>
 #include "admincontroller.h"
@@ -16,6 +17,7 @@ class AdminViewer
         int menu();
         void infu(Queueusuario*);
         void infc(Queuecandidato*);
+        void infp(Queuepartido*);
         void mostrar(Usuario*);
         void inicio();
         void fracaso();
@@ -30,6 +32,7 @@ class AdminViewer
         void nope();
         void agregado();
         void eliminado();
+        void dpar();
         //void cargar(Usuario*, string);
         //void mensaje(string);
         void yav();

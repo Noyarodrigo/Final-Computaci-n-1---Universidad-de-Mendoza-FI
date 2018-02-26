@@ -94,18 +94,20 @@ void AdminViewer::yav(){
 
 void AdminViewer::ver()
 {
-map<string,string> Get;
-initializeGet(Get);
-if (Get.find("opc")!=Get.end()) {
+	map<string,string> Get;
+	initializeGet(Get);
+	if (Get.find("opc")!=Get.end()) {
 		cout<<"Content-type: text/html"<<endl<<endl;
 		(new AdminViewer())->info((new AdminDAO())->getId(), Get["opc"]);
 		(new AdminController())->setAux();
-
 		if (Get["opc"]== "addu" ) {
 			(new AdminViewer())->dusu();	}
 
 		if (Get["opc"]== "addc") {
 			(new AdminViewer())->dcan();	}
+
+		if (Get["opc"]== "addp") {
+			(new AdminViewer())->dpar();	}
 
 		if (Get["opc"]== "delu" || Get["opc"]== "delc" || Get["opc"]== "modu" || Get["opc"]== "modc") {
 
@@ -115,7 +117,7 @@ if (Get.find("opc")!=Get.end()) {
 		if (Get["opc"]== "out" ) {
 			(new AdminController())->out();
 				}
-			if (Get["opc"]== "infu" || Get["opc"]== "infc" ) {
+			if (Get["opc"]== "infu" || Get["opc"]== "infc" || Get["opc"]== "infp") {
 				(new AdminController())->categoria();
 			}
 	}else{
@@ -125,9 +127,6 @@ if (Get.find("opc")!=Get.end()) {
 			if (Get.find("id")!=Get.end()) {
 			(new AdminController())->idAux();
 			}
-
-				cout<<"Content-type: text/html"<<endl<<endl;
-				cout<<"<h3 >Opcion: "+(new AdminDAO())->getAux()+"<h3>\n";
 				(new AdminController())->categoria();
 
 		}else{
@@ -139,7 +138,7 @@ if (Get.find("opc")!=Get.end()) {
 				cout<<"	<br>"<<endl;
 				cout<<"<form class='form-signin' method='get'>"<<endl;
 				cout<<"  <fieldset>"<<endl;
-				cout<<"    <legend>Opciones de votantes</legend>"<<endl;
+				cout<<"    <legend>Opciones de Votantes</legend>"<<endl;
 				cout<<"      <p>"<<endl;
 				cout<<"          <input type=\"radio\" name=\"opc\" value=\"addu\"> Agregar votante"<<endl;
 				cout<<"      </p>"<<endl;
@@ -155,7 +154,7 @@ if (Get.find("opc")!=Get.end()) {
 				cout<<"  </fieldset>"<<endl;
 				cout<<"	<br>	"<<endl;
 				cout<<"  <fieldset>"<<endl;
-				cout<<"    <legend>Opciones de candidatos</legend>"<<endl;
+				cout<<"    <legend>Opciones de Candidatos</legend>"<<endl;
 				cout<<"      <p>"<<endl;
 				cout<<"          <input type=\"radio\" name=\"opc\" value=\"addc\"> Agregar candidato"<<endl;
 				cout<<"      </p>"<<endl;
@@ -167,6 +166,19 @@ if (Get.find("opc")!=Get.end()) {
 				cout<<"      </p>"<<endl;
 				cout<<"      <p>"<<endl;
 				cout<<"           <input type=\"radio\" name=\"opc\" value=\"infc\"> info candidato"<<endl;
+				cout<<"      </p>"<<endl;
+				cout<<"  </fieldset>"<<endl;
+				cout<<"	<br>	"<<endl;
+				cout<<"  <fieldset>"<<endl;
+				cout<<"    <legend>Opciones de Partido</legend>"<<endl;
+				cout<<"      <p>"<<endl;
+				cout<<"           <input type=\"radio\" name=\"opc\" value=\"addp\"> Agregar partido"<<endl;
+				cout<<"      </p>"<<endl;
+				cout<<"      <p>"<<endl;
+				cout<<"           <input type=\"radio\" name=\"opc\" value=\"delp\"> Eliminar partido"<<endl;
+				cout<<"      </p>"<<endl;
+				cout<<"      <p>"<<endl;
+				cout<<"           <input type=\"radio\" name=\"opc\" value=\"infp\"> Info partido"<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"  </fieldset>"<<endl;
 				cout<<"	<br>	"<<endl;
@@ -264,6 +276,26 @@ void AdminViewer::dcan()
 	cout<<"</div>"<<endl;
 
 }
+void AdminViewer::dpar()
+{
+	cout<<"<html><head>"<<endl;
+	cout<< "</head>" <<endl;
+	cout<< "<body>   <div class='container'>"<<endl;
+	cout<<"<div class='centrar'></div>"<<endl;
+	cout<<"<h3 color='grey'>Ingrese el nombre<h3>\n";
+	cout<<"<div class='container'>"<<endl;
+
+	cout<<"<form class='form-signin' method='get'>"<<endl;
+	//NOMBRE
+	cout<<"<br>"<<endl;
+	cout<<"<label for='nombre' class='sr-only'>Nombre del partido</label>"<<endl;
+	cout<<"<input type='text' name='nombre' class='form-control' placeholder='Nombre del partido' required autofocus>"<<endl;
+	//boton
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingresar</button>"<<endl;
+	cout<<"</div>"<<endl;
+}
 
 void AdminViewer::did()	{
 	cout<<"<h3 color='grey'>Ingrese el id<h3>\n";
@@ -306,6 +338,19 @@ void AdminViewer::infc(Queuecandidato* queuecandidato){
 
 }
 
+void AdminViewer::infp(Queuepartido* queuepartido){
+
+  cout<<"<html><head>"<<endl;
+  cout<<"<font color='blue'><h3 align='center'>Informacion de Partidos</h3></font>"<<endl;
+	cout<<"<tr>"<<endl;
+  cout<<"<th>ID</th><th>Nombre</th><th>Cant. de socios</th></font>"<<endl;
+  cout<<"<br>"<<endl;
+  queuepartido->show();
+	cout<<"</tr>"<<endl;
+  cout<<"</body></html>"<<endl;
+
+}
+
 void AdminViewer::out()
 {
 	cout<<"<font color='red'><h3 >Has salido de la app<h3></font>\n";
@@ -319,6 +364,7 @@ void AdminViewer::nope()
 {
 	cout<<"<form class='form-signin' method='get'>"<<endl;
 	cout<<"<font color='red'><h3 >Algo salio mal<h3></font>\n";
+	cout<<"<font color='grey'><h4 >Resiva los datos ingresados<h4></font>\n";
 	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Volver</button>"<<endl;
 	cout<<"</form>"<<endl;
 
@@ -327,7 +373,7 @@ void AdminViewer::nope()
 void AdminViewer::agregado()
 {
 	cout<<"<form class='form-signin' method='get'>"<<endl;
-	cout<<"<font color='green'><h3>Usuario Agregado<h3>\n";
+	cout<<"<font color='green'><h3>Agregado correctamente<h3>\n";
 	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Volver</button>"<<endl;
 	cout<<"</form>"<<endl;
 

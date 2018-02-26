@@ -27,6 +27,7 @@ class AdminController
         void delu();
         void modu();
         void inicio();
+        void addp();
 };
 
 #endif // UsuarioCONTROLLER_H

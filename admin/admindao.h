@@ -4,8 +4,10 @@
 #include <sstream>
 #include "usuario.h"
 #include "candidato.h"
+#include "partido.h"
 #include "queueusuario.h"
 #include "queuecandidato.h"
+#include "queuepartido.h"
 
 using namespace std;
 
@@ -16,10 +18,13 @@ class AdminDAO
         virtual ~AdminDAO();
         void addu(Usuario*);
         void addc(Candidato*);
+        void addp(Partido*);
         void delu();
         void delc();
+        void delp();
         Queueusuario* infu();
         Queuecandidato* infc();
+        Queuepartido* infp();
         Usuario* find(int);
         int checkadmin(string);
         int checkLogin();

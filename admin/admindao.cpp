@@ -38,8 +38,20 @@ void AdminDAO::delc()
 
 }
 
+void AdminDAO::delp()
+{
+    string stringSQL = "SELECT idaux FROM admin WHERE id = " + getId();
+    sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
+    res->next();
+    string x =res->getString("idaux");
+    stringSQL = "DELETE FROM partido_politico WHERE id = " + x;
+    MyConnection::instance()->execute(stringSQL);
+    (new AdminViewer())->eliminado();
+}
+
 void AdminDAO::addu(Usuario* Usuario)
-{ string stringSQL;
+{
+  string stringSQL;
   stringSQL = "SELECT documento FROM votantes WHERE documento = " + Usuario->getDocumento();
   cout<<"<font color='blue'><h1 align='center'>"+stringSQL+"</h1></font>"<<endl;
 
@@ -58,7 +70,7 @@ void AdminDAO::addu(Usuario* Usuario)
 
 void AdminDAO::addc(Candidato* Candidato)
 {
-   string stringSQL;
+  string stringSQL;
   stringSQL = "SELECT telefono FROM persona WHERE telefono = " + Candidato->getTel();
   sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
   if (res->next())
@@ -69,6 +81,23 @@ void AdminDAO::addc(Candidato* Candidato)
     MyConnection::instance()->execute(stringSQL);
     (new AdminViewer())->agregado();
   }
+}
+
+void AdminDAO::addp(Partido* Partido)
+{
+  string stringSQL;
+  stringSQL = "SELECT nombre FROM partido_politico WHERE nombre = " + Partido->getNombre();
+  string query="SELECT nombre FROM partido_politico WHERE nombre = " + Partido->getNombre();
+  cout<<query;
+/*  sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
+  if (res->next())
+  {
+    (new AdminViewer())->nope();
+  }else{
+    stringSQL = "INSERT INTO partido_politico (nombre) VALUES ('" + Partido->getNombre() + "')";
+    MyConnection::instance()->execute(stringSQL);
+    (new AdminViewer())->agregado();
+  }*/
 }
 
 Usuario* AdminDAO::find(int id)
@@ -186,5 +215,16 @@ Queuecandidato* AdminDAO::infc(){
           queuecandidato->qstore(new Candidato(res));
       delete res;
       return queuecandidato;
+
+}
+
+Queuepartido* AdminDAO::infp(){
+
+  Queuepartido* queuepartido = new Queuepartido();
+      sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM partido_politico");
+      while (res->next())
+          queuepartido->qstore(new Partido(res));
+      delete res;
+      return queuepartido;
 
 }
