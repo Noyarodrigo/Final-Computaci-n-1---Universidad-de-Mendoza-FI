@@ -25,15 +25,13 @@ void EstController::abm()
 
 void EstController::inicio(){
 		(new EstViewer())->inicio();
-}
-
-
-
-void EstController::cargar(){
-	if ((new AdminDAO())->getAux() =="addu") {addu();}
-
-}
-void EstController::reload()
-{
-//solo que refresque la pagina pero creo que lo voy a meter en la funcion cargar que llame a un viewer y fue
+		//uno para cada tipo de Eleccion
+		(new EstViewer())->show((new EstDAO())->load("1"),"1");
+		(new EstViewer())->show((new EstDAO())->load("2"),"2");
+		(new EstViewer())->show((new EstDAO())->load("3"),"3");
+		(new EstViewer())->show((new EstDAO())->load("4"),"4");
+		(new EstViewer())->show((new EstDAO())->load("5"),"5");
+		(new EstViewer())->show((new EstDAO())->load("6"),"6");
+		(new EstViewer())->show((new EstDAO())->load("7"),"7");
+		(new EstViewer())->reload();
 }

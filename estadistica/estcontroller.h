@@ -9,13 +9,10 @@ class EstController
         EstController();
         virtual ~EstController();
         void abm();
-        void cargar();
-        void recargar();
-
 
     protected:
     private:
-
+      void inicio();
 };
 
 #endif // UsuarioCONTROLLER_H

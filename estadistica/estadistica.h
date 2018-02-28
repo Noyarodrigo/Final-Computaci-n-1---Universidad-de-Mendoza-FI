@@ -1,5 +1,5 @@
-#ifndef USUARIO_H
-#define USUARIO_H
+#ifndef ESTADISTICA_H
+#define ESTADISTICA_H
 
 #include <mysql_connection.h>
 #include <cppconn/driver.h>
@@ -9,11 +9,13 @@
 
 using namespace std;
 
-class Usuario
+class Estadistica
 {
     public:
-        Usuario();
-        Usuario(sql::ResultSet*);
+        Estadistica();
+        Estadistica(sql::ResultSet*);
+        string getPartido();
+        void setPartido(string);
         int getId();
         void setId(int);
         void setNombre(string);
@@ -21,38 +23,18 @@ class Usuario
         void setApellido(string);
         string getApellido();
         void fillObject(sql::ResultSet*);
-        string toString();
-        void setDocumento(string);
-        string getDocumento();
-        //INFORMACION DE VOTOS
-        void setConsejal(string);
-        string getConsejal();
-        void setLegislador(string);
-        string getLegislador();
-        void setSenador(string);
-        string getSenador();
-        void setDiputado(string);
-        string getDiputado();
-        void setIntendente(string);
-        string getIntendente();
-        void setGobernador(string);
-        string getGobernador();
-        void setPresidente(string);
-        string getPresidente();
+        string toString();;
+        void setVotos(string);
+        string getVotos();
+
 
     protected:
 
     private:
         int id;
-        string documento;
+        string votos;
         string nombre;
         string apellido;
-        string consejal;
-        string diputado;
-        string legislador;
-        string senador;
-        string intendente;
-        string gobernador;
-        string presidente;
+        string partido;
 };
 #endif

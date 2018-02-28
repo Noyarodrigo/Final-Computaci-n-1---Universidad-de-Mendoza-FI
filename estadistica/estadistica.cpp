@@ -7,8 +7,11 @@ using namespace std;
 
 Estadistica::Estadistica()
 {
-    tipo = "";
-
+    nombre = "";
+    apellido = "";
+		partido="";
+		votos="";
+		id=0;
 }
 
 Estadistica::Estadistica(sql::ResultSet* res)
@@ -21,8 +24,19 @@ void Estadistica::fillObject(sql::ResultSet* rs)
 {
 		this->setId(rs->getInt("id"));
     this->setNombre(rs->getString("nombre"));
-    
+    this->setApellido(rs->getString("apellido"));
+		this->setPartido(rs->getString("partido"));
+		this->setVotos(rs->getString("votos"));
+}
 
+void Estadistica::setId(int id)
+{
+    this->id = id;
+}
+
+int Estadistica::getId()
+{
+    return this->id;
 }
 
 void Estadistica::setNombre(string nombre)
@@ -44,94 +58,27 @@ void Estadistica::setApellido(string apellido)
 {
     this->apellido = apellido;
 }
+string Estadistica::getPartido(){
 
-string Estadistica::getDocumento(){
-
-	return this->documento;
-}
-
-void Estadistica::setDocumento(string documento){
-	this->documento = documento;
+	return this->partido;
 }
 
-void Estadistica::setId(int id)
-{
-    this->id = id;
+void Estadistica::setPartido(string partido){
+	this->partido = partido;
 }
 
-int Estadistica::getId()
-{
-    return this->id;
+string Estadistica::getVotos(){
+
+	return this->votos;
 }
 
-string Estadistica::getConsejal()
-{
-    return this->consejal;
+void Estadistica::setVotos(string votos){
+	this->votos = votos;
 }
 
-void Estadistica::setConsejal(string consejal)
-{
-    this->consejal = consejal;
-}
-string Estadistica::getLegislador()
-{
-    return this->legislador;
-}
-
-void Estadistica::setLegislador(string legislador)
-{
-    this->legislador = legislador;
-}
-string Estadistica::getSenador()
-{
-    return this->senador;
-}
-
-void Estadistica::setSenador(string senador)
-{
-    this->senador = senador;
-}
-string Estadistica::getDiputado()
-{
-    return this->diputado;
-}
-
-void Estadistica::setDiputado(string diputado)
-{
-    this->diputado = diputado;
-}
-string Estadistica::getIntendente()
-{
-    return this->intendente;
-}
-
-void Estadistica::setIntendente(string intendente)
-{
-    this->intendente = intendente;
-}
-string Estadistica::getGobernador()
-{
-    return this->gobernador;
-}
-
-void Estadistica::setGobernador(string gobernador)
-{
-    this->gobernador = gobernador;
-}
-string Estadistica::getPresidente()
-{
-    return this->presidente;
-}
-
-void Estadistica::setPresidente(string presidente)
-{
-    this->presidente = presidente;
-}
 string Estadistica::toString()
 {
     stringstream ss;
     ss << this->getId();
-    string uno="<th>"+ ss.str() + "</th><th>" + this->getNombre() + "</th><th>" + this->getApellido() + "</th><th>" + this->getConsejal() + "</th><th>" + this->getLegislador() + "</th><th>" + this->getSenador() + "</th><th>" + this->getDiputado()+ "</th>";
-    string dos= uno+"</th><th>" + this->getIntendente() +"</th><th>" + this->getGobernador() +"</th><th>" + this->getPresidente()+"</th>";
-    return dos;
+    return "<th>"+ ss.str() + "</th><th>" + this->getNombre() + "</th><th>" + this->getApellido() + "</th><th>"+this->getPartido()+"</th><th>"+this->getVotos()+"</th>"	;
 }

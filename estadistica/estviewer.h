@@ -12,7 +12,9 @@ class EstViewer
     public:
         EstViewer();
         virtual ~EstViewer();
-        void inicio(Queueest*)
+        void inicio();
+        void show(Queueest*, string);
+        void reload();
     protected:
     private:
 };

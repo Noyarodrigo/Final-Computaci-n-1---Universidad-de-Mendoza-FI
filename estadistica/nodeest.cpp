@@ -1,4 +1,4 @@
-#include "nodeestadistica.h"
+#include "nodeest.h"
 
 Nodeest::Nodeest()
 {

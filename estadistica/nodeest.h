@@ -15,7 +15,7 @@ class Nodeest
     protected:
 
     private:
-        Estadistica* est;
+        Estadistica* estadistica;
         Nodeest* next;
 };
 
