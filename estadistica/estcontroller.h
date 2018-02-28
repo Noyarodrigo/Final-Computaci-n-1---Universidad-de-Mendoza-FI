@@ -9,7 +9,7 @@ class EstController
         EstController();
         virtual ~EstController();
         void abm();
-
+        string parcial(string, string);
     protected:
     private:
       void inicio();

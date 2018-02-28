@@ -12,6 +12,7 @@ Estadistica::Estadistica()
     apellido = "";
 		partido="";
 		votos="";
+    total="";
 
 }
 
@@ -28,6 +29,8 @@ void Estadistica::fillObject(sql::ResultSet* rs)
     this->setApellido(rs->getString("apellido"));
 		this->setPartido(rs->getString("partido"));
 		this->setVotos(rs->getString("votos"));
+    this->setTotal(rs->getString("total"));
+
 }
 
 
@@ -39,6 +42,16 @@ void Estadistica::setNombre(string nombre)
 string Estadistica::getNombre()
 {
     return this->nombre;
+}
+
+void Estadistica::setTotal(string total)
+{
+    this->total = total;
+}
+
+string Estadistica::getTotal()
+{
+    return this->total;
 }
 
 string Estadistica::getApellido()
@@ -70,5 +83,7 @@ void Estadistica::setVotos(string votos){
 
 string Estadistica::toString()
 {
-    return "<th>" + this->getNombre() + "</th><th>" + this->getApellido() + "</th><th>"+(new EstDAO())->getPart(this->getPartido())+"</th><th>"+this->getVotos()+"</th>"	;
+    string f= (new EstController())->parcial(this->getTotal(), this->getVotos());
+    return "<th>" + this->getNombre() + "</th><th>" + this->getApellido() + "</th><th>"+ this->getPartido() +"</th><th>"+f+"%</th><th>("+this->getVotos()+" votos)</th>"	;
+
 }

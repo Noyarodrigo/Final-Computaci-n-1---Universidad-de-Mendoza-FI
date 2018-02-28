@@ -147,7 +147,7 @@ string Usuario::toString()
 {
     stringstream ss;
     ss << this->getId();
-    string uno="<th>"+ ss.str() + "</th><th>" + this->getNombre() + "</th><th>" + this->getApellido() + "</th><th>" + this->getConsejal() + "</th><th>" + this->getLegislador() + "</th><th>" + this->getSenador() + "</th><th>" + this->getDiputado()+ "</th>";
+    string uno="<th>"+ ss.str() + "</th><th>" + this->getNombre() + "</th><th>" + this->getApellido() + "</th><th>" + this->getDocumento() + "</th><th>" + this->getConsejal() + "</th><th>" + this->getLegislador() + "</th><th>" + this->getSenador() + "</th><th>" + this->getDiputado()+ "</th>";
     string dos= uno+"</th><th>" + this->getIntendente() +"</th><th>" + this->getGobernador() +"</th><th>" + this->getPresidente()+"</th>";
     return dos;
 }

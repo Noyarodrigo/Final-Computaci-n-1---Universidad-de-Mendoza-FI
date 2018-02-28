@@ -11,14 +11,7 @@ class UsuarioDAO
     public:
         UsuarioDAO();
         virtual ~UsuarioDAO();
-        void add(Usuario*);
-        void update(Usuario*);
-        bool exist(Usuario*);
-        void save(Usuario*);
-        void del(Usuario*);
-        Usuario* find(int);
         int checkusuario(string);
-        Queue* collection(int);
         Queue* checkcandidato(string);
         int checkLogin();
         void setLogin(string);
@@ -27,6 +20,7 @@ class UsuarioDAO
         void votar(string, string, string);
         void sumarvoto(string,string);
         int checkvoto(string);
+        void sumarest(string);
     protected:
     private:
 };

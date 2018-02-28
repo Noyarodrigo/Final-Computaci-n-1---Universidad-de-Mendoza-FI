@@ -15,95 +15,6 @@ UsuarioDAO::~UsuarioDAO()
     //dtor
 }
 
-Queue* UsuarioDAO::collection(int opc)
-{
-    Queue* queue = new Queue();
-    sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM persona WHERE idtc= "+opc);
-
-    while (res->next())
-        queue->qstore(new Usuario(res));
-
-    delete res;
-
-    return queue;
-}
-
-void UsuarioDAO::del(Usuario* usuario)
-{
-    string stringSQL;
-    stringstream ss;
-    ss << usuario->getId();
-
-    stringSQL = "DELETE FROM persona WHERE id = " + ss.str();
-    MyConnection::instance()->execute(stringSQL);
-}
-
-void UsuarioDAO::save(Usuario* Usuario)
-{
-    if (exist(Usuario))
-        update(Usuario);
-    else
-        add(Usuario);
-}
-
-bool UsuarioDAO::exist(Usuario* Usuario)
-{
-    string stringSQL;
-
-    stringstream ss;
-    ss << Usuario->getId();
-
-    stringSQL = "SELECT * FROM persona WHERE id = " + ss.str();
-    sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
-
-    return res->next();
-}
-
-void UsuarioDAO::update(Usuario* Usuario)
-{
-    string stringSQL;
-
-    stringstream ss;
-    ss << Usuario->getId();
-
-    stringSQL = "UPDATE persona SET usuario = '" + Usuario->getUsuario() + "' WHERE id = " + ss.str();
-    MyConnection::instance()->execute(stringSQL);
-}
-
-void UsuarioDAO::add(Usuario* Usuario)
-{
-    stringstream ss;
-
-    string stringSQL;
-
-    ss << Usuario->getId();
-
-    stringSQL = "INSERT INTO persona (id, usuario) VALUES (" + ss.str() + ", '" + Usuario->getUsuario() + "')";
-    MyConnection::instance()->execute(stringSQL);
-}
-
-Usuario* UsuarioDAO::find(int id)
-{
-    string stringSQL;
-
-    stringstream ss;
-    ss << id;
-
-    stringSQL = "SELECT * FROM persona WHERE id = " + ss.str();
-
-    sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
-
-    if (res->next())
-    {
-        Usuario* usuario = new Usuario(res);
-        delete res;
-        return usuario;
-    }
-
-    delete res;
-    return new Usuario();
-}
-
 int UsuarioDAO::checkusuario(string d){
   int a=0;
   string stringSQL;
@@ -175,7 +86,10 @@ void UsuarioDAO::votar(string a, string cod, string idtc){
         if (c ==idtc) {
           stringSQL <<"UPDATE `elecciones`.`votantes` SET " +a+"= '0' WHERE `votantes`.`id` ='"+getId()+"' AND `votantes`.`"+a+"` ='1' ";
           MyConnection::instance()->execute(stringSQL.str());
+          //sumar voto, estadistica y mensaje de votado
           sumarvoto(cod, idtc);
+          sumarest(idtc);
+          (new UsuarioViewer())->yav();
         }else{(new UsuarioViewer())->error();}
       }
       if (x==0) {
@@ -197,5 +111,11 @@ void UsuarioDAO::sumarvoto(string cod, string idtc)
   stringstream stringSQL;
   stringSQL <<"UPDATE `elecciones`.`persona` SET votos= votos+1 WHERE `persona`.`id` ='"+cod+"' AND `persona`.`idtc`="+idtc;
   MyConnection::instance()->execute(stringSQL.str());
-  (new UsuarioViewer())->yav();
+}
+
+void UsuarioDAO::sumarest(string idtc)
+{
+  stringstream stringSQL;
+  stringSQL <<"UPDATE `elecciones`.`tipo_candidato` SET total= total+1 WHERE `tipo_candidato`.`id` ="+idtc;
+  MyConnection::instance()->execute(stringSQL.str());
 }

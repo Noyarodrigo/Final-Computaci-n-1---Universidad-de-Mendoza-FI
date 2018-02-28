@@ -47,13 +47,6 @@ void UsuarioController::control(string cod){
 	}
 
 
-void UsuarioController::eliminar()
-{
-	Usuario* usuario = new Usuario();
-	usuario->setId(11);
-	(new UsuarioDAO())->del(usuario);
-}
-
 void UsuarioController::out()
 {
 	(new UsuarioViewer())->out();

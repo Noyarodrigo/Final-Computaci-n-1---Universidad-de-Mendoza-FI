@@ -6,6 +6,7 @@
 #include <cppconn/exception.h>
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
+#include "estcontroller.h"
 
 using namespace std;
 
@@ -24,6 +25,9 @@ class Estadistica
         string toString();;
         void setVotos(string);
         string getVotos();
+        void setTotal(string);
+        string getTotal();
+        float parcial(int);
 
 
     protected:
@@ -33,5 +37,6 @@ class Estadistica
         string nombre;
         string apellido;
         string partido;
+        string total;
 };
 #endif

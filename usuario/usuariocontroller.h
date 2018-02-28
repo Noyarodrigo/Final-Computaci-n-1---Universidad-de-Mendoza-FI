@@ -16,7 +16,6 @@ class UsuarioController
     private:
         void listar();
         void inicio();
-        void eliminar();
 
 };
 
