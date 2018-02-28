@@ -30,23 +30,21 @@ void EstViewer::inicio(){
 	  cout<<"<form class='form-signin' method='post'>"<<endl;
 	  cout<<"<h2 class='form-signin-heading'>Binvenido a los resultados de 2018</h2>"<<endl;
 		cout<<"</form>"<<endl;
-	//	cout<<"</body></html>"<<endl;
+		cout<<"</body></html>"<<endl;
 
 }
 void EstViewer::show(Queueest* queueest, string opc)
 {
 	string a;
 	if(opc=="1"){a="Consejales";}
-	if(opc=="2"){a="legisladores";}
+	if(opc=="2"){a="Legisladores";}
 	if(opc=="3"){a="Senadores";}
 	if(opc=="4"){a="Diputados";}
 	if(opc=="5"){a="Intendentes";}
 	if(opc=="6"){a="Gobernadores";}
 	if(opc=="7"){a="Presidentes";}
-
-	  cout<<"<html><head>"<<endl;
-	  cout<<"<font color='blue'><h4 align='left'>"+a+"</h3></font>"<<endl;
-	  cout<<"</h4></font>"<<endl;
+		cout<<"<html><head>"<<endl;
+	  cout<<"<font color='blue'><h4 align='left'>"+a+"</h4></font>"<<endl;
 	  cout<<"<tr>"<<endl;
 	  queueest->show();
 		cout<<"</tr>"<<endl;
@@ -56,5 +54,7 @@ void EstViewer::show(Queueest* queueest, string opc)
 
 void EstViewer::reload()
 {
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
 cout<<"<input value='Recargar Estadisticas' onClick='document.location.reload()' type='button' class='btn btn-outline-success my-2 my-sm-0'>"<<endl;
 }

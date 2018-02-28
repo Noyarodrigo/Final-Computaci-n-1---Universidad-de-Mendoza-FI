@@ -16,8 +16,6 @@ class Estadistica
         Estadistica(sql::ResultSet*);
         string getPartido();
         void setPartido(string);
-        int getId();
-        void setId(int);
         void setNombre(string);
         string getNombre();
         void setApellido(string);
@@ -31,7 +29,6 @@ class Estadistica
     protected:
 
     private:
-        int id;
         string votos;
         string nombre;
         string apellido;

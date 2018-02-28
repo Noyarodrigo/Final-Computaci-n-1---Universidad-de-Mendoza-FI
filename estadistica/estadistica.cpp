@@ -1,4 +1,5 @@
 #include "estadistica.h"
+#include "estdao.h"
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -11,7 +12,7 @@ Estadistica::Estadistica()
     apellido = "";
 		partido="";
 		votos="";
-		id=0;
+
 }
 
 Estadistica::Estadistica(sql::ResultSet* res)
@@ -22,22 +23,13 @@ Estadistica::Estadistica(sql::ResultSet* res)
 
 void Estadistica::fillObject(sql::ResultSet* rs)
 {
-		this->setId(rs->getInt("id"));
+
     this->setNombre(rs->getString("nombre"));
     this->setApellido(rs->getString("apellido"));
 		this->setPartido(rs->getString("partido"));
 		this->setVotos(rs->getString("votos"));
 }
 
-void Estadistica::setId(int id)
-{
-    this->id = id;
-}
-
-int Estadistica::getId()
-{
-    return this->id;
-}
 
 void Estadistica::setNombre(string nombre)
 {
@@ -78,7 +70,5 @@ void Estadistica::setVotos(string votos){
 
 string Estadistica::toString()
 {
-    stringstream ss;
-    ss << this->getId();
-    return "<th>"+ ss.str() + "</th><th>" + this->getNombre() + "</th><th>" + this->getApellido() + "</th><th>"+this->getPartido()+"</th><th>"+this->getVotos()+"</th>"	;
+    return "<th>" + this->getNombre() + "</th><th>" + this->getApellido() + "</th><th>"+(new EstDAO())->getPart(this->getPartido())+"</th><th>"+this->getVotos()+"</th>"	;
 }

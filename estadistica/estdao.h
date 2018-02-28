@@ -13,6 +13,7 @@ class EstDAO
         EstDAO();
         virtual ~EstDAO();
         Queueest* load(string);
+        string getPart(string);
 
     protected:
     private:
