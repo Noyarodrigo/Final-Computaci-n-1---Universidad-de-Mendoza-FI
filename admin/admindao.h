@@ -5,9 +5,11 @@
 #include "usuario.h"
 #include "candidato.h"
 #include "partido.h"
+#include "partidolista.h"
 #include "queueusuario.h"
 #include "queuecandidato.h"
 #include "queuepartido.h"
+#include "queuepartidolista.h"
 
 using namespace std;
 
@@ -25,7 +27,7 @@ class AdminDAO
         Queueusuario* infu();
         Queuecandidato* infc();
         Queuepartido* infp();
-        Usuario* find(int);
+        Queuepartidolista* plista();
         int checkadmin(string);
         int checkLogin();
         void setLogin(string);

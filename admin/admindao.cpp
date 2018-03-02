@@ -5,6 +5,8 @@
 #include "getpost.h"
 #include "adminviewer.h"
 #include "admincontroller.h"
+#include "candidato.h"
+
 AdminDAO::AdminDAO()
 {
     //ctor
@@ -49,6 +51,7 @@ void AdminDAO::delp()
     (new AdminViewer())->eliminado();
 }
 
+
 void AdminDAO::addu(Usuario* Usuario)
 {
   string stringSQL;
@@ -82,38 +85,16 @@ void AdminDAO::addc(Candidato* Candidato)
 void AdminDAO::addp(Partido* Partido)
 {
   string stringSQL;
-  stringSQL = "SELECT nombre FROM partido_politico WHERE nombre = '"+ Partido->getNombre()+"'";
+  stringSQL = "SELECT partido FROM partido_politico WHERE partido = '"+ Partido->getNombre()+"'";
   sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
   if (res->next())
   {
     (new AdminViewer())->nope();
   }else{
-    stringSQL = "INSERT INTO partido_politico (nombre) VALUES ('" + Partido->getNombre() + "')";
+    stringSQL = "INSERT INTO partido_politico (partido) VALUES ('" + Partido->getNombre() + "')";
     MyConnection::instance()->execute(stringSQL);
     (new AdminViewer())->agregado();
   }
-}
-
-Usuario* AdminDAO::find(int id)
-{
-    string stringSQL;
-
-    stringstream ss;
-    ss << id;
-
-    stringSQL = "SELECT * FROM persona WHERE id = " + ss.str();
-
-    sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
-
-    if (res->next())
-    {
-        Usuario* usuario = new Usuario(res);
-        delete res;
-        return usuario;
-    }
-
-    delete res;
-    return new Usuario();
 }
 
 int AdminDAO::checkadmin(string id){
@@ -204,7 +185,7 @@ Queueusuario* AdminDAO::infu(){
 Queuecandidato* AdminDAO::infc(){
 
   Queuecandidato* queuecandidato = new Queuecandidato();
-      sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM persona");
+      sql::ResultSet* res = MyConnection::instance()->query("select p.id,p.nombre,p.apellido,p.telefono ,c.idtc, d.partido,p.votos from persona as p inner join partido_politico as d inner join tipo_candidato as c on p.partido=d.id and p.idtc=c.id");
       while (res->next())
           queuecandidato->qstore(new Candidato(res));
       delete res;
@@ -220,5 +201,16 @@ Queuepartido* AdminDAO::infp(){
           queuepartido->qstore(new Partido(res));
       delete res;
       return queuepartido;
+
+}
+
+Queuepartidolista* AdminDAO::plista(){
+
+  Queuepartidolista* queuepartidolista = new Queuepartidolista();
+      sql::ResultSet* res = MyConnection::instance()->query("SELECT * FROM partido_politico");
+      while (res->next())
+          queuepartidolista->qstore(new Partidolista(res));
+      delete res;
+      return queuepartidolista;
 
 }

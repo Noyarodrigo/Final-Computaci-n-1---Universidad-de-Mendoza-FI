@@ -86,7 +86,6 @@ void AdminController::infc()
 {
 	(new AdminViewer())->infc((new AdminDAO())->infc());
 }
-
 //PARTIDO
 void AdminController::addp()
 {

@@ -4,6 +4,7 @@
 #include "queueusuario.h"
 #include "queuecandidato.h"
 #include "queuepartido.h"
+#include "queuepartidolista.h"
 #include <iostream>
 #include <string>
 #include "admincontroller.h"
@@ -14,7 +15,6 @@ class AdminViewer
     public:
         AdminViewer();
         virtual ~AdminViewer();
-        int menu();
         void infu(Queueusuario*);
         void infc(Queuecandidato*);
         void infp(Queuepartido*);
@@ -23,18 +23,15 @@ class AdminViewer
         void fracaso();
         void categoria();
         void fail();
-        void info(string, string);
         void ver();
         void dusu();
-        void dcan();
+        void dcan(Queuepartidolista*);
         void did();
         void out();
         void nope();
         void agregado();
         void eliminado();
         void dpar();
-        //void cargar(Usuario*, string);
-        //void mensaje(string);
         void yav();
     protected:
     private:

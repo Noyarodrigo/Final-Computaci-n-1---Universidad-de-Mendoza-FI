@@ -70,22 +70,8 @@ void AdminViewer::fracaso()
 {
 	cout<<"<font color='red'><h1 align='center'>Ingreso Incorrecto!</h1></font>"<<endl;
 }
-
 void AdminViewer::fail(){
 	cout<<"<font color='red'><h1 align='center'>Ya has votado en esa categoria!</h1></font>"<<endl;
-}
-
-void AdminViewer::info(string id, string categoria) {
-	cout<<"<html><head>"<<endl;
-  cout<<"	<br>	"<<endl;
-	cout<<"<font color='grey'>"<<endl;
-  cout<<"</h1>\n";
-  cout<<"<h3>categoria: "<<categoria<<endl;
-  cout<<"</h3>\n";
-	cout<<"<h3>Su id de administrador es:"+id<<endl;
-	cout<<"</h3>\n";
-	cout<<"</font>"<<endl;
-	cout<<"</body></html>"<<endl;
 }
 
 void AdminViewer::yav(){
@@ -98,18 +84,17 @@ void AdminViewer::ver()
 	initializeGet(Get);
 	if (Get.find("opc")!=Get.end()) {
 		cout<<"Content-type: text/html"<<endl<<endl;
-		(new AdminViewer())->info((new AdminDAO())->getId(), Get["opc"]);
 		(new AdminController())->setAux();
 		if (Get["opc"]== "addu" ) {
 			(new AdminViewer())->dusu();	}
 
 		if (Get["opc"]== "addc") {
-			(new AdminViewer())->dcan();	}
+			(new AdminViewer())->dcan((new AdminDAO())->plista());	}
 
 		if (Get["opc"]== "addp") {
 			(new AdminViewer())->dpar();	}
 
-		if (Get["opc"]== "delu" || Get["opc"]== "delc" || Get["opc"]== "delp" || Get["opc"]== "modu" || Get["opc"]== "modc") {
+		if (Get["opc"]== "delu" || Get["opc"]== "delc" || Get["opc"]== "delp" || Get["opc"]== "modc") {
 
 				(new AdminViewer())->did();
 				}
@@ -134,8 +119,6 @@ void AdminViewer::ver()
 				cout<<"<html><head>"<<endl;
 				cout<<"<font color='blue'><h1 align='center'>Panel de administracion</h1></font>"<<endl;
 				cout<<"	<br>	"<<endl;
-				cout<<"	<br>"<<endl;
-				cout<<"	<br>"<<endl;
 				cout<<"<form class='form-signin' method='get'>"<<endl;
 				cout<<"  <fieldset>"<<endl;
 				cout<<"    <legend>Opciones de Votantes</legend>"<<endl;
@@ -146,10 +129,7 @@ void AdminViewer::ver()
 				cout<<"           <input type=\"radio\" name=\"opc\" value=\"delu\"> Quitar votante "<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"      <p>"<<endl;
-				cout<<"          <input type=\"radio\" name=\"opc\" value=\"modu\"> Modificar votante"<<endl;
-				cout<<"      </p>"<<endl;
-				cout<<"      <p>"<<endl;
-				cout<<"          <input type=\"radio\" name=\"opc\" value=\"infu\"> Info de votante"<<endl;
+				cout<<"          <input type=\"radio\" name=\"opc\" value=\"infu\"> Info de votantes"<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"  </fieldset>"<<endl;
 				cout<<"	<br>	"<<endl;
@@ -162,10 +142,7 @@ void AdminViewer::ver()
 				cout<<"           <input type=\"radio\" name=\"opc\" value=\"delc\"> Quitar candidato"<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"      <p>"<<endl;
-				cout<<"           <input type=\"radio\" name=\"opc\" value=\"modc\"> Modificar candidato"<<endl;
-				cout<<"      </p>"<<endl;
-				cout<<"      <p>"<<endl;
-				cout<<"           <input type=\"radio\" name=\"opc\" value=\"infc\"> info candidato"<<endl;
+				cout<<"           <input type=\"radio\" name=\"opc\" value=\"infc\"> info candidatos"<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"  </fieldset>"<<endl;
 				cout<<"	<br>	"<<endl;
@@ -198,8 +175,6 @@ void AdminViewer::ver()
 
 		}
 	}
-
-
 void AdminViewer::dusu()
 {
 
@@ -232,8 +207,7 @@ void AdminViewer::dusu()
 	cout<<"</div>"<<endl;
 
 }
-
-void AdminViewer::dcan()
+void AdminViewer::dcan(Queuepartidolista* queuepartidolista)
 {
 
 	cout<<"<html><head>"<<endl;
@@ -258,23 +232,38 @@ void AdminViewer::dcan()
 	cout<<"<br>"<<endl;
 	cout<<"<label for='telefono' class='sr-only'>Telefono</label>"<<endl;
 	cout<<"<input type='text' name='telefono' class='form-control' placeholder='Telefono' >"<<endl;
-	//idtc
+	//idtc con lista desplegable
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
 	cout<<"<label for='idtc' class='sr-only'>Tipo de candidato:</label>"<<endl;
-	cout<<"<input type='text' name='idtc' class='form-control' placeholder='IDTC' >"<<endl;
+			// lista
+				cout<<"<select name=\"idtc\">"<<endl;
+				cout<<"<option selected value=\"0\"> Elige una categoria </option>"<<endl;
+				cout<<"<option value=\"1\">Consejal</option>"<<endl;
+				cout<<"<option value=\"2\">Legislador</option>"<<endl;
+				cout<<"<option value=\"3\">Senador</option>"<<endl;
+				cout<<"<option value=\"4\">Diputado</option>"<<endl;
+				cout<<"<option value=\"5\">Intendente</option>"<<endl;
+				cout<<"<option value=\"6\">Gobernador</option>"<<endl;
+				cout<<"<option value=\"7\">Presidente</option>"<<endl;
+				cout<<"</select>"<<endl;
+
 	//partido
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
 	cout<<"<label for='partido' class='sr-only'>Partido</label>"<<endl;
-	cout<<"<input type='text' name='partido' class='form-control' placeholder='Partido' >"<<endl;
+				//lista con base de datos
+				cout<<"<select name=\"partido\">"<<endl;
+				cout<<"<option selected value=\"0\"> Elige un partido </option>"<<endl;
+				queuepartidolista->show();
+				cout<<"</select>"<<endl;
 
 	//boton
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
 	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingresar datos</button>"<<endl;
 	cout<<"</div>"<<endl;
-
+	cout<<"</form>"<<endl;
 }
 void AdminViewer::dpar()
 {
@@ -296,7 +285,6 @@ void AdminViewer::dpar()
 	cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingresar</button>"<<endl;
 	cout<<"</div>"<<endl;
 }
-
 void AdminViewer::did()	{
 	cout<<"<h3 color='grey'>Ingrese el id<h3>\n";
 	cout<<"<form class='form-signin' method='get'>"<<endl;
@@ -330,7 +318,7 @@ void AdminViewer::infc(Queuecandidato* queuecandidato){
   cout<<"<html><head>"<<endl;
   cout<<"<font color='blue'><h3 align='center'>Informacion de Candidato</h3></font>"<<endl;
 	cout<<"<tr>"<<endl;
-  cout<<"<th>ID</th><th>Nombre</th><th>Apellido</th><th>Telefono</th><th>IDTC</th><th>Partido</th><th>Votos</th></font>"<<endl;
+  cout<<"<th>ID</th><th>Nombre</th><th>Apellido</th><th>Telefono</th><th>Cargo</th><th>Partido</th><th>Votos</th></font>"<<endl;
   cout<<"<br>"<<endl;
   queuecandidato->show();
 	cout<<"</tr>"<<endl;
@@ -359,7 +347,6 @@ void AdminViewer::out()
 	cout<<"</form>"<<endl;
 
 }
-
 void AdminViewer::nope()
 {
 	cout<<"Content-type: text/html"<<endl<<endl;
@@ -370,7 +357,6 @@ void AdminViewer::nope()
 	cout<<"</form>"<<endl;
 
 }
-
 void AdminViewer::agregado()
 {
 	cout<<"Content-type: text/html"<<endl<<endl;
@@ -380,7 +366,6 @@ void AdminViewer::agregado()
 	cout<<"</form>"<<endl;
 
 }
-
 void AdminViewer::eliminado()
 {
 	cout<<"Content-type: text/html"<<endl<<endl;
