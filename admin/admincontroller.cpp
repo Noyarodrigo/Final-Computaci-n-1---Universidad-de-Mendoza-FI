@@ -119,7 +119,13 @@ void AdminController::idAux()
 	map<string,string> Get;
 	initializeGet(Get);
 	string op=Get["id"];
-	(new AdminDAO())->setIdaux(op);
+	if (op=="") {
+		(new AdminViewer())->nope();
+		(new AdminDAO())->setIdaux("0");
+	}else{
+		(new AdminDAO())->setIdaux(op);
+	}
+
 }
 void AdminController::out()
 {

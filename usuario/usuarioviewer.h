@@ -21,8 +21,10 @@ class UsuarioViewer
         void out();
         void yav();
         void error();
+        void css();
     protected:
     private:
+
 };
 
 #endif

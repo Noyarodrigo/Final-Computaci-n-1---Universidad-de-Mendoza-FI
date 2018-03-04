@@ -22,7 +22,6 @@ class AdminViewer
         void inicio();
         void fracaso();
         void categoria();
-        void fail();
         void ver();
         void dusu();
         void dcan(Queuepartidolista*);
@@ -32,7 +31,7 @@ class AdminViewer
         void agregado();
         void eliminado();
         void dpar();
-        void yav();
+        void css();
     protected:
     private:
 };

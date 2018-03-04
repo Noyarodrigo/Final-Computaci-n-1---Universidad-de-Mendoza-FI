@@ -102,5 +102,5 @@ string Candidato::toString()
 {
     stringstream ss;
     ss << this->getId();
-    return "<th>"+ ss.str() + "</th><th>" + this->getNombre() + "</th><th>" + this->getApellido() + "</th><th>"+this->getTel()+"</th><th>"+ this->getIdtc()+"</th><th>"+this->getPartido()+"</th><th>"+this->getVotos()+"</th>"	;
+    return "<tr><td>"+ ss.str() + "</td><td>" + this->getNombre() + "</td><td>" + this->getApellido() + "</td><td>"+this->getTel()+"</td><td>"+ this->getIdtc()+"</td><td>"+this->getPartido()+"</td><td>"+this->getVotos()+"</td></tr>"	;
 }

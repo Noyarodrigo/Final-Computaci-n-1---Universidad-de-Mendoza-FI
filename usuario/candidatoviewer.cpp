@@ -34,46 +34,47 @@ void CandidatoViewer::mostrar(){
     else{
       cout<<"Content-type: text/html"<<endl<<endl;
       cout<<"<html><head>"<<endl;
+      cout<<"<title>Elecciones 2018</title>"<<endl;
+      cout<<"</head>"<<endl;
+      cout<<"<body>"<<endl;
+      (new UsuarioViewer())->css();
       cout<<"<font color='blue'><h1 align='center'>Elije el tipo de eleccion a continuacion</h1></font>"<<endl;
-      cout<<"	<br>	"<<endl;
-      cout<<"	<br>"<<endl;
-      cout<<"	<br>"<<endl;
-      cout<<"<form class='form-signin' method='get'>"<<endl;
-      cout<<"  <fieldset>"<<endl;
-      cout<<"    <legend>Elige una categoria luego, haz click en siguiente</legend>"<<endl;
+      cout<<"<form class='categoria' method='get'>"<<endl;
+      cout<<"  <fieldset >"<<endl;
+      cout<<"    <legend align='center'>Elige una categoria luego, haz click en siguiente</legend>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"1\"> Consejales"<<endl;
+      cout<<"          <input type=\"radio\" name=\"categoria\" class='incat' value=\"1\"> Consejales"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"           <input type=\"radio\" name=\"categoria\" value=\"2\"> Legisladores"<<endl;
+      cout<<"           <input type=\"radio\" name=\"categoria\"  class='incat' value=\"2\"> Legisladores"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"3\"> Senadores"<<endl;
+      cout<<"          <input type=\"radio\" name=\"categoria\"  class='incat' value=\"3\"> Senadores"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"4\"> Diputados"<<endl;
+      cout<<"          <input type=\"radio\" name=\"categoria\"  class='incat' value=\"4\"> Diputados"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"           <input type=\"radio\" name=\"categoria\" value=\"5\"> Intendentes"<<endl;
+      cout<<"           <input type=\"radio\" name=\"categoria\"  class='incat' value=\"5\"> Intendentes"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"6\"> Gobernadores"<<endl;
+      cout<<"          <input type=\"radio\" name=\"categoria\"  class='incat' value=\"6\"> Gobernadores"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"7\"> Presidentes"<<endl;
+      cout<<"          <input type=\"radio\" name=\"categoria\"  class='incat' value=\"7\"> Presidentes"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"  </fieldset>"<<endl;
       cout<<"	<br>"<<endl;
       cout<<"  <fieldset>"<<endl;
-      cout<<"    <legend>SALIR</legend>"<<endl;
+      cout<<"    <legend align='center'>SALIR</legend>"<<endl;
       cout<<"      <p>"<<endl;
-      cout<<"          <input type=\"radio\" name=\"categoria\" value=\"8\"> LOG OUT"<<endl;
+      cout<<"          <input type=\"radio\" name=\"categoria\"  class='incat' value=\"8\"> LOG OUT"<<endl;
       cout<<"      </p>"<<endl;
       cout<<"  </fieldset>"<<endl;
       cout<<"	<br>	"<<endl;
-      cout<<"<div align='center'>"<<endl;
-      cout<<"<button class='btn btn-lg btn-primary btn-block' type='submit'>Ingresar</button>"<<endl;
-      cout<<"</div>"<<endl;
+      cout<<"	<p align='center'>	"<<endl;
+      cout<<"<button  class='button' type='submit'>Siguiente</button>"<<endl;
+      cout<<"	</p>	"<<endl;
       cout<<"</form>"<<endl;
       cout<<"</body></html>"<<endl;
 
@@ -81,16 +82,21 @@ void CandidatoViewer::mostrar(){
 }
 
 void CandidatoViewer::listar(Queue* queue){
+
   cout<<"Content-type: text/html"<<endl<<endl;
   cout<<"<html><head>"<<endl;
+  (new UsuarioViewer())->css();
   cout<<"<font color='blue'><h1 align='center'>Listado de candidatos</h1></font>"<<endl;
   cout<<"<font color='grey'><h4 align='center'>Ingrese el codigo del candidato a continuacion</h4></font>"<<endl;
-  cout<<"</h1></font>"<<endl;
+  cout<<"</head>"<<endl;
+  cout<<"<body>"<<endl;
+  cout<<"<table id='candidatos'>"<<endl;
   cout<<"<tr>"<<endl;
   cout<<"<font color='grey'><th>Codigo</th><th>Nombre</th><th>Apellido</th><th>Partido</th></font>"<<endl;
   cout<<"<br>"<<endl;
   queue->show();
   cout<<"</tr>"<<endl;
+  cout<<"</table>"<<endl;
   cout<<"</body></html>"<<endl;
 
 }

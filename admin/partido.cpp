@@ -58,6 +58,6 @@ string Partido::toString()
 {
     stringstream ss;
     ss << this->getId();
-    string uno="<th>"+ ss.str() + "</th><th>" + this->getNombre() + "</th><th>" + this->getSocios() + "</th>";
+    string uno="<tr><td>"+ ss.str() + "</td><td>" + this->getNombre() + "</td><td>" + this->getSocios() + "</td></tr>";
     return uno;
 }

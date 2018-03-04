@@ -71,5 +71,5 @@ string Usuario::toString()
 {
     stringstream ss;
     ss << this->getId();
-		return "<th>"+ ss.str() + "</th><th>" + this->getUsuario() + "</th><th>" + this->getClave() + "</th><th>"+this->getPartido()+"</th>"	;
+		return "<tr><td>"+ ss.str() + "</td><td>" + this->getUsuario() + "</td><td>" + this->getClave() + "</td><td>"+this->getPartido()+"</td></tr>"	;
 }

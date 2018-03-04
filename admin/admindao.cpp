@@ -23,20 +23,31 @@ void AdminDAO::delu()
     sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
     res->next();
     string x =res->getString("idaux");
-    stringSQL = "DELETE FROM votantes WHERE id = " + x;
-    MyConnection::instance()->execute(stringSQL);
-    (new AdminViewer())->eliminado();
+    if (x!="0") {
+      string stringSQL = "SELECT idaux FROM admin WHERE id = " + getId();
+      stringSQL = "DELETE FROM votantes WHERE id = " + x;
+      MyConnection::instance()->execute(stringSQL);
+      (new AdminViewer())->eliminado();
+    }
+
 
 }
 void AdminDAO::delc()
 {
-    string stringSQL = "SELECT idaux FROM admin WHERE id = " + getId();
+    string stringSQL = "select p.partido,d.idaux from persona as p inner join admin as d on p.id= "+ getIdaux()+"";
     sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
     res->next();
     string x =res->getString("idaux");
-    stringSQL = "DELETE FROM persona WHERE id = " + x;
-    MyConnection::instance()->execute(stringSQL);
-    (new AdminViewer())->eliminado();
+    string p =res->getString("partido");
+    if (x!="0") {
+      stringSQL = "DELETE FROM persona WHERE id = " + x;
+      MyConnection::instance()->execute(stringSQL);
+      stringstream stringSQL2;
+      stringSQL2 <<"UPDATE `elecciones`.`partido_politico` SET socios = socios-1 WHERE `partido_politico`.`id` ='"+p+"';";
+      MyConnection::instance()->execute(stringSQL2.str());
+      (new AdminViewer())->eliminado();
+    }
+
 
 }
 
@@ -78,6 +89,9 @@ void AdminDAO::addc(Candidato* Candidato)
   }else{
     stringSQL = "INSERT INTO persona (nombre, apellido, telefono, idtc, partido) VALUES ('" + Candidato->getNombre() + "', '" + Candidato->getApellido() + "','"+Candidato->getTel()+"', '"+Candidato->getIdtc()+"','"+Candidato->getPartido()+"')";
     MyConnection::instance()->execute(stringSQL);
+    stringstream stringSQL2;
+    stringSQL2 <<"UPDATE `elecciones`.`partido_politico` SET socios = socios+1 WHERE `partido_politico`.`id` ='"+Candidato->getPartido()+"';";
+    MyConnection::instance()->execute(stringSQL2.str());
     (new AdminViewer())->agregado();
   }
 }
