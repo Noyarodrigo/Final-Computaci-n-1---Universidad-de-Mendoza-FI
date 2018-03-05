@@ -38,7 +38,6 @@ class AdminDAO
         void setIdaux(string);
         string getIdaux();
 
-
     protected:
     private:
 };

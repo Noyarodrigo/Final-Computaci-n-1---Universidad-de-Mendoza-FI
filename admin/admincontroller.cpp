@@ -28,8 +28,6 @@ void AdminController::inicio(){
 		(new AdminViewer())->inicio();
 }
 
-
-
 void AdminController::categoria(){
 	if ((new AdminDAO())->getAux() =="addu") {addu();}
 	if ((new AdminDAO())->getAux() =="delu")delu();
@@ -51,6 +49,9 @@ void AdminController::addu()
 	usuario->setDocumento(Get["documento"]);
 	usuario->setNombre(Get["nombre"]);
 	usuario->setApellido	(Get["apellido"]);
+	usuario->setFecha(Get["fecha"]);
+	usuario->setLugar(Get["lugar"]);
+	usuario->setDireccion	(Get["direccion"]);
 	(new AdminDAO())->addu(usuario);
 }
 void AdminController::delu()

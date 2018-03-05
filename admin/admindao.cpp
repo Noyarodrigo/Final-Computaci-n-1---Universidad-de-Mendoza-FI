@@ -68,7 +68,7 @@ void AdminDAO::addu(Usuario* Usuario)
   {
     (new AdminViewer())->nope();
   }else{
-    stringSQL = "INSERT INTO votantes (nombre, apellido, documento) VALUES ('" + Usuario->getNombre() + "', '" + Usuario->getApellido() + "','"+Usuario->getDocumento()+"')";
+    stringSQL = "INSERT INTO votantes (nombre, apellido, documento, fecha, lugar, direccion) VALUES ('" + Usuario->getNombre() + "', '" + Usuario->getApellido() + "','"+Usuario->getDocumento()+"','"+Usuario->getFecha()+"','"+Usuario->getLugar()+"','"+Usuario->getDireccion()+"')";
     MyConnection::instance()->execute(stringSQL);
     (new AdminViewer())->agregado();
   }

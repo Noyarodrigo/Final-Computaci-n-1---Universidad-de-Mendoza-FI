@@ -10,6 +10,9 @@ Usuario::Usuario()
     nombre = "";
     apellido = "";
 		documento="";
+    fecha="";
+    lugar="";
+    direccion="";
     consejal="";
     legislador="";
     senador="";
@@ -17,6 +20,7 @@ Usuario::Usuario()
     intendente="";
     gobernador="";
     presidente="";
+
 }
 
 Usuario::Usuario(sql::ResultSet* res)
@@ -31,6 +35,9 @@ void Usuario::fillObject(sql::ResultSet* rs)
     this->setNombre(rs->getString("nombre"));
     this->setApellido(rs->getString("apellido"));
 		this->setDocumento(rs->getString("documento"));
+    this->setFecha(rs->getString("fecha"));
+    this->setLugar(rs->getString("lugar"));
+    this->setDireccion(rs->getString("direccion"));
 		this->setConsejal(rs->getString("consejal"));
     this->setLegislador(rs->getString("legislador"));
 		this->setSenador(rs->getString("senador"));
@@ -68,6 +75,33 @@ string Usuario::getDocumento(){
 
 void Usuario::setDocumento(string documento){
 	this->documento = documento;
+}
+
+string Usuario::getFecha(){
+
+	return this->fecha;
+}
+
+void Usuario::setFecha(string fecha){
+	this->fecha = fecha;
+}
+
+string Usuario::getLugar(){
+
+	return this->lugar;
+}
+
+void Usuario::setLugar(string lugar){
+	this->lugar = lugar;
+}
+
+string Usuario::getDireccion(){
+
+	return this->direccion;
+}
+
+void Usuario::setDireccion(string direccion){
+	this->direccion = direccion;
 }
 
 void Usuario::setId(int id)
@@ -147,7 +181,9 @@ string Usuario::toString()
 {
     stringstream ss;
     ss << this->getId();
-    string uno="<tr><td>"+ ss.str() + "</td><td>" + this->getNombre() + "</td><td>" + this->getApellido() + "</td><td>" + this->getDocumento() + "</td><td>" + this->getConsejal() + "</td><td>" + this->getLegislador() + "</td><td>" + this->getSenador() + "</td><td>" + this->getDiputado()+ "</td>";
-    string dos= uno+"</td><td>" + this->getIntendente() +"</td><td>" + this->getGobernador() +"</td><td>" + this->getPresidente()+"</td></tr>";
-    return dos;
+
+    string uno="<tr><td>"+ ss.str() + "</td><td>" + this->getNombre() + "</td><td>" + this->getApellido() + "</td><td>" + this->getDocumento() + "</td><td>" + this->getFecha() + "</td><td>" + this->getLugar() + "</td><td>" + this->getDireccion() + "</td>";
+    string dos= uno+ "<td>" + this->getConsejal() + "</td><td>" + this->getLegislador() + "</td><td>" + this->getSenador() + "</td>""<td>" + this->getDiputado()+ "</td><td>" + this->getIntendente() +"</td><td>" + this->getGobernador() +"</td>";
+    string tres= "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">"+dos+"<td>" + this->getPresidente()+"</td></tr>";
+    return tres;
 }

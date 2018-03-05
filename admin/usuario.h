@@ -24,6 +24,12 @@ class Usuario
         string toString();
         void setDocumento(string);
         string getDocumento();
+        void setFecha(string);
+        string getFecha();
+        void setLugar(string);
+        string getLugar();
+        void setDireccion(string);
+        string getDireccion();
         //INFORMACION DE VOTOS
         void setConsejal(string);
         string getConsejal();
@@ -47,6 +53,9 @@ class Usuario
         string documento;
         string nombre;
         string apellido;
+        string fecha;
+        string lugar;
+        string direccion;
         string consejal;
         string diputado;
         string legislador;

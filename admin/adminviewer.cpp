@@ -178,12 +178,11 @@ void AdminViewer::dusu()
 	cout<< "</head>" <<endl;
 	cout<< "<body>"<<endl;
 	cout<<"<form class='categoria' method='get'>"<<endl;
-	cout<< "<div>"<<endl;
-	cout<< "<br>"<<endl;
-	cout<< "<br>"<<endl;
-	cout<< "<br>"<<endl;
-	cout<<"<h3 color='grey'>INGRESE LOS DATOS<h3>\n";
 	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<< "<div>"<<endl;
+	cout<<"<h3 color='grey'>INGRESE LOS DATOS<h3>\n";
 	cout<<"<br>"<<endl;
 	//NOMBRE
 	cout<<"<br>"<<endl;
@@ -191,14 +190,25 @@ void AdminViewer::dusu()
 	cout<<"<input type='text' name='nombre' class='input' placeholder='Nombre' required autofocus>"<<endl;
 	//apellido
 	cout<<"<br>"<<endl;
-	cout<<"<br>"<<endl;
 	cout<<"<label for='nombre' class='label'>Apellido</label>"<<endl;
 	cout<<"<input type='text' name='apellido' class='input' placeholder='Apellido' >"<<endl;
 	//DOCUMENTO
 	cout<<"<br>"<<endl;
-	cout<<"<br>"<<endl;
 	cout<<"<label for='nombre' class='label'>Documento</label>"<<endl;
 	cout<<"<input type='text' name='documento' class='input' placeholder='Documento' >"<<endl;
+	//Fecha de nac
+	cout<<"<br>"<<endl;
+	cout<<"<label for='fecha' class='label'>Fecha de N.</label>"<<endl;
+	cout<<"<input type='text' name='fecha' class='input' placeholder='DD/MM/AA' >"<<endl;
+	//lugar de nac
+	cout<<"<br>"<<endl;
+	cout<<"<label for='lugar' class='label'>Lugar de N.</label>"<<endl;
+	cout<<"<input type='text' name='lugar' class='input' placeholder='Provincia' >"<<endl;
+	//direccion
+	cout<<"<br>"<<endl;
+	cout<<"<label for='direccion' class='label'>Direccion</label>"<<endl;
+	cout<<"<input type='text' name='direccion' class='input' placeholder='Domicilio' >"<<endl;
+
 	//boton
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
@@ -222,8 +232,11 @@ void AdminViewer::dcan(Queuepartidolista* queuepartidolista)
 	css();
 	cout<< "</head>" <<endl;
 	cout<< "<body>"<<endl;
-	cout<< "<div>"<<endl;
 	cout<<"<form class='categoria' method='get'>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<< "<div>"<<endl;
 	cout<<"<h3 color='grey'>INGRESE LOS DATOS<h3>\n";
 	//NOMBRE
 	cout<<"<br>"<<endl;
@@ -277,12 +290,15 @@ void AdminViewer::dpar()
 	css();
 	cout<< "</head>" <<endl;
 	cout<< "<body>" <<endl;
+	cout<<"<form class='categoria' method='get'>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
 	cout<< "<div>" <<endl;
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
-	cout<<"<form class='categoria' method='get'>"<<endl;
 	cout<<"<h3 color='grey'>NUEVO PARTIDO<h3>\n";
 	//NOMBRE
 	cout<<"<br>"<<endl;
@@ -301,18 +317,20 @@ void AdminViewer::dpar()
 void AdminViewer::did()
 {
 	css();
+	cout<<"<form margin='auto' class='categoria' method='get'>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
 	cout<<"<div>"<<endl;
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
-	cout<<"<form margin='auto' class='categoria' method='get'>"<<endl;
+
 	cout<<"<h3 color='grey'>INGRESE EL ID A ELIMINAR<h3>\n";
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
 	cout<<"<label for='id' class='label'>ID</label>"<<endl;
 	cout<<"<input type='text' name='id' class='input' placeholder='AQUI' >"<<endl;
 	//boton
-	cout<<"<br>"<<endl;
-	cout<<"<br>"<<endl;
 	cout<< "</div>" <<endl;
 	cout<< "<p align='center'>"<<endl;
 	cout<<"<button align='center' class='button' type='submit'>Eliminar</button>"<<endl;
@@ -324,20 +342,20 @@ void AdminViewer::did()
 void AdminViewer::infu(Queueusuario* queueusuario){
 
   cout<<"<html><head>"<<endl;
+	cout<<"<meta charset=“UTF-8”>"<<endl;
 	css();
-  cout<<"<font color='blue'><h3 align='center'>INFORMACION DE USUARIOS</h3></font>"<<endl;
 	cout<<"</head>"<<endl;
 	cout<<"<body>"<<endl;
-  cout<<"</h1></font>"<<endl;
-	cout<<"<table id='candidatos'>"<<endl;;
-	cout<<"<tr>"<<endl;
-  cout<<"<th>ID</th><th>Nombre</th><th>Apellido</th><th>Documento</th><th>Consejal</th><th>Legislador</th><th>senador</th><th>Diputado</th><th>Intendente</th><th>Gobernador</th><th>Presidente</th></font>"<<endl;
-	queueusuario->show();
-	cout<<"</tr>"<<endl;
-	cout<<"</table>"<<endl;
+	cout<<"<font color='blue'><h3 align='center'>INFORMACION DE USUARIOS</h3></font>"<<endl;
 	cout<<"<form align='center' class='categoria' method='get'>"<<endl;
 	cout<<"<button class='button' type='submit'>Volver</button>"<<endl;
 	cout<<"</form>"<<endl;
+	cout<<"<table id='candidatos'style=\"position: absolute; top: 20%; left:10%; float: left;\">"<<endl;
+	cout<<"<tr>"<<endl;
+  cout<<"<th>ID</th><th>Nombre</th><th>Apellido</th><th>Documento</th><th>Fecha de Nac.</th><th>Lugar de Nac.</th><th>Direccion</th><th>Cons</th><th>Leg</th><th>Sen</th><th>Dip</th><th>Int</th><th>Gob</th><th>Pre</th></font>"<<endl;
+	queueusuario->show();
+	cout<<"</tr>"<<endl;
+	cout<<"</table>"<<endl;
   cout<<"</body></html>"<<endl;
 
 }
@@ -345,20 +363,21 @@ void AdminViewer::infu(Queueusuario* queueusuario){
 void AdminViewer::infc(Queuecandidato* queuecandidato){
 
   cout<<"<html><head>"<<endl;
+	cout<<"<meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">"<<endl;
 	css();
 	cout<<"</head>"<<endl;
   cout<<"<font color='blue'><h2 align='center'>INFORMACION DE CANDIDATOS</h2></font>"<<endl;
+	cout<<"<form align='center' class='categoria' method='get'>"<<endl;
+	cout<<"<button class='button' type='submit'>volver</button>"<<endl;
+	cout<<"</form>"<<endl;
 	cout<<"<body>"<<endl;
-	cout<<"<table id='candidatos'>"<<endl;
+	cout<<"<table id='candidatos' style=\"position: absolute; top: 20%; left:10%; float: left;\">"<<endl;
 	cout<<"<tr>"<<endl;
   cout<<"<th>ID</th><th>Nombre</th><th>Apellido</th><th>Telefono</th><th>Cargo</th><th>Partido</th><th>Votos</th></font>"<<endl;
   cout<<"<br>"<<endl;
   queuecandidato->show();
 	cout<<"</tr>"<<endl;
 	cout<<"</table>"<<endl;
-	cout<<"<form align='center' class='categoria' method='get'>"<<endl;
-	cout<<"<button class='button' type='submit'>volver</button>"<<endl;
-	cout<<"</form>"<<endl;
   cout<<"</body></html>"<<endl;
 
 }
@@ -366,20 +385,21 @@ void AdminViewer::infc(Queuecandidato* queuecandidato){
 void AdminViewer::infp(Queuepartido* queuepartido){
 
   cout<<"<html><head>"<<endl;
+	cout<<"<meta charset=“UTF-8”>"<<endl;
 	css();
   cout<<"<font color='blue'><h3 align='center'>INFORMACION DE PARTIDOS</h3></font>"<<endl;
+	cout<<"<form align='center' class='categoria' method='get'>"<<endl;
+	cout<<"<button class='button' type='submit'>Volver</button>"<<endl;
+	cout<<"</form>"<<endl;
 	cout<<"</head>"<<endl;
 	cout<<"<body>"<<endl;
-	cout<<"<table id='candidatos'>"<<endl;
+	cout<<"<table id='candidatos' style=\"position: absolute; top: 20%; left:10%; float: left;\">"<<endl;
 	cout<<"<tr>"<<endl;
   cout<<"<th>ID</th><th>Nombre</th><th>Cant. de socios</th></font>"<<endl;
   cout<<"<br>"<<endl;
   queuepartido->show();
 	cout<<"</tr>"<<endl;
 	cout<<"</table>"<<endl;
-	cout<<"<form align='center' class='categoria' method='get'>"<<endl;
-	cout<<"<button class='button' type='submit'>Volver</button>"<<endl;
-	cout<<"</form>"<<endl;
 	cout<<"</body></html>"<<endl;
 
 }
@@ -425,6 +445,7 @@ void AdminViewer::eliminado()
 void AdminViewer::css()
 {
 	cout<<"<style type=\"text/css\">"<<endl;
+	cout<<"@charset \"utf-8\";"<<endl;
 	cout<<"body{background-color: #CEF0EE;}"<<endl;
 //form
 		cout<<"form {"<<endl;
