@@ -38,7 +38,7 @@ void CandidatoViewer::mostrar(){
       cout<<"</head>"<<endl;
       cout<<"<body>"<<endl;
       (new UsuarioViewer())->css();
-      cout<<"<font color='blue'><h1 align='center'>Elije el tipo de eleccion a continuacion</h1></font>"<<endl;
+      cout<<"<font color='blue'><h1 align='center'>ELECCIONES 2018</h1></font>"<<endl;
       cout<<"<form class='categoria' method='get'>"<<endl;
       cout<<"  <fieldset >"<<endl;
       cout<<"    <legend align='center'>Elige una categoria luego, haz click en siguiente</legend>"<<endl;

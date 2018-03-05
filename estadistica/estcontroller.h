@@ -10,9 +10,11 @@ class EstController
         virtual ~EstController();
         void abm();
         string parcial(string, string);
+        void cate();
     protected:
     private:
-      void inicio();
+      void ver();
+
 };
 
 #endif // UsuarioCONTROLLER_H

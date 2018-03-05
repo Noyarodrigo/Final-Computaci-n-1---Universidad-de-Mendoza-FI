@@ -84,6 +84,6 @@ void Estadistica::setVotos(string votos){
 string Estadistica::toString()
 {
     string f= (new EstController())->parcial(this->getTotal(), this->getVotos());
-    return "<th>" + this->getNombre() + "</th><th>" + this->getApellido() + "</th><th>"+ this->getPartido() +"</th><th>"+f+"%</th><th>("+this->getVotos()+" votos)</th>"	;
+    return "<tr><td>" + this->getNombre() + "</td><td>" + this->getApellido() + "</td><td>"+ this->getPartido() +"</td><td>"+f+"%</td><td>("+this->getVotos()+" votos)</td></tr>"	;
 
 }

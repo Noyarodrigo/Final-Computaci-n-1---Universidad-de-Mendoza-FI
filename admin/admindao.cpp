@@ -23,15 +23,11 @@ void AdminDAO::delu()
     sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
     res->next();
     string x =res->getString("idaux");
-    if (x!="0") {
-      string stringSQL = "SELECT idaux FROM admin WHERE id = " + getId();
-      stringSQL = "DELETE FROM votantes WHERE id = " + x;
-      MyConnection::instance()->execute(stringSQL);
+    stringSQL = "DELETE FROM votantes WHERE id = " + x;
+    MyConnection::instance()->execute(stringSQL);
       (new AdminViewer())->eliminado();
-    }
+  }
 
-
-}
 void AdminDAO::delc()
 {
     string stringSQL = "select p.partido,d.idaux from persona as p inner join admin as d on p.id= "+ getIdaux()+"";

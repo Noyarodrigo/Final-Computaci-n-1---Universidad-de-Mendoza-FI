@@ -20,23 +20,26 @@ EstController::~EstController()
 
 void EstController::abm()
 {
-	inicio();
+	ver();
 
 }
 
 
-void EstController::inicio(){
+void EstController::cate(){
+	map<string,string> Get;
+	initializeGet(Get);
+	if (Get["categoria"]=="1") {(new EstViewer())->show(((new EstDAO())->load("1")),"1");}
+	if (Get["categoria"]=="2") {(new EstViewer())->show(((new EstDAO())->load("2")),"2");}
+	if (Get["categoria"]=="3") {(new EstViewer())->show(((new EstDAO())->load("3")),"3");}
+	if (Get["categoria"]=="4") {(new EstViewer())->show(((new EstDAO())->load("4")),"4");}
+	if (Get["categoria"]=="5") {(new EstViewer())->show(((new EstDAO())->load("5")),"5");}
+	if (Get["categoria"]=="6") {(new EstViewer())->show(((new EstDAO())->load("6")),"6");}
+	if (Get["categoria"]=="7") {(new EstViewer())->show(((new EstDAO())->load("7")),"7");}
+}
 
-		(new EstViewer())->inicio();
-		//uno para cada tipo de Eleccion
-		(new EstViewer())->show(((new EstDAO())->load("1")),"1");
-		(new EstViewer())->show(((new EstDAO())->load("2")),"2");
-		(new EstViewer())->show(((new EstDAO())->load("3")),"3");
-		(new EstViewer())->show(((new EstDAO())->load("4")),"4");
-		(new EstViewer())->show(((new EstDAO())->load("5")),"5");
-		(new EstViewer())->show(((new EstDAO())->load("6")),"6");
-		(new EstViewer())->show(((new EstDAO())->load("7")),"7");
-		(new EstViewer())->reload();
+void EstController::ver()
+{
+	(new EstViewer())->inicio();
 }
 
 string EstController::parcial(string t, string v)

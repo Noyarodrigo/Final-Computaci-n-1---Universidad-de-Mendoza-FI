@@ -26,15 +26,6 @@ Queueest* EstDAO::load(string opc){
 
 }
 
-/*string EstDAO::getCat(string t)
-{
-  string stringSQL = "SELECT votos FROM tipo_candidato WHERE id = " + t;
-  sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
-  res->next();
-  string x =res->getString("votos");
-  return x;
-}*/
-
 string EstDAO::getTipoparcial(string p)
 {
   string stringSQL = "SELECT partido FROM partido_politico WHERE id = " + p;

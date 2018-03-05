@@ -15,6 +15,7 @@ class EstViewer
         void inicio();
         void show(Queueest*, string);
         void reload();
+        void css();
     protected:
     private:
 };

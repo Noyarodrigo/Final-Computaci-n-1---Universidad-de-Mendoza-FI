@@ -36,7 +36,7 @@ void UsuarioViewer::inicio(){
 		cout<< "<div>"<<endl;
 		cout<< "<img src=\"http://www.jusdeleste.com.ar/wp-content/uploads/2017/04/logo-universidad-de-mendoza.png\" width=\"150\" height=\"150\">"<<endl;
 		cout<<"<h3>Bienvenido a las elecciones 2018<h>\n";
-	  cout<<"<form class='form-signin' method='post'>"<<endl;
+	  cout<<"<form class='categoria' method='post'>"<<endl;
 	  cout<<"<label for='documento' class='label'>Usuario</label>"<<endl;
 	  cout<<"<input type='text' name='documento' class='input' placeholder='Documento' required autofocus>"<<endl;
 		cout<<"<br>"<<endl;
@@ -51,7 +51,7 @@ void UsuarioViewer::inicio(){
 	          if(z == 1){
 								((new UsuarioDAO()) ->setLogin(Post["documento"]));
 								cout<<"<font color='green'><h1 align='center'>Ingreso con Exito!</h1></font>"<<endl;
-								cout<<"<form align='center'>"<<endl;
+								cout<<"<form class='categoria' align='center'>"<<endl;
 								cout<<"<input value='Ir a las categorias' onClick='document.location.reload()' type='button' class='button'>"<<endl;
 								cout<<"</form>"<<endl;
 							}else{fracaso();}
@@ -72,7 +72,7 @@ void UsuarioViewer::votar(){
 	(new UsuarioViewer())->css();
 	cout<< "</head>" <<endl;
 	cout<< "<body>"<<endl;
-	cout<<"<form  align='center' class='form-signin' method='post'>"<<endl;
+	cout<<"<form  align='center' class='categoria' method='post'>"<<endl;
 	cout<<"<label for='codigo' class='label'>Codigo</label>"<<endl;
 	cout<<"<input type='text' name='codigo' class='input' placeholder='Ingreselo AQUI' required autofocus>"<<endl;
 	cout<<"<button class='button' type='submit'>VOTAR</button>"<<endl;
@@ -91,16 +91,16 @@ void UsuarioViewer::fracaso()
 
 void UsuarioViewer::fail(){
 
-	cout<<"<font color='red'><h4 align='center'>Ya has votado en esa categoria!</h4></font>"<<endl;
-	cout<<"<form align='center' method='get'>"<<endl;
+	cout<<"<font color='red'><h4 align='center'>YA HAS VOTADO EN ESTA CATEGORIA!</h4></font>"<<endl;
+	cout<<"<form class='categoria' align='center' method='get'>"<<endl;
 	cout<<"<button class='button' type='submit'>VOLVER</button>"<<endl;
 	cout<<"</form>"<<endl;
 }
 
 void UsuarioViewer::yav(){
 
-	cout<<"<font color='green'><h4 align='center'>Voto ingresado !</h4></font>"<<endl;
-	cout<<"<form align='center' method='get'>"<<endl;
+	cout<<"<font color='green'><h4 align='center'>VOTO INGRESADO!</h4></font>"<<endl;
+	cout<<"<form class='categoria' align='center' method='get'>"<<endl;
 	cout<<"<button class='button' type='submit'>VOLVER</button>"<<endl;
 	cout<<"</form>"<<endl;
 }
@@ -118,9 +118,9 @@ void UsuarioViewer::out()
 
 void UsuarioViewer::error()
 {
-	cout<<"<p align='center'>"<<endl;
-	cout<<"<font color='red'><h3 >Codigo no valido<h3></font>\n";
-	cout<<"</p>"<<endl;
+	cout<<"<font color='red'><h4 align='center'>CODIGO NO VALIDO!</h4></font>"<<endl;
+	cout<<"<form class='categoria' align='center' method='get'>"<<endl;
+	cout<<"</form>"<<endl;
 }
 
 void UsuarioViewer::css()

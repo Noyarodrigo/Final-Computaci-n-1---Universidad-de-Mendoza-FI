@@ -34,11 +34,14 @@ void AdminViewer::inicio(){
   	cout<< "</head>" <<endl;
 		cout<< "<body>"<<endl;
 		cout<< "<div>"<<endl;
+		cout<< "<br>"<<endl;
 		cout<< "<img src=\"http://www.jusdeleste.com.ar/wp-content/uploads/2017/04/logo-universidad-de-mendoza.png\" width=\"150\" height=\"150\">"<<endl;
+		cout<< "<br>"<<endl;
 	  cout<<"<form class='categoria' method='post'>"<<endl;
-	  cout<<"<h2 class='form-signin-heading'>Ingrese su id de administrador</h2>"<<endl;
+	  cout<<"<h2 class='form-signin-heading'>INGRESE SU ID DE ADMINISTRADOR</h2>"<<endl;
+		cout<< "<br>"<<endl;
 	  cout<<"<label for='id' class='label'>Administrador</label>"<<endl;
-	  cout<<"<input type='text' name='id' class='input' placeholder='ID' required autofocus>"<<endl;
+	  cout<<"<input type='text' name='id' class='input' placeholder='AQUI' required autofocus>"<<endl;
 	  cout<<"<button class='button' type='submit'>Ingresar</button>"<<endl;
 	  cout<<"</form>"<<endl;
 	  cout<<"</div>"<<endl;
@@ -50,7 +53,8 @@ void AdminViewer::inicio(){
 								((new AdminDAO()) ->setLogin(Post["id"]));
 								cout<<"<font color='green'><h1 align='center'>Ingreso con Exito!</h1></font>"<<endl;
 								cout<<"<form align='center' class='categoria'>"<<endl;
-								cout<<"<input value='Ir al menu de administracion' onClick='document.location.reload()' type='input' class='btn btn-outline-success my-2 my-sm-0'>"<<endl;
+							//	cout<<"<input value='Ir al menu' ' type='input' class='input'>"<<endl;
+								cout<<"<button class='button' onClick='document.location.reload() type='submit'>Ir al Menu</button>"<<endl;
 								cout<<"</form>"<<endl;
 							}else{fracaso();}
 						}
@@ -99,15 +103,18 @@ void AdminViewer::ver()
 		if (Get.find("nombre")!=Get.end() || Get.find("apellido")!=Get.end() || Get.find("documento")!=Get.end() || Get.find("id")!=Get.end()) {
 
 			if (Get.find("id")!=Get.end()) {
+
 			(new AdminController())->idAux();
 			}
+				cout<<"Content-type: text/html"<<endl<<endl;
+				cout<<"<font color='blue'><h1 align='center'>PANEL DE ADMINISTRACION</h1></font>"<<endl;
 				(new AdminController())->categoria();
 
 		}else{
 				cout<<"Content-type: text/html"<<endl<<endl;
 				cout<<"<html><head>"<<endl;
 				css();
-				cout<<"<font color='blue'><h1 align='center'>Panel de administracion</h1></font>"<<endl;
+				cout<<"<font color='blue'><h1 align='center'>PANEL DE ADMINISTRACION</h1></font>"<<endl;
 				cout<<"<form class='categoria' method='get'>"<<endl;
 				cout<<"  <fieldset>"<<endl;
 				cout<<"    <legend align='center'>Opciones de Votantes</legend>"<<endl;
@@ -115,7 +122,7 @@ void AdminViewer::ver()
 				cout<<"          <input type=\"radio\" name=\"opc\" class='incat' value=\"addu\"> Agregar votante"<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"      <p>"<<endl;
-				cout<<"           <input type=\"radio\" name=\"opc\" class='incat' value=\"delu\"> Quitar votante "<<endl;
+				cout<<"           <input type=\"radio\" name=\"opc\" class='incat' value=\"delu\"> Eliminar votante "<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"      <p>"<<endl;
 				cout<<"          <input type=\"radio\" name=\"opc\" class='incat' value=\"infu\"> Info de votantes"<<endl;
@@ -128,7 +135,7 @@ void AdminViewer::ver()
 				cout<<"          <input type=\"radio\" name=\"opc\" class='incat' value=\"addc\"> Agregar candidato"<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"      <p>"<<endl;
-				cout<<"           <input type=\"radio\" name=\"opc\" class='incat' value=\"delc\"> Quitar candidato"<<endl;
+				cout<<"           <input type=\"radio\" name=\"opc\" class='incat' value=\"delc\"> Eliminar candidato"<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"      <p>"<<endl;
 				cout<<"           <input type=\"radio\" name=\"opc\" class='incat' value=\"infc\"> info candidatos"<<endl;
@@ -172,8 +179,10 @@ void AdminViewer::dusu()
 	cout<< "<body>"<<endl;
 	cout<<"<form class='categoria' method='get'>"<<endl;
 	cout<< "<div>"<<endl;
+	cout<< "<br>"<<endl;
+	cout<< "<br>"<<endl;
+	cout<< "<br>"<<endl;
 	cout<<"<h3 color='grey'>INGRESE LOS DATOS<h3>\n";
-	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
 	//NOMBRE
@@ -215,7 +224,7 @@ void AdminViewer::dcan(Queuepartidolista* queuepartidolista)
 	cout<< "<body>"<<endl;
 	cout<< "<div>"<<endl;
 	cout<<"<form class='categoria' method='get'>"<<endl;
-	cout<<"<h3 color='grey'>Ingrese los datos<h3>\n";
+	cout<<"<h3 color='grey'>INGRESE LOS DATOS<h3>\n";
 	//NOMBRE
 	cout<<"<br>"<<endl;
 	cout<<"<label for='nombre' class='label'>Nombre</label>"<<endl;
@@ -268,16 +277,24 @@ void AdminViewer::dpar()
 	css();
 	cout<< "</head>" <<endl;
 	cout<< "<body>" <<endl;
+	cout<< "<div>" <<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
 	cout<<"<form class='categoria' method='get'>"<<endl;
-	cout<<"<h3 color='grey'>Ingrese el nombre<h3>\n";
+	cout<<"<h3 color='grey'>NUEVO PARTIDO<h3>\n";
 	//NOMBRE
 	cout<<"<br>"<<endl;
-	cout<<"<label for='nombre' class='label'>Nombre del partido</label>"<<endl;
+	cout<<"<label for='nombre' class='label'>Nombre</label>"<<endl;
 	cout<<"<input type='text' name='nombre' class='input' placeholder='Nombre del partido' required autofocus>"<<endl;
 	//boton
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
-	cout<<"<button class='button'align='center' type='submit'>Ingresar</button>"<<endl;
+	cout<< "</div>" <<endl;
+	cout<< "<p align='center'>"<<endl;
+	cout<<"<button align='center' class='button' type='submit'>Ingresar datos</button>"<<endl;
+	cout<< "<p>"<<endl;
 	cout<<"</form><body>"<<endl;
 
 }
@@ -285,16 +302,22 @@ void AdminViewer::did()
 {
 	css();
 	cout<<"<div>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
 	cout<<"<form margin='auto' class='categoria' method='get'>"<<endl;
 	cout<<"<h3 color='grey'>INGRESE EL ID A ELIMINAR<h3>\n";
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
 	cout<<"<label for='id' class='label'>ID</label>"<<endl;
 	cout<<"<input type='text' name='id' class='input' placeholder='AQUI' >"<<endl;
 	//boton
 	cout<<"<br>"<<endl;
 	cout<<"<br>"<<endl;
-	cout<<"<button class='button' type='submit'>Aceptar</button>"<<endl;
-	cout<<"</form>"<<endl;
-	cout<<"</div>"<<endl;
+	cout<< "</div>" <<endl;
+	cout<< "<p align='center'>"<<endl;
+	cout<<"<button align='center' class='button' type='submit'>Eliminar</button>"<<endl;
+	cout<< "<p>"<<endl;
+	cout<<"</form><body>"<<endl;;
 
 }
 
@@ -363,39 +386,37 @@ void AdminViewer::infp(Queuepartido* queuepartido){
 
 void AdminViewer::out()
 {
-	cout<<"<font color='red'><h3 >Has salido de la app<h3></font>\n";
-	cout<<"<form class='categoria' method='get'>"<<endl;
-	cout<<"<button class='button' type='submit'>SALIR</button>"<<endl;
-	cout<<"</form>"<<endl;
 
+	css();
+	cout<<"<font color='red' align='center'><h3 >HAS SALIDO CORRECTAMENTE<h3></font>\n";
+	cout<<"<form class='categoria' width='70\%' method='get' align='center'>"<<endl;
+	cout<<"<button class='button' type='submit'>Salir</button>"<<endl;
+	cout<<"</form>"<<endl;
 }
 void AdminViewer::nope()
 {
-	cout<<"Content-type: text/html"<<endl<<endl;
 	css();
-	cout<<"<form class='categoria' method='get'>"<<endl;
-	cout<<"<font color='red'><h3 >Algo salio mal<h3></font>\n";
+	cout<<"<form class='categoria'align='center' method='get'>"<<endl;
+	cout<<"<font color='red'><h3 >ALGO SALIO MAL<h3></font>\n";
 	cout<<"<font color='grey'><h4 >Resiva los datos ingresados<h4></font>\n";
-	cout<<"<button class=button' type='submit'>Volver</button>"<<endl;
+	cout<<"<button class='button' type='submit'>Volver</button>"<<endl;
 	cout<<"</form>"<<endl;
 
 }
 void AdminViewer::agregado()
 {
-	cout<<"Content-type: text/html"<<endl<<endl;
 	css();
-	cout<<"<form class='categoria' method='get'>"<<endl;
-	cout<<"<font color='green'><h3>Agregado correctamente<h3>\n";
+	cout<<"<form class='categoria' align='center' method='get'>"<<endl;
+	cout<<"<font color='green'><h3>AGREGADO CORRECTAMENTE<h3>\n";
 	cout<<"<button class='button' type='submit'>Volver</button>"<<endl;
 	cout<<"</form>"<<endl;
 
 }
 void AdminViewer::eliminado()
 {
-	cout<<"Content-type: text/html"<<endl<<endl;
 	css();
-	cout<<"<form class='categoria' method='get'>"<<endl;
-	cout<<"<font color='green'><h3>Eliminado correctamente<h3>\n";
+	cout<<"<form class='categoria'align='center' method='get'>"<<endl;
+	cout<<"<font color='green'><h3>ELIMINADO CORRECTAMENTE<h3>\n";
 	cout<<"<button class='button' type='submit'>Volver</button>"<<endl;
 	cout<<"</form>"<<endl;
 
