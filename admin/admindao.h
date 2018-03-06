@@ -21,6 +21,8 @@ class AdminDAO
         void addu(Usuario*);
         void addc(Candidato*);
         void addp(Partido*);
+        void modc(Candidato*,string);
+        void restar(string,string);
         void delu();
         void delc();
         void delp();

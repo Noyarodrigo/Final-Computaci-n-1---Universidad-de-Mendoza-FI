@@ -25,22 +25,33 @@ void AdminDAO::delu()
     string x =res->getString("idaux");
     stringSQL = "DELETE FROM votantes WHERE id = " + x;
     MyConnection::instance()->execute(stringSQL);
+    stringstream stringSQL3;
+    stringSQL3<<"UPDATE `elecciones`.`admin` SET idaux = 0 WHERE `admin`.`id` ='"+getId()+"';";
+    MyConnection::instance()->execute(stringSQL3.str());
       (new AdminViewer())->eliminado();
   }
 
 void AdminDAO::delc()
 {
-    string stringSQL = "select p.partido,d.idaux from persona as p inner join admin as d on p.id= "+ getIdaux()+"";
+    string stringSQL = "select p.partido,p.votos,p.idtc,d.idaux from persona as p inner join admin as d on p.id="+ getIdaux()+"";
     sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
     res->next();
     string x =res->getString("idaux");
     string p =res->getString("partido");
+    string v =res->getString("votos");
+    string i =res->getString("idtc");
     if (x!="0") {
       stringSQL = "DELETE FROM persona WHERE id = " + x;
       MyConnection::instance()->execute(stringSQL);
       stringstream stringSQL2;
       stringSQL2 <<"UPDATE `elecciones`.`partido_politico` SET socios = socios-1 WHERE `partido_politico`.`id` ='"+p+"';";
       MyConnection::instance()->execute(stringSQL2.str());
+      stringstream stringSQL3;
+      stringSQL3<<"UPDATE `elecciones`.`admin` SET idaux = 0 WHERE `admin`.`id` ='"+getId()+"';";
+      MyConnection::instance()->execute(stringSQL3.str());
+      stringstream stringSQL4;
+      stringSQL4<<"UPDATE `elecciones`.`tipo_candidato` SET total = total-"+v+" WHERE `tipo_candidato`.`id` ='"+i+"';";
+      MyConnection::instance()->execute(stringSQL4.str());
       (new AdminViewer())->eliminado();
     }
 
@@ -55,6 +66,9 @@ void AdminDAO::delp()
     string x =res->getString("idaux");
     stringSQL = "DELETE FROM partido_politico WHERE id = " + x;
     MyConnection::instance()->execute(stringSQL);
+    stringstream stringSQL2;
+    stringSQL2<<"UPDATE `elecciones`.`admin` SET idaux = 0 WHERE `admin`.`id` ='"+getId()+"';";
+    MyConnection::instance()->execute(stringSQL2.str());
     (new AdminViewer())->eliminado();
 }
 
@@ -82,14 +96,53 @@ void AdminDAO::addc(Candidato* Candidato)
   if (res->next())
   {
     (new AdminViewer())->nope();
-  }else{
-    stringSQL = "INSERT INTO persona (nombre, apellido, telefono, idtc, partido) VALUES ('" + Candidato->getNombre() + "', '" + Candidato->getApellido() + "','"+Candidato->getTel()+"', '"+Candidato->getIdtc()+"','"+Candidato->getPartido()+"')";
-    MyConnection::instance()->execute(stringSQL);
-    stringstream stringSQL2;
-    stringSQL2 <<"UPDATE `elecciones`.`partido_politico` SET socios = socios+1 WHERE `partido_politico`.`id` ='"+Candidato->getPartido()+"';";
-    MyConnection::instance()->execute(stringSQL2.str());
-    (new AdminViewer())->agregado();
   }
+    else{
+      stringSQL = "INSERT INTO persona (nombre, apellido, telefono, idtc, partido) VALUES ('" + Candidato->getNombre() + "', '" + Candidato->getApellido() + "','"+Candidato->getTel()+"', '"+Candidato->getIdtc()+"','"+Candidato->getPartido()+"')";
+      MyConnection::instance()->execute(stringSQL);
+      stringstream stringSQL2;
+      stringSQL2 <<"UPDATE `elecciones`.`partido_politico` SET socios = socios+1 WHERE `partido_politico`.`id` ='"+Candidato->getPartido()+"';";
+      MyConnection::instance()->execute(stringSQL2.str());
+      (new AdminViewer())->agregado();
+  }
+}
+
+void AdminDAO::modc(Candidato* Candidato,string x)
+{
+  string stringSQL;
+  stringSQL = "select p.id,p.partido,p.idtc,p.votos,d.socios from persona as p inner join partido_politico as d on p.id='"+x+"'";
+  sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
+
+  if (res->next())
+  {
+    res->next();
+    string y =res->getString("partido");
+    string z =res->getString("idtc");
+    string w =res->getString("votos");
+    stringstream stringSQL2,stringSQL3,stringSQL4;
+    stringSQL2 <<"UPDATE `elecciones`.`persona` SET nombre ='"+Candidato->getNombre()+"', apellido='"+Candidato->getApellido()+"',telefono ='"+Candidato->getTel()+"', idtc='"+Candidato->getIdtc()+"', partido='"+Candidato->getPartido()+"',votos=0 WHERE `persona`.`id` ='"+x+"';";
+    MyConnection::instance()->execute(stringSQL2.str());
+    stringSQL3 <<"UPDATE `elecciones`.`partido_politico` SET socios = socios+1 WHERE `partido_politico`.`id` ='"+Candidato->getPartido()+"';";
+    MyConnection::instance()->execute(stringSQL3.str());
+    stringSQL4 <<"UPDATE `elecciones`.`partido_politico` SET socios = socios-1 WHERE `partido_politico`.`id` ='"+y+"';";
+    MyConnection::instance()->execute(stringSQL4.str());
+    (new AdminViewer())->modificado();
+    restar(z,w);
+
+  }else{
+    (new AdminViewer())->nope();
+    }
+
+}
+
+void AdminDAO::restar(string idtc,string votos)
+{
+  string stringSQL;
+  stringstream stringSQL4;
+  stringSQL = "select total from tipo_candidato where id="+idtc+"";
+  sql::ResultSet* res = MyConnection::instance()->query(stringSQL);
+  stringSQL4<<"UPDATE `elecciones`.`tipo_candidato` SET total = total-"+votos+" WHERE `tipo_candidato`.`id` ='"+idtc+"';";
+  MyConnection::instance()->execute(stringSQL4.str());
 }
 
 void AdminDAO::addp(Partido* Partido)

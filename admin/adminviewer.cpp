@@ -87,7 +87,10 @@ void AdminViewer::ver()
 		if (Get["opc"]== "addp") {
 			(new AdminViewer())->dpar();	}
 
-		if (Get["opc"]== "delu" || Get["opc"]== "delc" || Get["opc"]== "delp" || Get["opc"]== "modc") {
+		if (Get["opc"]== "modc") {
+			(new AdminViewer())->modc((new AdminDAO())->plista());}
+
+		if (Get["opc"]== "delu" || Get["opc"]== "delc" || Get["opc"]== "delp") {
 
 				(new AdminViewer())->did();
 				}
@@ -136,6 +139,9 @@ void AdminViewer::ver()
 				cout<<"      </p>"<<endl;
 				cout<<"      <p>"<<endl;
 				cout<<"           <input type=\"radio\" name=\"opc\" class='incat' value=\"delc\"> Eliminar candidato"<<endl;
+				cout<<"      </p>"<<endl;
+				cout<<"      <p>"<<endl;
+				cout<<"           <input type=\"radio\" name=\"opc\" class='incat' value=\"modc\"> Modificar candidato"<<endl;
 				cout<<"      </p>"<<endl;
 				cout<<"      <p>"<<endl;
 				cout<<"           <input type=\"radio\" name=\"opc\" class='incat' value=\"infc\"> info candidatos"<<endl;
@@ -339,6 +345,69 @@ void AdminViewer::did()
 
 }
 
+void AdminViewer::modc(Queuepartidolista* queuepartidolista)
+{
+	//ID
+	cout<<"<html><head>"<<endl;
+	css();
+	cout<< "</head>" <<endl;
+	cout<< "<body>"<<endl;
+	cout<<"<form class='categoria' method='get'>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<< "<div>"<<endl;
+	cout<<"<h3 color='grey'>INGRESE LOS NUEVOS DATOS DEL CANDIDATO<h3>\n";
+	//ID
+	cout<<"<label for='idm' class='label'>Modificar a</label>"<<endl;
+	cout<<"<input type='text' name='idm' class='input' placeholder='Ingrese el ID aqui' required autofocus>"<<endl;
+	//NOMBRE
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<label for='nombre' class='label'>Nombre</label>"<<endl;
+	cout<<"<input type='text' name='nombre' class='input' placeholder='Nombre' required autofocus>"<<endl;
+	//apellido
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<label for='nombre' class='label'>Apellido</label>"<<endl;
+	cout<<"<input type='text' name='apellido' class='input' placeholder='Apellido' >"<<endl;
+	//telefono
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<label for='telefono' class='label'>Telefono</label>"<<endl;
+	cout<<"<input type='text' name='telefono' class='input' placeholder='Telefono' >"<<endl;
+	//idtc con lista desplegable
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<label for='idtc' class='label'>Cargo</label>"<<endl;
+			// lista
+				cout<<"<select name=\"idtc\">"<<endl;
+				cout<<"<option selected value=\"0\"> Elige una categoria </option>"<<endl;
+				cout<<"<option value=\"1\">Consejal</option>"<<endl;
+				cout<<"<option value=\"2\">Legislador</option>"<<endl;
+				cout<<"<option value=\"3\">Senador</option>"<<endl;
+				cout<<"<option value=\"4\">Diputado</option>"<<endl;
+				cout<<"<option value=\"5\">Intendente</option>"<<endl;
+				cout<<"<option value=\"6\">Gobernador</option>"<<endl;
+				cout<<"<option value=\"7\">Presidente</option>"<<endl;
+				cout<<"</select>"<<endl;
+
+	//partido
+	cout<<"<br>"<<endl;
+	cout<<"<br>"<<endl;
+	cout<<"<label for='partido' class='class='label'>Partido</label>"<<endl;
+				//lista con base de datos
+				cout<<"<select name=\"partido\">"<<endl;
+				cout<<"<option selected value=\"0\"> Elige un partido </option>"<<endl;
+				queuepartidolista->show();
+				cout<<"</select>"<<endl;
+	cout<< "</div>"<<endl;
+	//boton
+	cout<< "<p align='center'>"<<endl;
+	cout<<"<button align='center' class='button' type='submit'>Ingresar datos</button>"<<endl;
+	cout<< "<p>"<<endl;
+	cout<<"</form></body>"<<endl;
+}
+
 void AdminViewer::infu(Queueusuario* queueusuario){
 
   cout<<"<html><head>"<<endl;
@@ -437,6 +506,15 @@ void AdminViewer::eliminado()
 	css();
 	cout<<"<form class='categoria'align='center' method='get'>"<<endl;
 	cout<<"<font color='green'><h3>ELIMINADO CORRECTAMENTE<h3>\n";
+	cout<<"<button class='button' type='submit'>Volver</button>"<<endl;
+	cout<<"</form>"<<endl;
+}
+
+void AdminViewer::modificado()
+{
+	css();
+	cout<<"<form class='categoria' align='center' method='get'>"<<endl;
+	cout<<"<font color='green'><h3>MODIFICADO CORRECTAMENTE<h3>\n";
 	cout<<"<button class='button' type='submit'>Volver</button>"<<endl;
 	cout<<"</form>"<<endl;
 

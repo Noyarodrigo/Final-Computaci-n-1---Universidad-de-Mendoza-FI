@@ -30,7 +30,9 @@ class AdminViewer
         void nope();
         void agregado();
         void eliminado();
+        void modificado();
         void dpar();
+        void modc(Queuepartidolista*);
         void css();
     protected:
     private:

@@ -38,6 +38,7 @@ void AdminController::categoria(){
 	if ((new AdminDAO())->getAux() =="addp"){addp();}
 	if ((new AdminDAO())->getAux() =="delp"){delp();}
 	if ((new AdminDAO())->getAux() =="infp")infp();
+	if ((new AdminDAO())->getAux() =="modc")modc();
 
 }
 //USUARIO
@@ -66,16 +67,37 @@ void AdminController::infu()
 }
 
 //CANDIDATOS
-void AdminController::addc()
+void AdminController::modc()
 {
 	map<string,string> Get;
 	initializeGet(Get);
+	string x;
 	Candidato* candidato = new Candidato();
 	candidato->setIdtc(Get["idtc"]);
 	candidato->setNombre(Get["nombre"]);
 	candidato->setTel(Get["telefono"]);
 	candidato->setPartido(Get["partido"]);
 	candidato->setApellido(Get["apellido"]);
+	if (Get.find("idm")!=Get.end()){
+		x=Get["idm"];
+		(new AdminDAO())->modc(candidato,x);
+		}else
+			{(new AdminViewer())->nope();}
+
+}
+
+void AdminController::addc()
+{
+	map<string,string> Get;
+	initializeGet(Get);
+	string x;
+	Candidato* candidato = new Candidato();
+	candidato->setIdtc(Get["idtc"]);
+	candidato->setNombre(Get["nombre"]);
+	candidato->setTel(Get["telefono"]);
+	candidato->setPartido(Get["partido"]);
+	candidato->setApellido(Get["apellido"]);
+
 	(new AdminDAO())->addc(candidato);
 
 }

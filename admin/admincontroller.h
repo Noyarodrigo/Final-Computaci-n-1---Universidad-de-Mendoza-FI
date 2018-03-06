@@ -22,6 +22,7 @@ class AdminController
     private:
         void addc();
         void delc();
+        void modc();
         void addu();
         void delu();
         void inicio();
